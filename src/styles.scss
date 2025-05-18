@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --ngrok-grayple-900: 234 18% 17%;
+  --bg-card: var(--ngrok-grayple-900);
+
+  --ngrok-blue-500: 224 81% 57%;
+  --ngrok-blue-500-accent-hover: var(--ngrok-blue-500) / 0.9;
+
+  --blue-500: var(--ngrok-blue-500);
+  --blue-500-accent: var(--ngrok-blue-500-accent-hover);
+}
+
+
+html, html * {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  background-color: hsl(var(--bg-card));
+}
+
+body {
+  min-height: 100vh;
+  padding: 25px;
+}
