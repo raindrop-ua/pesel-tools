@@ -142,6 +142,7 @@ export class PeselParserService {
 
       return isValidDate(birthYear, month, day);
     } catch {
+      // This catch is unreachable in current flow, retained as safety fallback
       return false;
     }
   }
