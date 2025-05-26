@@ -85,3 +85,19 @@ export function calculateAge(
   // Ensure age is not negative (though this should not happen with valid data)
   return Math.max(0, age);
 }
+
+/**
+ * Calculates the checksum digit for the first 10 digits of a PESEL number.
+ * This is a helper method for generation and can be reused if needed.
+ * @param firstTenDigits The first 10 digits of the PESEL number string.
+ * @returns The calculated checksum digit (0-9).
+ * @private
+ */
+export function calculateChecksumDigit(firstTenDigits: string): number {
+  const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
+  const sum = firstTenDigits
+    .split('')
+    .reduce((acc, digit, idx) => acc + parseInt(digit, 10) * weights[idx], 0);
+
+  return (10 - (sum % 10)) % 10;
+}

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { calculateChecksumDigit, isValidDate } from './pesel-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,7 @@ export class PeselGeneratorService {
       birthDay = options.day;
 
       // Simple check of validity of entered date before proceeding
-      if (!this.isValidDate(birthYear, birthMonth, birthDay)) {
+      if (!isValidDate(birthYear, birthMonth, birthDay)) {
         throw new Error('Provided birth date is invalid.');
       }
     } else {
@@ -63,7 +64,7 @@ export class PeselGeneratorService {
             ? 29
             : daysInMonth[birthMonth];
         birthDay = Math.floor(Math.random() * maxDay) + 1;
-      } while (!this.isValidDate(birthYear, birthMonth, birthDay)); // Retry if an invalid date is generated (though this is unlikely with maxDay calculation)
+      } while (!isValidDate(birthYear, birthMonth, birthDay)); // Retry if an invalid date is generated (though this is unlikely with maxDay calculation)
     }
 
     // 2. Sex determination
@@ -115,54 +116,9 @@ export class PeselGeneratorService {
     const firstTenDigits = peselDatePart + serialPart + sexDigit.toString();
 
     // 5. Calculate checksum
-    const checksumDigit = this.calculateChecksumDigit(firstTenDigits);
+    const checksumDigit = calculateChecksumDigit(firstTenDigits);
 
     // 6. Formation of the final PESEL
     return firstTenDigits + checksumDigit.toString();
-  }
-
-  /**
-   * Calculates the checksum digit for the first 10 digits of a PESEL number.
-   * This is a helper method for generation and can be reused if needed.
-   * @param firstTenDigits The first 10 digits of the PESEL number string.
-   * @returns The calculated checksum digit (0-9).
-   * @private
-   */
-  private calculateChecksumDigit(firstTenDigits: string): number {
-    const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
-    const sum = firstTenDigits
-      .split('')
-      .reduce((acc, digit, idx) => acc + parseInt(digit, 10) * weights[idx], 0);
-
-    return (10 - (sum % 10)) % 10;
-  }
-
-  /**
-   * Checks if the given year, month, and day form a valid date.
-   * Reused from PeselService to ensure generated dates are valid.
-   * @param year The full year (e.g., 1990).
-   * @param month The month (1-12).
-   * @param day The day of the month (1-31).
-   * @returns True if the date is valid according to calendar rules, false otherwise.
-   * @private
-   */
-  private isValidDate(year: number, month: number, day: number): boolean {
-    if (month < 1 || month > 12 || day < 1 || day > 31) {
-      return false;
-    }
-
-    const daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-    if (month === 2) {
-      if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-        if (day > 29) return false;
-      } else {
-        if (day > 28) return false;
-      }
-    } else {
-      if (day > daysInMonth[month]) return false;
-    }
-
-    return true;
   }
 }

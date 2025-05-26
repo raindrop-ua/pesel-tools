@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import * as utils from '../pesel-utils';
 import {
   PeselParserService,
   InvalidPeselFormatError,
@@ -148,6 +149,14 @@ describe('PeselParserService — 100% coverage', () => {
     it('validatePesel throws internally and returns false via catch', () => {
       const brokenInput = {} as unknown as string;
       expect(service.validatePesel(brokenInput)).toBe(false);
+    });
+
+    it('validatePesel triggers catch via mocked isValidDate', () => {
+      jest.spyOn(utils, 'isValidDate').mockImplementation(() => {
+        throw new Error('boom');
+      });
+
+      expect(service.validatePesel('82090500000')).toBe(false);
     });
   });
 });
