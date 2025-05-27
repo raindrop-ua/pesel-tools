@@ -4,7 +4,7 @@ import {
   isValidDate,
   calculateAge,
   calculateChecksumDigit,
-} from '../pesel-utils';
+} from './pesel-utils';
 
 describe('pesel-utils — 100% coverage', () => {
   describe('isValidFormat', () => {

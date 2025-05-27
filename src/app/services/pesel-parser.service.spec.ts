@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import * as utils from '../pesel-utils';
+import * as utils from './pesel-utils';
 import {
   PeselParserService,
   InvalidPeselFormatError,
   InvalidPeselChecksumError,
   InvalidPeselDateError,
-} from '../pesel-parser.service';
+} from './pesel-parser.service';
 
 describe('PeselParserService — 100% coverage', () => {
   let service: PeselParserService;
