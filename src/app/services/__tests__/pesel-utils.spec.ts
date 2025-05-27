@@ -3,6 +3,7 @@ import {
   isValidChecksum,
   isValidDate,
   calculateAge,
+  calculateChecksumDigit,
 } from '../pesel-utils';
 
 describe('pesel-utils — 100% coverage', () => {
@@ -81,9 +82,9 @@ describe('pesel-utils — 100% coverage', () => {
     });
   });
 
-  describe('calculateAge (fixed date: 2025-05-24)', () => {
+  describe('calculateAge (fixed date: 2025-06-28)', () => {
     beforeEach(() => {
-      jest.useFakeTimers().setSystemTime(new Date('2025-05-24'));
+      jest.useFakeTimers().setSystemTime(new Date('2025-06-28'));
     });
 
     afterEach(() => {
@@ -95,19 +96,41 @@ describe('pesel-utils — 100% coverage', () => {
     });
 
     it('returns correct age if birthday is today', () => {
-      expect(calculateAge(1982, 5, 24)).toBe(43);
+      expect(calculateAge(1982, 6, 28)).toBe(43);
     });
 
     it('returns correct age if birthday is tomorrow', () => {
-      expect(calculateAge(1982, 5, 25)).toBe(42);
+      expect(calculateAge(1982, 6, 29)).toBe(42);
     });
 
     it('returns 0 if birth date is after today in same year', () => {
-      expect(calculateAge(2025, 6, 1)).toBe(0);
+      expect(calculateAge(2025, 7, 1)).toBe(0);
     });
 
     it('returns 0 for future year', () => {
       expect(calculateAge(2026, 1, 1)).toBe(0);
+    });
+  });
+
+  describe('calculateChecksumDigit', () => {
+    it('returns correct checksum for known PESELs', () => {
+      expect(calculateChecksumDigit('8209050000')).toBe(0);
+      expect(calculateChecksumDigit('9106280000')).toBe(8);
+      expect(calculateChecksumDigit('0329050009')).toBe(4);
+      expect(calculateChecksumDigit('1449050003')).toBe(4);
+      expect(calculateChecksumDigit('2669050005')).toBe(7);
+    });
+
+    it('returns checksum 0 when sum % 10 === 0', () => {
+      expect(calculateChecksumDigit('0207080362')).toBe(8); // Real PESEL = 02070803628
+    });
+
+    it('throws if input is not exactly 10 digits', () => {
+      expect(() => calculateChecksumDigit('123')).toThrow();
+      expect(() => calculateChecksumDigit('123456789')).toThrow();
+      expect(() => calculateChecksumDigit('12345678901')).toThrow();
+      expect(() => calculateChecksumDigit('123456789a')).toThrow();
+      expect(() => calculateChecksumDigit('abcdefghij')).toThrow();
     });
   });
 });

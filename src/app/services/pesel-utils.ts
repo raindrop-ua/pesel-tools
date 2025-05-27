@@ -94,6 +94,10 @@ export function calculateAge(
  * @private
  */
 export function calculateChecksumDigit(firstTenDigits: string): number {
+  if (!/^\d{10}$/.test(firstTenDigits)) {
+    throw new Error('Input must be exactly 10 digits');
+  }
+
   const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
   const sum = firstTenDigits
     .split('')
