@@ -9,7 +9,6 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 import { provideEnvironment } from './environment.providers';
@@ -28,6 +27,5 @@ export const appConfig: ApplicationConfig = {
     ),
     provideClientHydration(withEventReplay()),
     provideEnvironment(),
-    provideAnimations(),
   ],
 };

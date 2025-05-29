@@ -1,5 +1,6 @@
 <app-header/>
-<main class="main">
-  <router-outlet/>
+<main>
+  <app-loader [class.show]="loading" [class.hide]="!loading" />
+  <router-outlet></router-outlet>
 </main>
 <app-footer/>

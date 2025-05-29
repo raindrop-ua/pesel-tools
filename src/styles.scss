@@ -1,4 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@use "reset";
+@use "themes";
+
+:root {
+  --container-max-width: 1200px;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
 :root {
   --ngrok-grayple-900: 234 18% 17%;
   --bg-card: var(--ngrok-grayple-900);

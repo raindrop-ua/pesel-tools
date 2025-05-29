@@ -8,13 +8,13 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        data: { preload: true, animation: 'HomePage' },
+        data: { preload: true },
         loadComponent: () =>
           import('./features/home/home.component').then((m) => m.HomeComponent),
       },
       {
         path: 'parser',
-        data: { preload: true, animation: 'AboutPage' },
+        data: { preload: true },
         loadComponent: () =>
           import('./features/parser/parser.component').then(
             (m) => m.ParserComponent,
@@ -22,7 +22,7 @@ export const routes: Routes = [
       },
       {
         path: 'generator',
-        data: { preload: true, animation: 'ContactPage' },
+        data: { preload: true },
         loadComponent: () =>
           import('./features/generator/generator.component').then(
             (m) => m.GeneratorComponent,
@@ -30,13 +30,13 @@ export const routes: Routes = [
       },
       {
         path: 'doc',
-        data: { preload: true, animation: 'ContactPage' },
+        data: { preload: true },
         loadComponent: () =>
           import('./features/doc/doc.component').then((m) => m.DocComponent),
       },
       {
         path: '**',
-        data: { animation: 'NotFoundPage' },
+        data: { preload: false },
         loadComponent: () =>
           import('./features/not-found/not-found.component').then(
             (m) => m.NotFoundComponent,
