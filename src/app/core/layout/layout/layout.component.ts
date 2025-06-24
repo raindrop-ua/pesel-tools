@@ -15,7 +15,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
-import { LoaderComponent } from '../loader/loader.component';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
