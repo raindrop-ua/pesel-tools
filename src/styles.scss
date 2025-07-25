@@ -18,6 +18,8 @@ html, body {
 
   --blue-500: var(--ngrok-blue-500);
   --blue-500-accent: var(--ngrok-blue-500-accent-hover);
+
+
 }
 
 
@@ -34,4 +36,8 @@ html, body {
 body {
   min-height: 100vh;
   padding: 25px;
+}
+
+button {
+  background-color: transparent;
 }
