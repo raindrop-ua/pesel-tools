@@ -1,6 +1,6 @@
 <app-section>
   <app-card>
-    <p>Enter your PESEL for validation</p>
+    <p>Enter PESEL for parsing</p>
     <form [formGroup]="form">
       <app-pesel-input formControlName="pesel" (paste)="onPaste($event)"></app-pesel-input>
 

@@ -1,6 +1,10 @@
 <app-section>
   <app-card>
+    <p>Enter birthday and gender: </p>
+    <app-birthday-input/>
+    <button app-button="primary">Generate</button>
+    <br/>
     <p>Generated PESEL(s)</p>
-    <app-pesel-output [data]="pesels"/>
+    <app-pesel-output [data]="pesels()"/>
   </app-card>
 </app-section>

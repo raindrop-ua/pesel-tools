@@ -1,0 +1,75 @@
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @media screen and (min-width: 640px) {
+    gap: 1rem;
+    flex-direction: row;
+  }
+
+}
+
+.dob {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  position: relative;
+}
+
+.gender {
+
+}
+
+
+.input-s {
+  width: 60px;
+}
+
+.input-l {
+  width: 80px;
+}
+
+
+.radio-inputs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  padding: 0.25rem;
+  margin: 0.5rem 0;
+  width: 200px;
+  height: 48px;
+  font-size: 14px;
+  background-color: #171823;
+  border: 1px solid #3b3f4f;
+}
+
+.radio-inputs .radio {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.radio-inputs .radio input {
+  display: none;
+}
+
+.radio-inputs .radio .name {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  border: none;
+  padding: .5rem 0;
+  height: 38px;
+  color: #ffffff;
+  transition: all .15s ease-in-out;
+}
+
+.radio-inputs .radio input:checked + .name {
+  background-color: #3b3f4f;
+}
