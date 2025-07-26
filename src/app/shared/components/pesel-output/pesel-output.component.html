@@ -1,9 +1,4 @@
 <div class="output-control">
-  <pre>
-    @for (d of data(); track d) {
-      {{ d }}
-    }
-<code>r</code>
-</pre>
-  <app-copy-button [contentToCopy]="'boo'"/>
+  <pre><code>{{ peselList() }}</code></pre>
+  <app-copy-button [contentToCopy]="peselList()"/>
 </div>

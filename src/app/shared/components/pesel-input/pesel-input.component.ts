@@ -1,4 +1,4 @@
-import {Component, forwardRef, input, Input} from '@angular/core';
+import { Component, forwardRef, input, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -9,18 +9,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => PeselInputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class PeselInputComponent implements ControlValueAccessor {
-  //@Input() placeholder = '';
   placeholder = input<string>('');
 
   value = '';
   disabled = false;
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: string) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
   writeValue(value: string): void {
