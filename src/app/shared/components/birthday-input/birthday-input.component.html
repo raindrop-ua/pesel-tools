@@ -1,19 +1,23 @@
-<div class="inputs">
+<div class="inputs" [formGroup]="formGroup">
   <div class="dob">
-    <app-pesel-input class="input-s" placeholder="dd"/>
-    <app-pesel-input class="input-s" placeholder="mm"/>
-    <app-pesel-input class="input-l" placeholder="yyyy"/>
+    <app-pesel-input
+      class="input-s"
+      placeholder="dd"
+      formControlName="day"
+    />
+    <app-pesel-input
+      class="input-s"
+      placeholder="mm"
+      formControlName="month"
+    />
+    <app-pesel-input
+      class="input-l"
+      placeholder="yyyy"
+      formControlName="year"
+    />
   </div>
+
   <div class="gender">
-    <div class="radio-inputs">
-      <label class="radio">
-        <input type="radio" name="radio">
-        <span class="name">Male</span>
-      </label>
-      <label class="radio">
-        <input type="radio" name="radio" checked>
-        <span class="name">Female</span>
-      </label>
-    </div>
+    <app-radio-select formControlName="gender" />
   </div>
 </div>
