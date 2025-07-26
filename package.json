@@ -8,9 +8,19 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prepare": "husky install"
   },
   "private": true,
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix"
+    ]
+  },
   "dependencies": {
     "@angular/animations": "^19.2.8",
     "@angular/common": "^19.2.0",
@@ -39,7 +49,12 @@
     "@types/node": "^18.18.0",
     "angular-eslint": "19.4.0",
     "eslint": "^9.26.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
+    "stylelint": "^16.22.0",
+    "stylelint-config-standard-scss": "^15.0.1",
+    "stylelint-scss": "^6.12.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "8.32.0"
