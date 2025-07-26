@@ -4,23 +4,16 @@
       PESEL Tools
     </a>
   </div>
-  <div class="navigation">
+  <nav class="navigation">
     <menu>
-      <li>
-        <a [routerLink]="'/'">Home</a>
-      </li>
-      <li>
-        <a [routerLink]="'/validator'">Validator</a>
-      </li>
-      <li>
-        <a [routerLink]="'/parser'">Parser</a>
-      </li>
-      <li>
-        <a [routerLink]="'/generator'">Generator</a>
-      </li>
-      <li>
-        <a [routerLink]="'/doc'">Doc</a>
-      </li>
+      @for (item of navigation; track item.path) {
+        <a
+          [routerLink]="item.path"
+          [class.active]="isLinkActive(item.path)"
+        >
+          {{ item.label }}
+        </a>
+      }
     </menu>
-  </div>
+  </nav>
 </header>

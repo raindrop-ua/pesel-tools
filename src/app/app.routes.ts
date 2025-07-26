@@ -13,14 +13,6 @@ export const routes: Routes = [
           import('./features/home/home.component').then((m) => m.HomeComponent),
       },
       {
-        path: 'validator',
-        data: { preload: true },
-        loadComponent: () =>
-          import('./features/validator/validator.component').then(
-            (m) => m.ValidatorComponent,
-          ),
-      },
-      {
         path: 'parser',
         data: { preload: true },
         loadComponent: () =>
@@ -42,14 +34,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/doc/doc.component').then((m) => m.DocComponent),
       },
+      {
+        path: '**',
+        data: { preload: false },
+        loadComponent: () =>
+          import('./features/not-found/not-found.component').then(
+            (m) => m.NotFoundComponent,
+          ),
+      },
     ],
-  },
-  {
-    path: '**',
-    data: { preload: false },
-    loadComponent: () =>
-      import('./features/not-found/not-found.component').then(
-        (m) => m.NotFoundComponent,
-      ),
   },
 ];
