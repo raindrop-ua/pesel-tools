@@ -22,8 +22,8 @@ A lightweight Angular app that parses and validates Polish PESEL numbers with fu
 ## 📦 Run locally
 
 ```bash
-git clone https://github.com/raindrop-ua/pesel-parser.git
-cd pesel-parser
+git clone https://github.com/raindrop-ua/pesel-tools.git
+cd pesel-tools
 npm install
 ng serve
 ```
