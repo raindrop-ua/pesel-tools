@@ -12,15 +12,15 @@ html, body {
 :root {
   --ngrok-grayple-900: 234 18% 17%;
   --neutral-100: var(--gray-100);
-  --bg-card: var(--ngrok-grayple-900);
+  --bg-card: var(--pesel-grayple-900);
   --border-card: var(--neutral-300);
 
-  /* --ngrok-blue-500: 224 81% 57%; */
-  --ngrok-blue-500: 224 89% 60%;
-  --ngrok-blue-500-accent-hover: var(--ngrok-blue-500) / 0.9;
+  /* --pesel-blue-500: 224 81% 57%; */
+  --pesel-blue-500: 224 89% 60%;
+  --pesel-blue-500-accent-hover: var(--pesel-blue-500) / 0.9;
 
-  --blue-500: var(--ngrok-blue-500);
-  --blue-500-accent: var(--ngrok-blue-500-accent-hover);
+  --blue-500: var(--pesel-blue-500);
+  --blue-500-accent: var(--pesel-blue-500-accent-hover);
 
 
 }
