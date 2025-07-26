@@ -1,7 +1,9 @@
-:host {
+.card {
   border-width: 1px;
   border-radius: 0.5rem;
   border-style: solid;
-  background-color: hsl(var(--bg-card));
-  border-color: hsl(var(--border-card));
+  background-color: #242533;
+  border-color: #3b3f4f;
+  padding: 1.5rem;
+  color: #e6e6e7;
 }

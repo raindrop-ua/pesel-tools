@@ -1,19 +1,26 @@
 <header>
-  <ul>
-    <li>
-      <a [routerLink]="'/'">Home</a>
-    </li>
-    <li>
-      <a [routerLink]="'/validator'">Validator</a>
-    </li>
-    <li>
-      <a [routerLink]="'/parser'">Parser</a>
-    </li>
-    <li>
-      <a [routerLink]="'/generator'">Generator</a>
-    </li>
-    <li>
-      <a [routerLink]="'/doc'">Doc</a>
-    </li>
-  </ul>
+  <div class="logo">
+    <a [routerLink]="'/'">
+      PESEL Tools
+    </a>
+  </div>
+  <div class="navigation">
+    <menu>
+      <li>
+        <a [routerLink]="'/'">Home</a>
+      </li>
+      <li>
+        <a [routerLink]="'/validator'">Validator</a>
+      </li>
+      <li>
+        <a [routerLink]="'/parser'">Parser</a>
+      </li>
+      <li>
+        <a [routerLink]="'/generator'">Generator</a>
+      </li>
+      <li>
+        <a [routerLink]="'/doc'">Doc</a>
+      </li>
+    </menu>
+  </div>
 </header>

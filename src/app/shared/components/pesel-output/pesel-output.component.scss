@@ -1,0 +1,55 @@
+.output-control {
+  background-color: #171823;
+  border: 1px solid #3b3f4f;
+  border-radius: 0.375rem;
+  padding: 0;
+  display: flex;
+  color: #ffffff;
+  position: relative;
+
+  pre {
+    scrollbar-color: #e2e4e980 transparent;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    padding: 1rem 3.5rem 1rem 1rem;
+    margin: 0;
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  code {
+    color: #facc15;
+  }
+
+  button {
+    background-color: #171823;
+    color: #737683;
+    border: 1px solid #3b3f4f;
+    border-radius: 0.25rem;
+    z-index: 10;
+    top: 0.625rem;
+    right: 0.625rem;
+    position: absolute;
+    width: 1.75rem;
+    height: 1.75rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: all 200ms ease;
+
+    &:hover {
+      background-color: #2d2f3e;
+      border-color: #4f5363;
+      color: #ffffffb3;
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}
