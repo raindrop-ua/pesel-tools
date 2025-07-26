@@ -8,19 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
-    "lint": "ng lint",
-    "prepare": "husky install"
+    "lint": "ng lint"
   },
   "private": true,
-  "lint-staged": {
-    "*.{ts,js}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{scss,css}": [
-      "stylelint --fix"
-    ]
-  },
   "dependencies": {
     "@angular/animations": "^19.2.8",
     "@angular/common": "^19.2.0",
