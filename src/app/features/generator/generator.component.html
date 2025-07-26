@@ -2,7 +2,7 @@
   <app-card>
     <p>Enter birthday and gender: </p>
     <app-birthday-input [formGroup]="birthdayGroup" />
-    @if (birthdayGroup?.errors && birthdayGroup?.touched) {
+    @if (birthdayGroup.errors && birthdayGroup.touched) {
       <p>Invalid date — check day, month, and year. Please check.</p>
     }
     <button app-button="primary" (click)="generatePesel()">Generate</button>

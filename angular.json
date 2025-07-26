@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pesel-tools-draft": {
+    "pesel-tools": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/pesel-tools-draft",
+            "outputPath": "dist/pesel-tools",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "pesel-tools-draft:build:production"
+              "buildTarget": "pesel-tools:build:production"
             },
             "development": {
-              "buildTarget": "pesel-tools-draft:build:development"
+              "buildTarget": "pesel-tools:build:development"
             }
           },
           "defaultConfiguration": "development"

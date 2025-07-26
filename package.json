@@ -1,5 +1,5 @@
 {
-  "name": "pesel-tools-draft",
+  "name": "pesel-tools",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,7 @@
     "test": "jest --config jest.config.js",
     "test:watch": "jest --watch --config jest.config.js",
     "test:coverage": "jest --coverage --config jest.config.js",
-    "serve:ssr:pesel-tools-draft": "node dist/pesel-tools-draft/server/server.mjs",
+    "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
     "lint": "ng lint"
   },
   "private": true,
