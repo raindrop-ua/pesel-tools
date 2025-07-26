@@ -12,15 +12,15 @@ header {
 }
 
 .logo {
-  font-size: 36px;
-  line-height: 38px;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
   font-weight: 800;
   color: #e6e6e7;
   margin-right: 1.5rem;
 
-  @media screen and (max-width: 640px) {
-    font-size: 24px;
-    line-height: 25px;
+  @media screen and (min-width: 640px) {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   a {
@@ -49,6 +49,13 @@ menu {
     text-underline-offset: 5px;
     text-decoration-thickness: 3px;
     transition: text-underline-offset 0.3s ease;
+    font-size: 1rem;
+    line-height: 1.25rem;
+
+    @media screen and (min-width: 640px) {
+      font-size: 1.125rem;
+      line-height: 1.25rem;
+    }
 
     &.active {
       color: #fb923c;

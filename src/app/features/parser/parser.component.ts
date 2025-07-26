@@ -18,6 +18,7 @@ import {
   PeselInfo,
   PeselParserService,
 } from '../../services/pesel-parser.service';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-parser',
@@ -37,6 +38,7 @@ export class ParserComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
   private peselParser = inject(PeselParserService);
+  private seo = inject(SeoService);
 
   form = this.fb.group({
     pesel: ['', [Validators.required, peselValidatorFactory(this.peselParser)]],
@@ -49,6 +51,10 @@ export class ParserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.seo.updateTitle('Parser | Ultimate PESEL Tools');
+    this.seo.updateDescription('Ultimate PESEL Tools');
+    this.seo.updateKeywords('pesel generator');
+
     this.route.queryParamMap.subscribe((params) => {
       const pesel = params.get('pesel');
       if (pesel) {
