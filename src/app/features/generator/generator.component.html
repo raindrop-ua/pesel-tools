@@ -2,9 +2,14 @@
   <app-card>
     <p>Enter birthday and gender: </p>
     <app-birthday-input/>
-    <button app-button="primary">Generate</button>
+    <button app-button="primary" (click)="generatePesel()">Generate</button>
+    &nbsp;<span> or </span>&nbsp;
+    <button app-button="primary" (click)="generateRandomPesel()">Generate Random</button>
     <br/>
-    <p>Generated PESEL(s)</p>
-    <app-pesel-output [data]="pesels()"/>
+    @if (pesels().length) {
+      <p>Generated PESEL(s)</p>
+      <app-pesel-output [data]="pesels()"/>
+      <button app-button="primary" (click)="clearList()">Clear</button>
+    }
   </app-card>
 </app-section>

@@ -7,5 +7,5 @@ export const NAVIGATION: NavItem[] = [
   { path: "/", label: "Home" },
   { path: "/parser", label: "Parser" },
   { path: "/generator", label: "Generator" },
-  { path: "/doc", label: "Documents" },
+  { path: "/docs", label: "Documents" },
 ];

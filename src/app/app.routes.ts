@@ -29,7 +29,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'doc',
+        path: 'docs',
         data: { preload: true },
         loadComponent: () =>
           import('./features/doc/doc.component').then((m) => m.DocComponent),
