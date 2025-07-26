@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {Component, forwardRef, input, Input} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class PeselInputComponent implements ControlValueAccessor {
-  @Input() placeholder = '';
+  //@Input() placeholder = '';
+  placeholder = input<string>('');
 
   value = '';
   disabled = false;

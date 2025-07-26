@@ -17,5 +17,10 @@ import {SectionComponent} from "../../core/layout/section/section.component";
   styleUrl: './generator.component.scss'
 })
 export class GeneratorComponent {
+  pesels: string[] = [
+    '91062800008',
+    '82090519293',
+    '13302111183',
+  ];
 
 }

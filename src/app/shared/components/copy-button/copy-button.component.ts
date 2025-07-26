@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-copy-button',
@@ -7,18 +7,15 @@ import { Component, Input, signal } from '@angular/core';
   styleUrl: './copy-button.component.scss',
 })
 export class CopyButtonComponent {
-  @Input({ required: true }) contentToCopy!: string;
-
+  contentToCopy = input.required<string>();
   copied = signal(false);
 
   copyToClipboard(): void {
-    console.log(this.contentToCopy);
+    if (!this.contentToCopy()) return;
 
-    if (!this.contentToCopy) return;
-
-    navigator.clipboard.writeText(this.contentToCopy).then(() => {
+    navigator.clipboard.writeText(this.contentToCopy()).then(() => {
       this.copied.set(true);
-      setTimeout(() => this.copied.set(false), 2000);
+      setTimeout(() => this.copied.set(false), 3000);
     });
   }
 }

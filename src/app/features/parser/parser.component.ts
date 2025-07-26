@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -12,14 +11,12 @@ import { SectionComponent } from '../../core/layout/section/section.component';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { PeselInputComponent } from '../../shared/components/pesel-input/pesel-input.component';
 import { PeselOutputComponent } from '../../shared/components/pesel-output/pesel-output.component';
-import { ButtonComponent } from '../../shared/components/button/button.component';
 
 import { peselValidatorFactory } from '../../shared/validators/pesel-validator.factory';
 import {
   PeselInfo,
   PeselParserService,
 } from '../../services/pesel-parser.service';
-import { DatePipe, TitleCasePipe } from '@angular/common';
 import { ResultOutputComponent } from '../../shared/components/result-output/result-output.component';
 import { DisclaimerComponent } from '../../shared/components/disclaimer/disclaimer.component';
 
@@ -32,9 +29,6 @@ import { DisclaimerComponent } from '../../shared/components/disclaimer/disclaim
     PeselOutputComponent,
     ReactiveFormsModule,
     SectionComponent,
-    ButtonComponent,
-    TitleCasePipe,
-    DatePipe,
     ResultOutputComponent,
     DisclaimerComponent,
   ],

@@ -1,8 +1,9 @@
 <div class="output-control">
   <pre>
-<code>91062800008
-82090519293
-13302111183</code>
+    @for (d of data(); track d) {
+      {{ d }}
+    }
+<code>r</code>
 </pre>
-  <app-copy-button/>
+  <app-copy-button [contentToCopy]="'boo'"/>
 </div>
