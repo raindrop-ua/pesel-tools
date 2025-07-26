@@ -6,11 +6,16 @@
   height: 2.25rem;
   display: flex;
   color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus-within {
+    border-color: #699afc;
+    box-shadow: 0 0 0 4px #3e6ff44d;
+  }
 }
 
 input {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+  outline: none;
   background-color: transparent;
   flex: 1 1 0;
   text-align: left;
