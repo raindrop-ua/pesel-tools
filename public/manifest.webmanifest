@@ -1,9 +1,12 @@
 {
   "name": "Ultimate PESEL Tools",
   "short_name": "PESEL Tools",
+  "description": "Advanced PESEL parsing and generation tools — all in your browser.",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "scope": "/",
+  "start_url": "/",
+  "background_color": "#171823",
+  "theme_color": "#171823",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
