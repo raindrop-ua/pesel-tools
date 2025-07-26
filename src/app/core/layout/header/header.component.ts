@@ -1,10 +1,10 @@
 import {Component, inject} from '@angular/core';
-import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NAVIGATION} from '../../../config/navigation.config';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

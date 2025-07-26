@@ -9,10 +9,8 @@ import {SectionComponent} from "../../core/layout/section/section.component";
 @Component({
   selector: 'app-generator',
     imports: [
-        ButtonComponent,
         CardComponent,
         FormsModule,
-        PeselInputComponent,
         PeselOutputComponent,
         ReactiveFormsModule,
         SectionComponent
