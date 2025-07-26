@@ -1,8 +1,8 @@
 <app-section>
   <app-card>
     <p>Enter your PESEL for validation</p>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <app-pesel-input formControlName="pesel"></app-pesel-input>
+    <form [formGroup]="form">
+      <app-pesel-input formControlName="pesel" (paste)="onPaste($event)"></app-pesel-input>
 
       @if (peselControl?.errors && peselControl?.touched) {
         <div class="error">
@@ -23,11 +23,13 @@
           }
         </div>
       }
-
-      <button app-button="primary" [disabled]="peselControl?.errors" type="submit">Parse</button>
     </form>
+    <app-result-output [data]="parsedData()" />
     <br/>
     <p>Generated PESEL(s)</p>
     <app-pesel-output/>
+  </app-card>
+  <app-card>
+    <app-disclaimer/>
   </app-card>
 </app-section>

@@ -1,5 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { SectionComponent } from '../../core/layout/section/section.component';
@@ -9,7 +15,13 @@ import { PeselOutputComponent } from '../../shared/components/pesel-output/pesel
 import { ButtonComponent } from '../../shared/components/button/button.component';
 
 import { peselValidatorFactory } from '../../shared/validators/pesel-validator.factory';
-import { PeselParserService } from '../../services/pesel-parser.service';
+import {
+  PeselInfo,
+  PeselParserService,
+} from '../../services/pesel-parser.service';
+import { DatePipe, TitleCasePipe } from '@angular/common';
+import { ResultOutputComponent } from '../../shared/components/result-output/result-output.component';
+import { DisclaimerComponent } from '../../shared/components/disclaimer/disclaimer.component';
 
 @Component({
   selector: 'app-parser',
@@ -20,39 +32,56 @@ import { PeselParserService } from '../../services/pesel-parser.service';
     PeselOutputComponent,
     ReactiveFormsModule,
     SectionComponent,
-    ButtonComponent
+    ButtonComponent,
+    TitleCasePipe,
+    DatePipe,
+    ResultOutputComponent,
+    DisclaimerComponent,
   ],
   templateUrl: './parser.component.html',
-  styleUrl: './parser.component.scss'
+  styleUrl: './parser.component.scss',
 })
 export class ParserComponent implements OnInit {
-  form!: FormGroup;
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
   private peselParser = inject(PeselParserService);
 
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      pesel: ['', [Validators.required, peselValidatorFactory(this.peselParser)]]
-    });
+  form = this.fb.group({
+    pesel: ['', [Validators.required, peselValidatorFactory(this.peselParser)]],
+  });
 
-    this.route.queryParamMap.subscribe((params) => {
-      const peselFromUrl = params.get('pesel');
-      if (peselFromUrl) {
-        this.form.patchValue({ pesel: peselFromUrl });
-      }
-    });
-  }
+  parsedData = signal<Omit<PeselInfo, 'message'> | null>(null);
 
   get peselControl() {
     return this.form.get('pesel');
   }
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      console.log('PESEL is valid:', this.form.value.pesel);
-    } else {
-      console.log('Validation error:', this.form.errors);
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      const pesel = params.get('pesel');
+      if (pesel) {
+        this.form.patchValue({ pesel });
+
+        if (pesel && this.form.get('pesel')?.valid) {
+          this.parsedData.set(this.peselParser.parsePesel(pesel));
+        }
+      }
+    });
+
+    this.peselControl?.valueChanges.subscribe((value) => {
+      if (this.peselControl?.valid && value) {
+        this.parsedData.set(this.peselParser.parsePesel(value));
+      } else {
+        this.parsedData.set(null);
+      }
+    });
+  }
+
+  onPaste(event: ClipboardEvent) {
+    event.preventDefault();
+    const pasted = event.clipboardData?.getData('text')?.trim() ?? '';
+    if (/^\d{11}$/.test(pasted)) {
+      this.form.patchValue({ pesel: pasted });
     }
   }
 }
