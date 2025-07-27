@@ -174,16 +174,19 @@ img {
   display: block;
   bottom: 0;
   right: -100px;
+  min-width: 360px;
   width: 360px;
   height: 360px;
 
   @media screen and (min-width: 540px) {
+    min-width: 400px;
     width: 400px;
     height: 400px;
     right: -50px;
   }
 
   @media screen and (min-width: 768px) {
+    min-width: 440px;
     width: 440px;
     height: 440px;
     right: 0;
