@@ -1,3 +1,10 @@
+export class InvalidInputStringLengthError extends Error {
+  constructor(message = 'Input must be exactly 10 digits') {
+    super(message);
+    this.name = 'InvalidInputStringLengthError';
+  }
+}
+
 /**
  * Checks if the PESEL string has the correct format (11 digits).
  * @param pesel The PESEL number string.
@@ -95,7 +102,7 @@ export function calculateAge(
  */
 export function calculateChecksumDigit(firstTenDigits: string): number {
   if (!/^\d{10}$/.test(firstTenDigits)) {
-    throw new Error('Input must be exactly 10 digits');
+    throw new InvalidInputStringLengthError();
   }
 
   const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];

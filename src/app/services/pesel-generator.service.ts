@@ -1,6 +1,20 @@
 import { Injectable } from '@angular/core';
 import { calculateChecksumDigit, isValidDate } from './pesel-utils';
 
+export class InvalidBirthDateError extends Error {
+  constructor(message = 'Provided birth date is invalid.') {
+    super(message);
+    this.name = 'InvalidBirthDateError';
+  }
+}
+
+export class InvalidDateRangeError extends Error {
+  constructor(message = 'PESEL supports only years between 1800 and 2299.') {
+    super(message);
+    this.name = 'InvalidDateRangeError';
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -36,13 +50,13 @@ export class PeselGeneratorService {
 
     // 1. Determining the year, month and day of birth
     if (options?.year && options?.month && options?.day) {
-      birthYear = options.year;
-      birthMonth = options.month;
-      birthDay = options.day;
+      birthYear = Number(options.year);
+      birthMonth = Number(options.month);
+      birthDay = Number(options.day);
 
       // Simple check of validity of entered date before proceeding
       if (!isValidDate(birthYear, birthMonth, birthDay)) {
-        throw new Error('Provided birth date is invalid.');
+        throw new InvalidBirthDateError();
       }
     } else {
       // Generate a random date of birth (e.g. within the last 100 years)
@@ -75,19 +89,23 @@ export class PeselGeneratorService {
     }
 
     // 3. Formation of the first 6 digits (year, month, day, taking into account the century)
-    let monthCode = birthMonth;
+    let monthCode: number;
     const peselYear = birthYear % 100;
 
     // Determining the century and adjusting the month
     if (birthYear >= 1800 && birthYear <= 1899) {
-      monthCode += 80;
+      monthCode = birthMonth + 80;
+    } else if (birthYear >= 1900 && birthYear <= 1999) {
+      monthCode = birthMonth; // 1900-1999 do not require adjustment
     } else if (birthYear >= 2000 && birthYear <= 2099) {
-      monthCode += 20;
+      monthCode = birthMonth + 20;
     } else if (birthYear >= 2100 && birthYear <= 2199) {
-      monthCode += 40;
+      monthCode = birthMonth + 40;
     } else if (birthYear >= 2200 && birthYear <= 2299) {
-      monthCode += 60;
-    } // 1900-1999 do not require adjustment
+      monthCode = birthMonth + 60;
+    } else {
+      throw new InvalidDateRangeError();
+    }
 
     const peselDatePart =
       peselYear.toString().padStart(2, '0') +

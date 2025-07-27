@@ -10,6 +10,8 @@ export function validDateValidator(): ValidatorFn {
     const month = control.get('month')?.value;
     const year = control.get('year')?.value;
 
+    console.log(day, month, year);
+
     if (!day || !month || !year) {
       return null; // don't validate if fields are missing
     }
