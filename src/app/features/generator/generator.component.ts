@@ -12,8 +12,8 @@ import { SectionComponent } from '../../core/layout/section/section.component';
 import { BirthdayInputComponent } from '../../shared/components/birthday-input/birthday-input.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { PeselGeneratorService } from '../../services/pesel-generator.service';
-import { validDateValidator } from '../../shared/validators/valid-date.validator';
 import { SeoService } from '../../services/seo.service';
+import { validDateValidator } from '../../shared/validators/valid-date.validator';
 
 @Component({
   selector: 'app-generator',
@@ -76,8 +76,8 @@ export class GeneratorComponent implements OnInit {
   }
 
   generateRandomPesel(): void {
-    const newPesel = this.generator.generatePesel();
-    this.peselList.update((list) => [newPesel, ...list]);
+    const pesel = this.generator.generatePesel();
+    this.peselList.update((list) => [pesel, ...list]);
   }
 
   clearList(): void {

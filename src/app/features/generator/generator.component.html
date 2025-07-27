@@ -5,7 +5,7 @@
     @if (birthdayGroup.errors && birthdayGroup.touched) {
       <p>Invalid date — check day, month, and year. Please check.</p>
     }
-    <button app-button="primary" (click)="generatePesel()">Generate</button>
+    <button app-button="primary" (click)="generatePesel()" [disabled]="birthdayGroup.errors">Generate</button>
     &nbsp;<span> or </span>&nbsp;
     <button app-button="primary" (click)="generateRandomPesel()">Generate Random</button>
     <br/>
