@@ -17,8 +17,8 @@ import { peselValidatorFactory } from '../../shared/validators/pesel-validator.f
 import {
   PeselInfo,
   PeselParserService,
-} from '../../services/pesel-parser.service';
-import { SeoService } from '../../services/seo.service';
+} from '../../core/services/pesel-parser.service';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-parser',

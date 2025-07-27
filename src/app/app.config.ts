@@ -16,11 +16,13 @@ import {
 
 import { routes } from './app.routes';
 import { provideEnvironment } from './environment.providers';
-import { CustomPreloadingStrategy } from './shared/strategies/custom-preloading.strategy';
+import { CustomPreloadingStrategy } from './core/strategies/custom-preloading.strategy';
 import { provideServiceWorker } from '@angular/service-worker';
+import { NAVIGATION, NAVIGATION_TOKEN } from './config/navigation.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: NAVIGATION_TOKEN, useValue: NAVIGATION },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,

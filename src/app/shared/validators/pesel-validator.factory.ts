@@ -3,8 +3,8 @@ import {
   InvalidPeselChecksumError,
   InvalidPeselDateError,
   InvalidPeselFormatError,
-  PeselParserService
-} from '../../services/pesel-parser.service';
+  PeselParserService,
+} from '../../core/services/pesel-parser.service';
 
 export function peselValidatorFactory(parser: PeselParserService): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {

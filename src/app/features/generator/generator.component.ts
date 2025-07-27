@@ -11,8 +11,9 @@ import { PeselOutputComponent } from '../../shared/components/pesel-output/pesel
 import { SectionComponent } from '../../core/layout/section/section.component';
 import { BirthdayInputComponent } from '../../shared/components/birthday-input/birthday-input.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
-import { PeselGeneratorService } from '../../services/pesel-generator.service';
-import { SeoService } from '../../services/seo.service';
+import { PeselGeneratorService } from '../../core/services/pesel-generator.service';
+import { SeoService } from '../../core/services/seo.service';
+import { PeselStoreService } from '../../core/services/pesel-store.service';
 import { validDateValidator } from '../../shared/validators/valid-date.validator';
 
 @Component({
@@ -30,11 +31,12 @@ import { validDateValidator } from '../../shared/validators/valid-date.validator
   styleUrl: './generator.component.scss',
 })
 export class GeneratorComponent implements OnInit {
+  private seo = inject(SeoService);
   private fb = inject(FormBuilder);
   private generator = inject(PeselGeneratorService);
-  private seo = inject(SeoService);
+  private peselStoreService = inject(PeselStoreService);
 
-  peselList = signal<string[]>([]);
+  peselList = this.peselStoreService.pesels;
 
   form: FormGroup = this.fb.group({
     birthday: this.fb.group(
@@ -73,15 +75,15 @@ export class GeneratorComponent implements OnInit {
       sex: gender,
     });
 
-    this.peselList.update((list) => [pesel, ...list]);
+    this.peselStoreService.add(pesel);
   }
 
   generateRandomPesel(): void {
     const pesel = this.generator.generatePesel();
-    this.peselList.update((list) => [pesel, ...list]);
+    this.peselStoreService.add(pesel);
   }
 
   clearList(): void {
-    this.peselList.set([]);
+    this.peselStoreService.clear();
   }
 }

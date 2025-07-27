@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SectionComponent } from '../../core/layout/section/section.component';
 import { CardComponent } from '../../shared/components/card/card.component';
-import { SeoService } from '../../services/seo.service';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-doc',
