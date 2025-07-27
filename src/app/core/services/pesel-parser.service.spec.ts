@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import * as utils from './pesel-utils';
 import {
   PeselParserService,
   InvalidPeselFormatError,
@@ -73,51 +72,69 @@ describe('PeselParserService — 100% coverage', () => {
 
     it('returns full object structure with age', () => {
       const result = service.parsePesel('91062800008');
-      expect(result).toEqual(
-        expect.objectContaining({
-          valid: true,
-          birthDate: '1991-06-28',
-          sex: 'female',
-          serial: '0000',
-          age: expect.any(Number),
-        }),
-      );
+
+      expect(result.valid).toBeTrue();
+      expect(result.birthDate).toBe('1991-06-28');
+      expect(result.sex).toBe('female');
+      expect(result.serial).toBe('0000');
+      expect(typeof result.age).toBe('number');
+      expect(result.age).toBeGreaterThan(0);
     });
   });
 
   describe('parsePesel — invalid PESELs', () => {
     it('throws InvalidPeselFormatError if PESEL too short', () => {
-      expect(() => service.parsePesel('123')).toThrow(InvalidPeselFormatError);
+      try {
+        service.parsePesel('123');
+        fail('Expected InvalidPeselFormatError');
+      } catch (e) {
+        expect(e instanceof InvalidPeselFormatError).toBeTrue();
+      }
     });
 
     it('throws InvalidPeselFormatError if PESEL too long', () => {
-      expect(() => service.parsePesel('123456789012')).toThrow(
-        InvalidPeselFormatError,
-      );
+      try {
+        service.parsePesel('123456789012');
+        fail('Expected InvalidPeselFormatError');
+      } catch (e) {
+        expect(e instanceof InvalidPeselFormatError).toBeTrue();
+      }
     });
 
     it('throws InvalidPeselChecksumError for invalid checksum', () => {
-      expect(() => service.parsePesel('82090500001')).toThrow(
-        InvalidPeselChecksumError,
-      );
+      try {
+        service.parsePesel('82090500001');
+        fail('Expected InvalidPeselChecksumError');
+      } catch (e) {
+        expect(e instanceof InvalidPeselChecksumError).toBeTrue();
+      }
     });
 
     it('throws InvalidPeselDateError for invalid day (Feb 30)', () => {
-      expect(() => service.parsePesel('82023000005')).toThrow(
-        InvalidPeselDateError,
-      );
+      try {
+        service.parsePesel('82023000005');
+        fail('Expected InvalidPeselDateError');
+      } catch (e) {
+        expect(e instanceof InvalidPeselDateError).toBeTrue();
+      }
     });
 
     it('throws InvalidPeselDateError for month > 12 and < 21', () => {
-      expect(() => service.parsePesel('82130500007')).toThrow(
-        InvalidPeselDateError,
-      );
+      try {
+        service.parsePesel('82130500007');
+        fail('Expected InvalidPeselDateError');
+      } catch (e) {
+        expect(e instanceof InvalidPeselDateError).toBeTrue();
+      }
     });
 
     it('throws InvalidPeselDateError for April 31 (exists in PESEL range)', () => {
-      expect(() => service.parsePesel('82043100004')).toThrow(
-        InvalidPeselDateError,
-      );
+      try {
+        service.parsePesel('82043100004');
+        fail('Expected InvalidPeselDateError');
+      } catch (e) {
+        expect(e instanceof InvalidPeselDateError).toBeTrue();
+      }
     });
   });
 
@@ -151,12 +168,9 @@ describe('PeselParserService — 100% coverage', () => {
       expect(service.validatePesel(brokenInput)).toBe(false);
     });
 
-    it('validatePesel triggers catch via mocked isValidDate', () => {
-      jest.spyOn(utils, 'isValidDate').mockImplementation(() => {
-        throw new Error('boom');
-      });
-
-      expect(service.validatePesel('82090500000')).toBe(false);
+    it('validatePesel returns false if unexpected error occurs during parsing', () => {
+      const brokenInput = undefined as unknown as string;
+      expect(service.validatePesel(brokenInput)).toBe(false);
     });
   });
 });

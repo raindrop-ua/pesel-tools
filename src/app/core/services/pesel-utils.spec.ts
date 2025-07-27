@@ -1,9 +1,9 @@
 import {
-  isValidFormat,
-  isValidChecksum,
-  isValidDate,
   calculateAge,
   calculateChecksumDigit,
+  isValidChecksum,
+  isValidDate,
+  isValidFormat,
 } from './pesel-utils';
 
 describe('pesel-utils — 100% coverage', () => {
@@ -83,12 +83,17 @@ describe('pesel-utils — 100% coverage', () => {
   });
 
   describe('calculateAge (fixed date: 2025-06-28)', () => {
+    let originalDateNow: () => number;
+
     beforeEach(() => {
-      jest.useFakeTimers().setSystemTime(new Date('2025-06-28'));
+      originalDateNow = Date.now;
+
+      const fixedDate = new Date(Date.UTC(2025, 5, 28, 12)); // 2025-06-28T12:00:00Z
+      spyOn(Date, 'now').and.returnValue(fixedDate.getTime());
     });
 
     afterEach(() => {
-      jest.useRealTimers();
+      Date.now = originalDateNow;
     });
 
     it('returns correct age if birthday already passed this year', () => {

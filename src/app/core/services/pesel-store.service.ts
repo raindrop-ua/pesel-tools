@@ -1,11 +1,22 @@
-import { Injectable, computed, signal } from '@angular/core';
+import {
+  Injectable,
+  computed,
+  signal,
+  PLATFORM_ID,
+  inject,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PeselStoreService {
   private readonly STORAGE_KEY = 'pesel-list';
-  private readonly _pesels = signal<string[]>(this.load());
+  private readonly platformId = inject(PLATFORM_ID);
+
+  private readonly _pesels = signal<string[]>(
+    isPlatformBrowser(this.platformId) ? this.load() : [],
+  );
 
   readonly pesels = computed(() => this._pesels());
   readonly hasPesels = computed(() => this._pesels().length > 0);
@@ -13,35 +24,46 @@ export class PeselStoreService {
   add(pesel: string) {
     const updated = [...this._pesels(), pesel];
     this._pesels.set(updated);
-    this.save(updated);
+    if (isPlatformBrowser(this.platformId)) {
+      this.save(updated);
+    }
   }
 
   remove(pesel: string) {
     const updated = this._pesels().filter((p) => p !== pesel);
     this._pesels.set(updated);
-    this.save(updated);
+    if (isPlatformBrowser(this.platformId)) {
+      this.save(updated);
+    }
   }
 
   clear() {
     this._pesels.set([]);
-    this.save([]);
-  }
-
-  private load(): string[] {
-    try {
-      const raw = localStorage.getItem(this.STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) {
-      console.error('Failed to load pesel list:', e);
-      return [];
+    if (isPlatformBrowser(this.platformId)) {
+      this.save([]);
     }
   }
 
+  private load(): string[] {
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        const raw = localStorage.getItem(this.STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error('Failed to load pesel list:', e);
+        return [];
+      }
+    }
+    return [];
+  }
+
   private save(pesels: string[]) {
-    try {
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(pesels));
-    } catch (e) {
-      console.error('Failed to save pesel list:', e);
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(pesels));
+      } catch (e) {
+        console.error('Failed to save pesel list:', e);
+      }
     }
   }
 }

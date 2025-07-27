@@ -64,33 +64,34 @@ export function isValidDate(year: number, month: number, day: number): boolean {
 /**
  * Calculates the age based on birth year, month, and day.
  * This method uses a standard age calculation logic.
- * @param birthYear The birth year.
- * @param birthMonth The birth month (1-12).
- * @param birthDay The birthday (1-31).
  * @returns The calculated age in years.
+ * @param year
+ * @param month
+ * @param day
  */
-export function calculateAge(
-  birthYear: number,
-  birthMonth: number,
-  birthDay: number,
-): number {
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth() + 1; // Month is 0-indexed in Date
-  const currentDay = today.getDate();
+export function calculateAge(year: number, month: number, day: number): number {
+  const today = new Date(Date.now());
 
-  let age = currentYear - birthYear;
+  const birthDate = new Date(Date.UTC(year, month - 1, day));
+  const todayDate = new Date(
+    Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()),
+  );
 
-  // Adjust age if a birthday hasn't occurred yet this year
-  if (
-    currentMonth < birthMonth ||
-    (currentMonth === birthMonth && currentDay < birthDay)
-  ) {
+  let age = todayDate.getUTCFullYear() - birthDate.getUTCFullYear();
+
+  const thisYearBirthday = new Date(
+    Date.UTC(
+      todayDate.getUTCFullYear(),
+      birthDate.getUTCMonth(),
+      birthDate.getUTCDate(),
+    ),
+  );
+
+  if (todayDate < thisYearBirthday) {
     age--;
   }
 
-  // Ensure age is not negative (though this should not happen with valid data)
-  return Math.max(0, age);
+  return age >= 0 ? age : 0;
 }
 
 /**
