@@ -1,4 +1,3 @@
-// server.ts
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 import { getContext } from '@netlify/angular-runtime/context.mjs';
 
