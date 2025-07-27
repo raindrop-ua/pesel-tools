@@ -145,6 +145,8 @@ img {
   min-width: 360px;
   width: 360px;
   height: 360px;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
 
   @media screen and (min-width: 540px) {
     min-width: 400px;

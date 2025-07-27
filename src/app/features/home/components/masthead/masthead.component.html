@@ -1,4 +1,4 @@
-<div class="masthead">
+<div class="masthead" #masthead>
   <div class="float float-1">Ultimate</div>
   <div class="float float-2">
     PESEL
@@ -10,6 +10,7 @@
     <div class="pulse-circle circle-3"></div>
   </div>
   <img [ngSrc]="'/assets/masthead-girl.webp'"
+       #parallaxImg
        width="880"
        height="880"
        alt="Girl holding PESEL card"
