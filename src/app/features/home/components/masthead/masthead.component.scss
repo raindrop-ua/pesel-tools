@@ -1,28 +1,41 @@
 .masthead {
-  background: linear-gradient(135deg, #141a37 0%, #1d2543 50%, #242533 100%);
-  height: 400px;
+  background: linear-gradient(135deg, #141a37 0%, #253260 50%, #242533 100%);
+  height: 340px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 2rem;
-  font-size: 4rem;
+  padding-left: 0.5rem;
+  font-size: 2.5rem;
   font-weight: 400;
-  line-height: 5rem;
+  line-height: 2.75rem;
   color: #ffffff;
   border-radius: 1rem;
   position: relative;
-  margin-top: 2rem;
+  margin-top: 1rem;
+
+  @media screen and (min-width: 540px) {
+    height: 380px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 2rem;
+    height: 400px;
+    padding-left: 2rem;
+    font-size: 4rem;
+    line-height: 5rem;
+  }
 }
 
 .pulses {
   position: absolute;
   top: 45%;
   right: 200px;
-  transform: translateY(-50%) scale(3);
+  transform: translateY(-50%) scale(2);
   pointer-events: none;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 540px) {
     right: 45%;
+    transform: translateY(-50%) scale(3);
   }
 }
 
@@ -98,23 +111,50 @@
 
 .float-1 {
   left: 10px;
-  animation: float-left-right 8s ease-in-out infinite;
+  animation: float-left-right-light 8s ease-in-out infinite;
+
+  @media screen and (min-width: 540px) {
+    left: 10px;
+    animation: float-left-right 8s ease-in-out infinite;
+  }
 }
 
 .float-2 {
-  left: 50px;
+  left: 30px;
   margin-bottom: -20px;
-  animation: float-left-right 4s ease-in-out infinite reverse;
+  animation: float-left-right-light 4s ease-in-out infinite reverse;
+
+  @media screen and (min-width: 540px) {
+    left: 50px;
+    animation: float-left-right 4s ease-in-out infinite reverse;
+  }
 }
 
 .float-3 {
   left: 0;
-  animation: float-left-right 10s ease-in-out infinite alternate;
+  animation: float-left-right-light 10s ease-in-out infinite alternate;
+
+  @media screen and (min-width: 540px) {
+    left: 0;
+    animation: float-left-right 10s ease-in-out infinite alternate;
+  }
 }
 
 .wave-letter {
   display: inline-block;
   animation: wave-bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes float-left-right {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(40px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes float-left-right-light {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(20px); }
+  100% { transform: translateX(0); }
 }
 
 .wave-letter:nth-child(1) { animation-delay: 0s; }
@@ -128,19 +168,22 @@
   50%      { transform: translateY(-8px); }
 }
 
-@keyframes float-left-right {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(40px); }
-  100% { transform: translateX(0); }
-}
 
 img {
-  display: none;
+  position: absolute;
+  display: block;
+  bottom: 0;
+  right: -100px;
+  width: 360px;
+  height: 360px;
+
+  @media screen and (min-width: 540px) {
+    width: 400px;
+    height: 400px;
+    right: -50px;
+  }
 
   @media screen and (min-width: 768px) {
-    display: block;
-    position: absolute;
-    bottom: 0;
     width: 440px;
     height: 440px;
     right: 0;
