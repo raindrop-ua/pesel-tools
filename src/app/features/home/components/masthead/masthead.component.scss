@@ -9,19 +9,21 @@
   font-weight: 400;
   line-height: 5rem;
   color: #ffffff;
-}
-
-.masthead {
+  border-radius: 1rem;
   position: relative;
-  overflow: hidden;
+  margin-top: 2rem;
 }
 
 .pulses {
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 200px;
-  transform: translateY(-50%) scale(2.8);
+  transform: translateY(-50%) scale(3);
   pointer-events: none;
+
+  @media screen and (min-width: 768px) {
+    right: 45%;
+  }
 }
 
 .pulse-circle {
@@ -130,4 +132,17 @@
   0%   { transform: translateX(0); }
   50%  { transform: translateX(40px); }
   100% { transform: translateX(0); }
+}
+
+img {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 440px;
+    height: 440px;
+    right: 0;
+  }
 }

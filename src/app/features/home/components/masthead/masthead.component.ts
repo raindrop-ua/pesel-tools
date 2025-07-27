@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-masthead',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './masthead.component.html',
-  styleUrl: './masthead.component.scss'
+  styleUrl: './masthead.component.scss',
 })
-export class MastheadComponent {
-
-}
+export class MastheadComponent {}
