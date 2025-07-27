@@ -5,22 +5,31 @@ import { isValidDate } from '../../services/pesel-utils';
  * Validator for day/month/year group to ensure the date is valid.
  */
 export function validDateValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const day = control.get('day')?.value;
-    const month = control.get('month')?.value;
-    const year = control.get('year')?.value;
+  return (group: AbstractControl): ValidationErrors | null => {
+    if (!group.get) return null;
 
-    console.log(day, month, year);
+    const day = Number(group.get('day')?.value);
+    const month = Number(group.get('month')?.value);
+    const year = Number(group.get('year')?.value);
 
     if (!day || !month || !year) {
       return null; // don't validate if fields are missing
     }
 
-    const dayNum = parseInt(day, 10);
-    const monthNum = parseInt(month, 10);
-    const yearNum = parseInt(year, 10);
+    if (
+      isNaN(day) ||
+      isNaN(month) ||
+      isNaN(year) ||
+      day < 1 ||
+      month < 1 ||
+      month > 12 ||
+      year < 1800 ||
+      year > 2299
+    ) {
+      return { invalidDate: true };
+    }
 
-    if (!isValidDate(yearNum, monthNum, dayNum)) {
+    if (!isValidDate(year, month, day)) {
       return { invalidDate: true };
     }
 

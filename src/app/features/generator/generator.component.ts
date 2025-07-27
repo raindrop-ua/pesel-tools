@@ -39,8 +39,8 @@ export class GeneratorComponent implements OnInit {
   form: FormGroup = this.fb.group({
     birthday: this.fb.group(
       {
-        day: ['', [Validators.required, Validators.pattern(/^\d{2}$/)]],
-        month: ['', [Validators.required, Validators.pattern(/^\d{2}$/)]],
+        day: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
+        month: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
         year: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         gender: ['female', Validators.required],
       },
@@ -72,6 +72,7 @@ export class GeneratorComponent implements OnInit {
       day,
       sex: gender,
     });
+
     this.peselList.update((list) => [pesel, ...list]);
   }
 

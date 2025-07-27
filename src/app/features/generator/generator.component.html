@@ -3,7 +3,7 @@
     <p>Enter birthday and gender: </p>
     <app-birthday-input [formGroup]="birthdayGroup" />
     @if (birthdayGroup.errors && birthdayGroup.touched) {
-      <p>Invalid date — check day, month, and year. Please check.</p>
+      <p>Invalid date — check day, month, and year.</p>
     }
     <button app-button="primary" (click)="generatePesel()" [disabled]="birthdayGroup.errors">Generate</button>
     &nbsp;<span> or </span>&nbsp;
