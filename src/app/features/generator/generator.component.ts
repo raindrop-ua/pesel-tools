@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CardComponent } from '../../shared/components/card/card.component';
 import {
   FormBuilder,
@@ -12,7 +12,6 @@ import { SectionComponent } from '../../core/layout/section/section.component';
 import { BirthdayInputComponent } from '../../shared/components/birthday-input/birthday-input.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { PeselGeneratorService } from '../../core/services/pesel-generator.service';
-import { SeoService } from '../../core/services/seo.service';
 import { PeselStoreService } from '../../core/services/pesel-store.service';
 import { validDateValidator } from '../../shared/validators/valid-date.validator';
 
@@ -30,8 +29,7 @@ import { validDateValidator } from '../../shared/validators/valid-date.validator
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.scss',
 })
-export class GeneratorComponent implements OnInit {
-  private seo = inject(SeoService);
+export class GeneratorComponent {
   private fb = inject(FormBuilder);
   private generator = inject(PeselGeneratorService);
   private peselStoreService = inject(PeselStoreService);
@@ -49,12 +47,6 @@ export class GeneratorComponent implements OnInit {
       { validators: [validDateValidator()] },
     ),
   });
-
-  ngOnInit(): void {
-    this.seo.updateTitle('Generator | Ultimate PESEL Tools');
-    this.seo.updateDescription('Ultimate PESEL Tools');
-    this.seo.updateKeywords('pesel generator');
-  }
 
   get birthdayGroup(): FormGroup {
     return this.form.get('birthday') as FormGroup;

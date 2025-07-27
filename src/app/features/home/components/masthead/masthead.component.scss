@@ -105,7 +105,6 @@
   }
 }
 
-
 .float {
   position: relative;
   white-space: nowrap;
@@ -114,19 +113,19 @@
 }
 
 .float-1 {
-  left: 10px;
+  left: 0.75rem;
 
   @media screen and (min-width: 540px) {
-    left: 10px;
+    left: 0.75rem;
   }
 }
 
 .float-2 {
-  left: 30px;
+  left: 2rem;
   margin-bottom: -1rem;
 
   @media screen and (min-width: 540px) {
-    left: 50px;
+    left: 3rem;
   }
 }
 
