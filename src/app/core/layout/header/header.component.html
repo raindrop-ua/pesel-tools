@@ -1,19 +1,22 @@
 <header>
-  <div class="logo">
-    <a [routerLink]="'/'">
-      PESEL Tools
-    </a>
+  <div class="main-block">
+    <div class="logo">
+      <a [routerLink]="'/'">
+        PESEL Tools
+      </a>
+    </div>
+    <nav class="navigation">
+      <menu>
+        @for (item of navigation; track item.path) {
+          <a
+            [routerLink]="item.path"
+            [class.active]="isLinkActive(item.path)"
+          >
+            {{ item.label }}
+          </a>
+        }
+      </menu>
+    </nav>
   </div>
-  <nav class="navigation">
-    <menu>
-      @for (item of navigation; track item.path) {
-        <a
-          [routerLink]="item.path"
-          [class.active]="isLinkActive(item.path)"
-        >
-          {{ item.label }}
-        </a>
-      }
-    </menu>
-  </nav>
+  <app-theme-switcher/>
 </header>

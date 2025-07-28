@@ -1,0 +1,69 @@
+:host {
+  display: flex;
+}
+
+.toggle-group {
+  display: inline-flex;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+.toggle-group button {
+  all: unset;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    color: #fb923c;
+  }
+
+  svg {
+    transition: stroke-width 0.3s ease, color 0.3s ease;
+    stroke-width: 1.5;
+  }
+
+  &:hover svg {
+    stroke: currentColor;
+    stroke-width: 3;
+  }
+}
+
+.toggle-group button.active,
+.toggle-group button[aria-pressed="true"] {
+  background-color: var(--active-bg);
+}
+
+.toggle-group button:hover {
+  background-color: var(--hover-bg);
+}
+
+svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.skeleton {
+  display: inline-flex;
+  gap: 0;
+}
+
+.skeleton-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
