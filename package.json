@@ -1,6 +1,6 @@
 {
   "name": "pesel-tools",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -42,7 +42,7 @@
     "@types/node": "^18.18.0",
     "angular-eslint": "19.4.0",
     "commitlint": "^19.8.1",
-    "eslint": "^9.26.0",
+    "eslint": "^9.32.0",
     "husky": "^8.0.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
@@ -51,7 +51,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^16.1.2",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
+    "standard-version": "^9.5.0",
     "stylelint": "^16.22.0",
     "stylelint-config-standard-scss": "^15.0.1",
     "stylelint-scss": "^6.12.1",
@@ -60,6 +61,14 @@
     "typescript-eslint": "8.32.0"
   },
   "lint-staged": {
-    "*.{ts,js,json,scss,html}": "prettier --write"
+    "*.{ts,js}": [
+      "eslint --fix"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix"
+    ],
+    "*.{ts,js,scss,json,html,md}": [
+      "prettier --write"
+    ]
   }
 }
