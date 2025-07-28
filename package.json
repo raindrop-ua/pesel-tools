@@ -6,8 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --watch=false --browsers=ChromeHeadless",
-    "test:coverage": "ng test --watch=false --code-coverage",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
     "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
     "lint": "ng lint",
     "release": "standard-version"
