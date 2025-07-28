@@ -22,7 +22,7 @@ export class PeselStoreService {
   readonly hasPesels = computed(() => this._pesels().length > 0);
 
   add(pesel: string) {
-    const updated = [...this._pesels(), pesel];
+    const updated = [pesel, ...this._pesels()];
     this._pesels.set(updated);
     if (isPlatformBrowser(this.platformId)) {
       this.save(updated);

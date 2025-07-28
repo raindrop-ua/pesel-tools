@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -7,9 +7,10 @@ import { Component, Input } from '@angular/core';
   template: '<svg:use [attr.href]="href"></svg:use>',
 })
 export class SvgIconComponent {
-  @Input() icon = '';
+  icon = input.required();
+  sprite = input('icons');
 
   get href() {
-    return `/assets/svg/${this.icon}.svg#${this.icon}`;
+    return `/assets/svg/${this.sprite()}.svg#${this.icon()}`;
   }
 }

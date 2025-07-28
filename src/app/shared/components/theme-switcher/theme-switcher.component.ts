@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { Theme, ThemeService } from '../../../core/services/theme.service';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 const themes = [
-  { id: 'light', label: 'Light', icon: '🌞' },
-  { id: 'dark', label: 'Dark', icon: '🌙' },
-  { id: 'system', label: 'System', icon: '💻' },
+  { id: 'light', label: 'Light', icon: 'sun' },
+  { id: 'dark', label: 'Dark', icon: 'moon' },
+  { id: 'system', label: 'System', icon: 'laptop' },
 ] as const;
 
 @Component({
@@ -12,6 +13,7 @@ const themes = [
   standalone: true,
   templateUrl: './theme-switcher.component.html',
   styleUrls: ['./theme-switcher.component.scss'],
+  imports: [SvgIconComponent],
 })
 export class ThemeSwitcherComponent {
   private readonly themeService = inject(ThemeService);

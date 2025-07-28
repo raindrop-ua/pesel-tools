@@ -21,7 +21,11 @@
 }
 
 .radio-inputs .radio input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 }
 
 .radio-inputs .radio .name {
@@ -39,4 +43,11 @@
 
 .radio-inputs .radio input:checked + .name {
   background-color: #3b3f4f;
+}
+
+.radio-inputs .radio input:focus-visible + .name {
+  transition: none;
+  outline: 2px solid rgba(62, 111, 244, 0.75);
+  outline-offset: -2px;
+  border-radius: 0.5rem;
 }

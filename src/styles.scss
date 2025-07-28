@@ -10,7 +10,7 @@ html, body {
 }
 
 :root {
-  --ngrok-grayple-900: 234 18% 17%;
+  --pesel-grayple-900: 234 18% 17%;
   --neutral-100: var(--gray-100);
   --bg-card: var(--pesel-grayple-900);
   --border-card: var(--neutral-300);
@@ -60,4 +60,24 @@ h1 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+a, button {
+  outline: none;
+  position: relative;
+
+  &:focus-visible {
+    transition: none;
+    border-radius: 0.5rem;
+    outline: 2px solid transparent;
+  }
+
+  &:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 2px solid rgba(62, 111, 244, 0.3);
+    border-radius: 1rem;
+    pointer-events: none;
+  }
 }
