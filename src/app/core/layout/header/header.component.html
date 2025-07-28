@@ -1,0 +1,57 @@
+<header>
+  <div class="main-block">
+    <button class="burger" (click)="toggleMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    @if (menuOpen()) {
+      <nav class="mobile-navigation">
+        <menu>
+          @for (item of navigation; track item.path) {
+            <li>
+              <a
+                [routerLink]="item.path"
+                [class.active]="isLinkActive(item.path)"
+                (click)="closeMenu()"
+              >
+                {{ item.label }}
+              </a>
+            </li>
+          }
+        </menu>
+      </nav>
+    }
+    <div class="logo">
+      <a [routerLink]="'/'">
+        PESEL Tools
+      </a>
+    </div>
+    <nav class="navigation">
+      <menu>
+        @for (item of navigation; track item.path) {
+          <li>
+            <a
+              [routerLink]="item.path"
+              [class.active]="isLinkActive(item.path)"
+            >
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </menu>
+    </nav>
+  </div>
+  @if (menuOpen()) {
+    <div
+      class="overlay"
+      tabindex="0"
+      role="button"
+      aria-label="Close menu"
+      (click)="closeMenu()"
+      (keydown.enter)="closeMenu()"
+      (keydown.space)="closeMenu()"
+    ></div>
+  }
+  <app-theme-switcher/>
+</header>

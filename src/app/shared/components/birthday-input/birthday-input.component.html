@@ -1,0 +1,23 @@
+<div class="inputs" [formGroup]="formGroup">
+  <div class="dob">
+    <app-pesel-input
+      class="input-s"
+      placeholder="dd"
+      formControlName="day"
+    />
+    <app-pesel-input
+      class="input-s"
+      placeholder="mm"
+      formControlName="month"
+    />
+    <app-pesel-input
+      class="input-l"
+      placeholder="yyyy"
+      formControlName="year"
+    />
+  </div>
+
+  <div class="gender">
+    <app-radio-select formControlName="gender" />
+  </div>
+</div>

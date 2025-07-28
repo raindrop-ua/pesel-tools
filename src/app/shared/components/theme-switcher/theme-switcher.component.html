@@ -1,0 +1,22 @@
+@defer (on idle) {
+  <div role="group" aria-label="Theme toggle" class="toggle-group">
+    @for (theme of themes; track theme.id) {
+      <button
+        type="button"
+        (click)="setTheme(theme.id)"
+        [attr.aria-pressed]="currentTheme() === theme.id"
+        [class.active]="currentTheme() === theme.id"
+        [title]="theme.label"
+      >
+          <svg [icon]="theme.icon" width="24" height="24" stroke="currentColor" stroke-width="2"></svg>
+        <span class="sr-only">{{ theme.label }}</span>
+      </button>
+    }
+  </div>
+} @placeholder {
+  <div class="toggle-group skeleton">
+    @for (theme of themes; track theme.id) {
+      <div class="skeleton-button"></div>
+    }
+  </div>
+}
