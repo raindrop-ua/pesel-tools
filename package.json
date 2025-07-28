@@ -9,7 +9,8 @@
     "test": "ng test --watch=false --browsers=ChromeHeadless",
     "test:coverage": "ng test --watch=false --code-coverage",
     "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "release": "standard-version"
   },
   "private": true,
   "dependencies": {
