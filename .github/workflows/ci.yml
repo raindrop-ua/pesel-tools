@@ -17,7 +17,7 @@ jobs:
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
 
       - name: 📦 Install deps
         run: npm ci
@@ -26,7 +26,7 @@ jobs:
         run: npm run lint
 
       - name: ✅ Run tests
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+        run: npm test
 
       - name: 📊 Coverage
         run: npm run test:coverage || true

@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import {
   PeselGeneratorService,
   InvalidBirthDateError,
@@ -10,8 +9,7 @@ describe('PeselGeneratorService — 100% coverage', () => {
   let service: PeselGeneratorService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(PeselGeneratorService);
+    service = new PeselGeneratorService(); // ← без TestBed
   });
 
   describe('generatePesel with valid parameters', () => {
@@ -31,7 +29,7 @@ describe('PeselGeneratorService — 100% coverage', () => {
       expect(sexDigit % 2).toBe(1); // male = odd
     });
 
-    it('generates PESEL for 2000s female with correct month offset', () => {
+    it('generates PESEL for 2003 female with correct month offset', () => {
       const pesel = service.generatePesel({
         year: 2003,
         month: 2,
@@ -44,7 +42,7 @@ describe('PeselGeneratorService — 100% coverage', () => {
       expect(sexDigit % 2).toBe(0); // female = even
     });
 
-    it('generates PESEL for year in 1800s with month offset +80', () => {
+    it('generates PESEL for 1820 female with +80 month offset', () => {
       const pesel = service.generatePesel({
         year: 1820,
         month: 4,
@@ -52,10 +50,10 @@ describe('PeselGeneratorService — 100% coverage', () => {
         sex: 'female',
       });
 
-      expect(pesel.substring(2, 4)).toBe('84'); // 04 + 80
+      expect(pesel.substring(2, 4)).toBe('84');
     });
 
-    it('generates PESEL for year in 2200s with month offset +60', () => {
+    it('generates PESEL for 2220 male with +60 month offset', () => {
       const pesel = service.generatePesel({
         year: 2220,
         month: 1,
@@ -63,7 +61,7 @@ describe('PeselGeneratorService — 100% coverage', () => {
         sex: 'male',
       });
 
-      expect(pesel.substring(2, 4)).toBe('61'); // 01 + 60
+      expect(pesel.substring(2, 4)).toBe('61');
     });
   });
 
@@ -78,19 +76,19 @@ describe('PeselGeneratorService — 100% coverage', () => {
     it('throws InvalidBirthDateError for invalid date', () => {
       expect(() =>
         service.generatePesel({ year: 2000, month: 2, day: 30 }),
-      ).toThrowError(InvalidBirthDateError);
+      ).toThrow(InvalidBirthDateError);
     });
 
     it('throws InvalidDateRangeError for year < 1800', () => {
       expect(() =>
         service.generatePesel({ year: 1799, month: 12, day: 31 }),
-      ).toThrowError(InvalidDateRangeError);
+      ).toThrow(InvalidDateRangeError);
     });
 
     it('throws InvalidDateRangeError for year > 2299', () => {
       expect(() =>
         service.generatePesel({ year: 2300, month: 1, day: 1 }),
-      ).toThrowError(InvalidDateRangeError);
+      ).toThrow(InvalidDateRangeError);
     });
   });
 

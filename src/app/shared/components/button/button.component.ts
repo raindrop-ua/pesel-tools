@@ -1,5 +1,4 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 type ButtonType = 'primary' | 'secondary' | 'danger';
 
@@ -11,7 +10,7 @@ type ButtonType = 'primary' | 'secondary' | 'danger';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[app-button], a[app-button]',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
 })
