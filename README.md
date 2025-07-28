@@ -1,4 +1,4 @@
-# PESEL Parser
+# PESEL Tools
 
 ![CI](https://github.com/raindrop-ua/pesel-tools/actions/workflows/ci.yml/badge.svg)
 ![Commits](https://img.shields.io/badge/commits-conventional-brightgreen)
