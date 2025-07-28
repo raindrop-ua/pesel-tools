@@ -43,7 +43,15 @@
     </nav>
   </div>
   @if (menuOpen()) {
-    <div class="overlay" (click)="closeMenu()"></div>
+    <div
+      class="overlay"
+      tabindex="0"
+      role="button"
+      aria-label="Close menu"
+      (click)="closeMenu()"
+      (keydown.enter)="closeMenu()"
+      (keydown.space)="closeMenu()"
+    ></div>
   }
   <app-theme-switcher/>
 </header>

@@ -1,4 +1,20 @@
 <footer>
-  <div>&copy; 2025</div>
+  <div>
+    <p>&copy; 2025</p>
+    <nav class="navigation">
+      <menu>
+        @for (item of navigation; track item.path) {
+          <li>
+            <a
+              [routerLink]="item.path"
+              [class.active]="isLinkActive(item.path)"
+            >
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </menu>
+    </nav>
+  </div>
   <div>Version 0.12.5 beta</div>
 </footer>

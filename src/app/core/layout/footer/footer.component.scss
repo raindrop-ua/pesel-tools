@@ -9,4 +9,36 @@ footer {
   gap: 24px;
   color: #ffffff;
   font-size: 1rem;
+
+  > div {
+    display: flex;
+  }
+}
+
+.navigation {
+  menu {
+    list-style: none;
+    padding: 0;
+    display: none;
+    margin-left: 2rem;
+    gap: 1rem;
+
+    a {
+      color: #ffffff;
+      font-size: 1rem;
+      text-decoration: none;
+
+      &.active,
+      &:hover {
+        color: #fb923c;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 1px;
+      }
+    }
+
+    @media screen and (min-width: 641px) {
+      display: flex;
+    }
+  }
 }
