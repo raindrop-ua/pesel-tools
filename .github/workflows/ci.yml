@@ -30,3 +30,7 @@ jobs:
 
       - name: 📊 Coverage
         run: npm run test:coverage || true
+
+      - name: 🚀 Deploy to Netlify
+        if: success() && github.ref == 'refs/heads/main'
+        run: curl -X POST -d '{}' https://api.netlify.com/build_hooks/6887c1497a86aa2736d70b50
