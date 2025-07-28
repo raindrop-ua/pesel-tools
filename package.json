@@ -8,8 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
-    "lint": "ng lint",
-    "prepare": "husky install"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
