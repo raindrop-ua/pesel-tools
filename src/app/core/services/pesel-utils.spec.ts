@@ -5,6 +5,7 @@ import {
   isValidDate,
   isValidFormat,
 } from './pesel-utils';
+import { vi } from 'vitest';
 
 describe('pesel-utils — 100% coverage', () => {
   describe('isValidFormat', () => {
@@ -83,17 +84,13 @@ describe('pesel-utils — 100% coverage', () => {
   });
 
   describe('calculateAge (fixed date: 2025-06-28)', () => {
-    let originalDateNow: () => number;
-
     beforeEach(() => {
-      originalDateNow = Date.now;
-
-      const fixedDate = new Date(Date.UTC(2025, 5, 28, 12)); // 2025-06-28T12:00:00Z
-      spyOn(Date, 'now').and.returnValue(fixedDate.getTime());
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date(Date.UTC(2025, 5, 28, 12))); // 2025-06-28
     });
 
     afterEach(() => {
-      Date.now = originalDateNow;
+      vi.useRealTimers();
     });
 
     it('returns correct age if birthday already passed this year', () => {

@@ -1,9 +1,11 @@
 import {
   Injectable,
+  Inject,
+  PLATFORM_ID,
   computed,
   signal,
-  PLATFORM_ID,
-  inject,
+  Signal,
+  WritableSignal,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -12,19 +14,23 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class PeselStoreService {
   private readonly STORAGE_KEY = 'pesel-list';
-  private readonly platformId = inject(PLATFORM_ID);
 
-  private readonly _pesels = signal<string[]>(
-    isPlatformBrowser(this.platformId) ? this.load() : [],
-  );
+  private readonly _pesels: WritableSignal<string[]>;
 
-  readonly pesels = computed(() => this._pesels());
-  readonly hasPesels = computed(() => this._pesels().length > 0);
+  readonly pesels: Signal<string[]>;
+  readonly hasPesels: Signal<boolean>;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: string) {
+    const initial = this.isBrowser() ? this.load() : [];
+    this._pesels = signal(initial);
+    this.pesels = computed(() => this._pesels());
+    this.hasPesels = computed(() => this._pesels().length > 0);
+  }
 
   add(pesel: string) {
     const updated = [pesel, ...this._pesels()];
     this._pesels.set(updated);
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser()) {
       this.save(updated);
     }
   }
@@ -32,38 +38,37 @@ export class PeselStoreService {
   remove(pesel: string) {
     const updated = this._pesels().filter((p) => p !== pesel);
     this._pesels.set(updated);
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser()) {
       this.save(updated);
     }
   }
 
   clear() {
     this._pesels.set([]);
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser()) {
       this.save([]);
     }
   }
 
   private load(): string[] {
-    if (isPlatformBrowser(this.platformId)) {
-      try {
-        const raw = localStorage.getItem(this.STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        console.error('Failed to load pesel list:', e);
-        return [];
-      }
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      console.error('Failed to load pesel list:', e);
+      return [];
     }
-    return [];
   }
 
   private save(pesels: string[]) {
-    if (isPlatformBrowser(this.platformId)) {
-      try {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(pesels));
-      } catch (e) {
-        console.error('Failed to save pesel list:', e);
-      }
+    try {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(pesels));
+    } catch (e) {
+      console.error('Failed to save pesel list:', e);
     }
+  }
+
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && isPlatformBrowser(this.platformId);
   }
 }
