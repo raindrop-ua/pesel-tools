@@ -21,6 +21,7 @@
   color: #ffffff;
   transition: all 0.3s ease, color 0.3s ease;
 
+  &.active,
   &:hover {
     color: #fb923c;
   }
