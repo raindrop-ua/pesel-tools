@@ -1,0 +1,12 @@
+<button type="button" (click)="pasteFromClipboard()" class="copy-button" title="{{ pasted() ? 'Pasted!' : 'Paste' }}">
+  <span class="sr-only">{{ pasted() ? 'Copied!' : 'Copy' }}</span>
+  @if (!pasted()) {
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256">
+      <path d="M216,48H179.31A47.87,47.87,0,0,0,136,16H120A47.87,47.87,0,0,0,76.69,48H40A16,16,0,0,0,24,64V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V64A16,16,0,0,0,216,48ZM120,32h16a32,32,0,0,1,32,32H88A32,32,0,0,1,120,32Zm96,184H40V64H216V216ZM144,112a8,8,0,0,1,11.31-11.31l24,24a8,8,0,0,1,0,11.31l-24,24A8,8,0,0,1,144,152V136H104a8,8,0,0,1,0-16h40Z"/>
+    </svg>
+  } @else {
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256">
+      <path d="M216.49,79.51a12,12,0,0,0-17,0L104,175,56.49,127.51a12,12,0,0,0-17,17l56,56a12,12,0,0,0,17,0l104-104A12,12,0,0,0,216.49,79.51Z"></path>
+    </svg>
+  }
+</button>
