@@ -8,7 +8,6 @@ import {Component, output, signal} from '@angular/core';
 })
 export class PasteButtonComponent {
   pasted = signal(false);
-
   pastedValue = output<string>();
 
   async pasteFromClipboard(): Promise<void> {
