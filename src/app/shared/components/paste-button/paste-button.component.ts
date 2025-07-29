@@ -1,8 +1,11 @@
 import {Component, output, signal} from '@angular/core';
+import {SvgIconComponent} from "../svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-paste-button',
-  imports: [],
+  imports: [
+    SvgIconComponent
+  ],
   templateUrl: './paste-button.component.html',
   styleUrl: './paste-button.component.scss'
 })
