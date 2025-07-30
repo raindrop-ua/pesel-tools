@@ -88,5 +88,6 @@
     "*.{ts,js,scss,json,html,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "type": "module"
 }
