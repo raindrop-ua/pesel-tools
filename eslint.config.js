@@ -1,9 +1,11 @@
 // @ts-check
-const eslint = require("@eslint/js");
-const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import angular from "angular-eslint";
+import storybook from "eslint-plugin-storybook";
 
-module.exports = tseslint.config(
+/** @type {import('eslint').Linter.FlatConfig[]} */
+export default tseslint.config(
   {
     files: ["**/*.ts"],
     extends: [
@@ -12,6 +14,9 @@ module.exports = tseslint.config(
       ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended,
     ],
+    plugins: {
+      storybook,
+    },
     processor: angular.processInlineTemplates,
     rules: {
       "@angular-eslint/directive-selector": [
@@ -39,5 +44,5 @@ module.exports = tseslint.config(
       ...angular.configs.templateAccessibility,
     ],
     rules: {},
-  }
+  },
 );
