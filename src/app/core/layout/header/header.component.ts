@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   HostListener,
   inject,
@@ -14,7 +13,6 @@ import { ThemeSwitcherComponent } from '../../../shared/components/theme-switche
   imports: [RouterLink, ThemeSwitcherComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   private router = inject(Router);
