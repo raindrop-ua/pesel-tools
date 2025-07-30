@@ -1,5 +1,5 @@
 footer {
-  background-color: hsl(var(--blue-500) / 0.15);
+  background-color: hsl(var(--blue-500) / 15%);
   height: 52px;
   display: flex;
   flex-direction: row;
@@ -7,11 +7,16 @@ footer {
   align-items: center;
   padding: 0 24px;
   gap: 24px;
-  color: #ffffff;
+  color: #fff;
   font-size: 1rem;
 
   > div {
     display: flex;
+  }
+
+  svg {
+    margin-left: 0.5rem;
+    color: #fa1d1d;
   }
 }
 
@@ -24,7 +29,7 @@ footer {
     gap: 1rem;
 
     a {
-      color: #ffffff;
+      color: #fff;
       font-size: 1rem;
       text-decoration: none;
 
@@ -37,7 +42,7 @@ footer {
       }
     }
 
-    @media screen and (min-width: 641px) {
+    @media screen and (width >= 641px) {
       display: flex;
     }
   }

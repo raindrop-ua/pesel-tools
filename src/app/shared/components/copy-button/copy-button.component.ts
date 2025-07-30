@@ -1,8 +1,11 @@
 import { Component, input, signal } from '@angular/core';
+import {SvgIconComponent} from '../svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-copy-button',
-  imports: [],
+  imports: [
+    SvgIconComponent
+  ],
   templateUrl: './copy-button.component.html',
   styleUrl: './copy-button.component.scss',
 })
