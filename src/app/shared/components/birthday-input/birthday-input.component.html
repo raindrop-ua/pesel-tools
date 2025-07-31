@@ -1,22 +1,21 @@
 <div class="inputs" [formGroup]="formGroup">
   <div class="dob">
     <app-value-input
-      class="input-s"
+      class="input-s day"
       placeholder="DD"
       formControlName="day"
     />
     <app-value-input
-      class="input-s"
+      class="input-s month"
       placeholder="MM"
       formControlName="month"
     />
     <app-value-input
-      class="input-l"
+      class="input-l year"
       placeholder="YYYY"
       formControlName="year"
     />
   </div>
-
   <div class="gender">
     <app-radio-select formControlName="gender" />
   </div>
