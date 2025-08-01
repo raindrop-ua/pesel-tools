@@ -11,6 +11,8 @@
     "test:coverage": "vitest run --coverage",
     "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
     "lint": "ng lint",
+    "lint:scss": "stylelint \"src/**/*.scss\"",
+    "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix",
     "release": "standard-version",
     "storybook": "ng run pesel-tools:storybook",
     "build-storybook": "ng run pesel-tools:build-storybook"
