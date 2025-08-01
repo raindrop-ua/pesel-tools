@@ -33,8 +33,7 @@ export class GeneratorComponent {
   private fb = inject(FormBuilder);
   private generator = inject(PeselGeneratorService);
   private peselStoreService = inject(PeselStoreService);
-
-  peselList = this.peselStoreService.pesels;
+  public peselList = this.peselStoreService.pesels;
 
   form: FormGroup = this.fb.group({
     birthday: this.fb.group(

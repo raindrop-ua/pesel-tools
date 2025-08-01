@@ -8,7 +8,6 @@ import { CopyButtonComponent } from '../copy-button/copy-button.component';
   styleUrl: './pesel-output.component.scss',
 })
 export class PeselOutputComponent {
-  data = input.required<string[]>();
-
-  peselList = computed(() => this.data().join('\n'));
+  public data = input.required<string[]>();
+  public peselList = computed(() => this.data().join('\n'));
 }

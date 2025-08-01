@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
@@ -7,12 +7,12 @@ import { filter, map, mergeMap } from 'rxjs';
   providedIn: 'root',
 })
 export class SeoService {
-  constructor(
-    private title: Title,
-    private meta: Meta,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {
+  private title = inject(Title);
+  private meta = inject(Meta);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+
+  constructor() {
     this.router.events
       .pipe(
         filter((e) => e instanceof NavigationEnd),

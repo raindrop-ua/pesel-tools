@@ -37,12 +37,10 @@ export class ParserComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
   private peselParser = inject(PeselParserService);
-
-  form = this.fb.group({
+  public parsedData = signal<Omit<PeselInfo, 'message'> | null>(null);
+  public form = this.fb.group({
     pesel: ['', [Validators.required, peselValidatorFactory(this.peselParser)]],
   });
-
-  parsedData = signal<Omit<PeselInfo, 'message'> | null>(null);
 
   get peselControl() {
     return this.form.get('pesel');

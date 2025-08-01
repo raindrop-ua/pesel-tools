@@ -1,9 +1,4 @@
-import {
-  Component,
-  HostListener,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NAVIGATION_TOKEN } from '../../../config/navigation.config';
 import { ThemeSwitcherComponent } from '../../../shared/components/theme-switcher/theme-switcher.component';
@@ -16,8 +11,8 @@ import { ThemeSwitcherComponent } from '../../../shared/components/theme-switche
 })
 export class HeaderComponent {
   private router = inject(Router);
-  navigation = inject(NAVIGATION_TOKEN);
-  menuOpen = signal(false);
+  public navigation = inject(NAVIGATION_TOKEN);
+  public menuOpen = signal(false);
 
   isLinkActive(path: string): boolean {
     return this.router.isActive(path, {
