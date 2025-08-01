@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   border-radius: 0.5rem;
   box-sizing: border-box;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 6%);
   padding: 0.25rem;
   margin: 0.5rem 0;
   width: 200px;
@@ -37,7 +37,7 @@
   border: none;
   padding: .5rem 0;
   height: 38px;
-  color: #ffffff;
+  color: #fff;
   transition: all .15s ease-in-out;
 }
 
@@ -47,7 +47,7 @@
 
 .radio-inputs .radio input:focus-visible + .name {
   transition: none;
-  outline: 2px solid rgba(62, 111, 244, 0.75);
+  outline: 2px solid rgb(62 111 244 / 75%);
   outline-offset: -2px;
   border-radius: 0.5rem;
 }

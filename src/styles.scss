@@ -3,25 +3,15 @@
 
 :root {
   --container-max-width: 1200px;
-}
-
-html, body {
-  overflow-x: hidden;
-}
-
-:root {
   --pesel-grayple-900: 234 18% 17%;
   --neutral-100: var(--gray-100);
   --bg-card: var(--pesel-grayple-900);
   --border-card: var(--neutral-300);
-
   --pesel-blue-500: 224 89% 60%;
   --pesel-blue-500-accent-hover: var(--pesel-blue-500) / 0.9;
-
   --blue-500: var(--pesel-blue-500);
   --blue-500-accent: var(--pesel-blue-500-accent-hover);
 }
-
 
 html, html * {
   box-sizing: border-box;
@@ -29,6 +19,7 @@ html, html * {
 }
 
 html, body {
+  overflow-x: hidden;
   margin: 0;
   background-color: #171823;
 }
@@ -46,7 +37,7 @@ button {
 h1 {
   font-size: 2rem;
   line-height: 2.25rem;
-  color: #ffffff;
+  color: #fff;
   margin-bottom: 1.5rem;
 }
 
@@ -76,7 +67,7 @@ a, button {
     content: '';
     position: absolute;
     inset: -8px;
-    border: 2px solid rgba(62, 111, 244, 0.3);
+    border: 2px solid rgb(62 111 244 / 30%);
     border-radius: 1rem;
     pointer-events: none;
   }

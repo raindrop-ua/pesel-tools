@@ -1,5 +1,5 @@
 header {
-  background-color: hsl(var(--blue-500) / 0.15);
+  background-color: hsl(var(--blue-500) / 15%);
   height: 64px;
   display: flex;
   flex-direction: row;
@@ -22,7 +22,7 @@ header {
   font-weight: 800;
   color: #e6e6e7;
 
-  @media screen and (min-width: 640px) {
+  @media screen and (width >= 640px) {
     font-size: 2rem;
     line-height: 2.25rem;
     margin-right: 1.5rem;
@@ -44,7 +44,7 @@ header {
     flex-direction: row;
     gap: 1rem;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (width >= 768px) {
       display: flex;
     }
 
@@ -59,7 +59,7 @@ header {
       font-size: 1rem;
       line-height: 1.25rem;
 
-      @media screen and (min-width: 640px) {
+      @media screen and (width >= 640px) {
         font-size: 1.125rem;
         line-height: 1.25rem;
       }
@@ -92,7 +92,7 @@ header {
     transition: 0.3s ease;
   }
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     display: none;
   }
 }
@@ -106,9 +106,9 @@ header {
   backdrop-filter: blur(5px);
   padding: 1rem;
   z-index: 100;
-  box-shadow: 0.5rem 0.5rem 0.5rem rgba(0,0,0,0.25);
+  box-shadow: 0.5rem 0.5rem 0.5rem rgb(0 0 0 / 25%);
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     display: none;
   }
 
@@ -128,7 +128,7 @@ header {
     font-size: 1.25rem;
     line-height: 2rem;
     font-weight: 400;
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
 
     &.active {
@@ -146,11 +146,11 @@ header {
   left: 0;
   width: 100%;
   height: calc(100vh - 64px);
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgb(0 0 0 / 25%);
   z-index: 5;
   backdrop-filter: blur(5px);
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     display: none;
   }
 }
