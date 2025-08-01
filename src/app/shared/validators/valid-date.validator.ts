@@ -2,7 +2,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { isValidDate } from '../../core/services/pesel-utils';
 
 /**
- * Validator for day/month/year group to ensure the date is valid.
+ * Validator for a day/month/year group to ensure the date is valid.
  */
 export function validDateValidator(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {

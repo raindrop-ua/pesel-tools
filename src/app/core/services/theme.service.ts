@@ -14,11 +14,8 @@ export class ThemeService {
   private readonly DEFAULT_THEME: Theme = 'system';
   private readonly platformId = inject(PLATFORM_ID);
   private readonly mediaQueryList: MediaQueryList | null = null;
-
   private currentThemeSubject = new BehaviorSubject<Theme>(this.DEFAULT_THEME);
-
-  /** Observable that emits the current theme whenever it changes. */
-  readonly theme$ = this.currentThemeSubject.asObservable();
+  public readonly theme$ = this.currentThemeSubject.asObservable();
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {

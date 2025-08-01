@@ -1,5 +1,5 @@
-import {Component, forwardRef, input} from '@angular/core';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Component, forwardRef, input } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-value-input',
@@ -15,10 +15,10 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
   ],
 })
 export class ValueInputComponent {
-  placeholder = input<string>('');
+  public placeholder = input<string>('');
 
-  value = '';
-  disabled = false;
+  public value = '';
+  public disabled = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: string) => void = () => {};

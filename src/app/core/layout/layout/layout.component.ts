@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  Inject,
+  inject,
 } from '@angular/core';
 import {
   Router,
@@ -26,14 +26,13 @@ import { FooterComponent } from '../footer/footer.component';
   imports: [HeaderComponent, LoaderComponent, RouterOutlet, FooterComponent],
 })
 export class LayoutComponent implements AfterViewInit {
-  loading = false;
+  private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
+  private cdr = inject(ChangeDetectorRef);
   private loadingTimeout: ReturnType<typeof setTimeout> | undefined;
+  public loading = false;
 
-  constructor(
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: object,
-    private cdr: ChangeDetectorRef,
-  ) {
+  constructor() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.startLoading();

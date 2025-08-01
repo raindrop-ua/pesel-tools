@@ -1,6 +1,6 @@
 import { Component, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {PasteButtonComponent} from '../paste-button/paste-button.component';
+import { PasteButtonComponent } from '../paste-button/paste-button.component';
 
 @Component({
   selector: 'app-pesel-input',
@@ -13,15 +13,13 @@ import {PasteButtonComponent} from '../paste-button/paste-button.component';
       multi: true,
     },
   ],
-  imports: [
-    PasteButtonComponent
-  ]
+  imports: [PasteButtonComponent],
 })
 export class PeselInputComponent implements ControlValueAccessor {
-  placeholder = input<string>('');
+  public placeholder = input<string>('');
 
-  value = '';
-  disabled = false;
+  public value = '';
+  public disabled = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: string) => void = () => {};

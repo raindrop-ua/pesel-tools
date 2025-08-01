@@ -1,17 +1,15 @@
-import {Component, output, signal} from '@angular/core';
-import {SvgIconComponent} from "../svg-icon/svg-icon.component";
+import { Component, output, signal } from '@angular/core';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-paste-button',
-  imports: [
-    SvgIconComponent
-  ],
+  imports: [SvgIconComponent],
   templateUrl: './paste-button.component.html',
-  styleUrl: './paste-button.component.scss'
+  styleUrl: './paste-button.component.scss',
 })
 export class PasteButtonComponent {
-  pasted = signal(false);
-  pastedValue = output<string>();
+  public pasted = signal(false);
+  public pastedValue = output<string>();
 
   async pasteFromClipboard(): Promise<void> {
     try {

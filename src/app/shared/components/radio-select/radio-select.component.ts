@@ -15,8 +15,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class RadioSelectComponent implements ControlValueAccessor {
-  value: 'male' | 'female' = 'female';
-  disabled = false;
+  public value: 'male' | 'female' = 'female';
+  public disabled = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: 'male' | 'female') => void = () => {};

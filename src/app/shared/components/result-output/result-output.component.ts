@@ -10,9 +10,9 @@ import { CopyButtonComponent } from '../copy-button/copy-button.component';
   styleUrl: './result-output.component.scss',
 })
 export class ResultOutputComponent {
-  data = input<Omit<PeselInfo, 'message'> | null>(null);
+  public data = input<Omit<PeselInfo, 'message'> | null>(null);
 
-  dataString = computed(() => {
+  public dataString = computed(() => {
     const info = this.data();
     return info
       ? `PESEL info:\nSex: ${info.sex}\nDOB: ${info.birthDate}\nAge: ${info.age}\nSerial: ${info.serial}`
