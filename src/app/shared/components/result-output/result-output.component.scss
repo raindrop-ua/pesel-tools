@@ -1,11 +1,11 @@
 .result {
   font-size: 1rem;
-  background-color: #171823;
-  border: 1px solid #3b3f4f;
+  background-color: var(--gray-950);
+  border: 1px solid var(--gray-800);
   border-radius: 0.375rem;
   padding: 1rem 3.5rem 1rem 1rem;
   display: flex;
   flex-direction: column;
-  color: #ffffff;
+  color: var(--white);
   position: relative;
 }

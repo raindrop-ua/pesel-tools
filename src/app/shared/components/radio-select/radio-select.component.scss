@@ -5,14 +5,14 @@
   flex-wrap: wrap;
   border-radius: 0.5rem;
   box-sizing: border-box;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 6%);
   padding: 0.25rem;
   margin: 0.5rem 0;
   width: 200px;
   height: 48px;
   font-size: 1rem;
-  background-color: #171823;
-  border: 1px solid #3b3f4f;
+  background-color: var(--gray-950);
+  border: 1px solid var(--gray-800);
 }
 
 .radio-inputs .radio {
@@ -37,17 +37,17 @@
   border: none;
   padding: .5rem 0;
   height: 38px;
-  color: #ffffff;
+  color: var(--white);
   transition: all .15s ease-in-out;
 }
 
 .radio-inputs .radio input:checked + .name {
-  background-color: #3b3f4f;
+  background-color: var(--gray-800);
 }
 
 .radio-inputs .radio input:focus-visible + .name {
   transition: none;
-  outline: 2px solid rgba(62, 111, 244, 0.75);
+  outline: 2px solid var(--blue-500-alpha-75);
   outline-offset: -2px;
   border-radius: 0.5rem;
 }

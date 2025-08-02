@@ -17,23 +17,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--white);
   transition: all 0.3s ease, color 0.3s ease;
   position: relative;
 
   &.active,
   &:hover {
-    color: #fb923c;
+    color: var(--orange-400);
   }
 
   svg {
+    width: 1.5rem;
+    height: 1.5rem;
     min-width: 24px;
     transition: stroke-width 0.3s ease, color 0.3s ease;
     stroke-width: 1.5;
   }
 
   &:hover svg {
-    stroke: currentColor;
+    stroke: currentcolor;
     stroke-width: 3;
   }
 }
@@ -47,11 +49,6 @@
   background-color: var(--hover-bg);
 }
 
-svg {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
 .skeleton {
   display: inline-flex;
   gap: 0;
@@ -60,7 +57,7 @@ svg {
 .skeleton-button {
   width: 2.5rem;
   height: 2.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
   border-radius: 0.5rem;
   animation: pulse 1.5s infinite ease-in-out;
 }

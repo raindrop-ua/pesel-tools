@@ -13,7 +13,7 @@
     opacity: 0.5;
   }
 
-  &.app-button--primary {
+  &.app-button-primary {
     background-color: hsl(var(--blue-500));
     color: white;
 
@@ -22,8 +22,8 @@
     }
   }
 
-  &.app-button--secondary {
-    background-color: #6c757d;
+  &.app-button-secondary {
+    background-color: var(--gray-500);
     color: white;
 
     &:not([disabled]):hover {
@@ -31,12 +31,12 @@
     }
   }
 
-  &.app-button--danger {
-    background-color: #dc3545;
+  &.app-button-danger {
+    background-color: var(--red-700);
     color: white;
 
     &:not([disabled]):hover {
-      background-color: #c82333;
+      background-color: var(--red-800);
     }
   }
 }
