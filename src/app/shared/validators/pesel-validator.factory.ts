@@ -4,7 +4,7 @@ import {
   InvalidPeselDateError,
   InvalidPeselFormatError,
   PeselParserService,
-} from '../../core/services/pesel-parser.service';
+} from '@services/pesel-parser.service';
 
 export function peselValidatorFactory(parser: PeselParserService): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {

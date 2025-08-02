@@ -7,17 +7,17 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { SectionComponent } from '../../core/layout/section/section.component';
-import { CardComponent } from '../../shared/components/card/card.component';
-import { PeselInputComponent } from '../../shared/components/pesel-input/pesel-input.component';
-import { ResultOutputComponent } from '../../shared/components/result-output/result-output.component';
-import { DisclaimerComponent } from '../../shared/components/disclaimer/disclaimer.component';
+import { SectionComponent } from '@core/layout/section/section.component';
+import { CardComponent } from '@components/card/card.component';
+import { PeselInputComponent } from '@components/pesel-input/pesel-input.component';
+import { ResultOutputComponent } from '@components/result-output/result-output.component';
+import { DisclaimerComponent } from '@components/disclaimer/disclaimer.component';
 
-import { peselValidatorFactory } from '../../shared/validators/pesel-validator.factory';
+import { peselValidatorFactory } from '@shared/validators/pesel-validator.factory';
 import {
   PeselInfo,
   PeselParserService,
-} from '../../core/services/pesel-parser.service';
+} from '@services/pesel-parser.service';
 
 @Component({
   selector: 'app-parser',
