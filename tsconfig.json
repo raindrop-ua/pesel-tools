@@ -19,6 +19,7 @@
     "module": "ES2022",
     "baseUrl": "src",
     "paths": {
+      "@config/*": ["app/config/*"],
       "@core/*": ["app/core/*"],
       "@shared/*": ["app/shared/*"],
       "@features/*": ["app/features/*"],

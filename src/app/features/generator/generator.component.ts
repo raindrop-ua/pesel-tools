@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CardComponent } from '../../shared/components/card/card.component';
+import { CardComponent } from '@components/card/card.component';
 import {
   FormBuilder,
   FormGroup,
@@ -7,13 +7,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { PeselOutputComponent } from '../../shared/components/pesel-output/pesel-output.component';
-import { SectionComponent } from '../../core/layout/section/section.component';
-import { BirthdayInputComponent } from '../../shared/components/birthday-input/birthday-input.component';
-import { ButtonComponent } from '../../shared/components/button/button.component';
-import { PeselGeneratorService } from '../../core/services/pesel-generator.service';
-import { PeselStoreService } from '../../core/services/pesel-store.service';
-import { validDateValidator } from '../../shared/validators/valid-date.validator';
+import { PeselOutputComponent } from '@components/pesel-output/pesel-output.component';
+import { SectionComponent } from '@core/layout/section/section.component';
+import { BirthdayInputComponent } from '@components/birthday-input/birthday-input.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { PeselGeneratorService } from '@services/pesel-generator.service';
+import { PeselStoreService } from '@services/pesel-store.service';
+import { validDateValidator } from '@shared/validators/valid-date.validator';
 
 @Component({
   selector: 'app-generator',
