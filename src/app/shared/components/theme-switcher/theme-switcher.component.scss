@@ -17,16 +17,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--white);
   transition: all 0.3s ease, color 0.3s ease;
   position: relative;
 
   &.active,
   &:hover {
-    color: #fb923c;
+    color: var(--orange-400);
   }
 
   svg {
+    width: 1.5rem;
+    height: 1.5rem;
     min-width: 24px;
     transition: stroke-width 0.3s ease, color 0.3s ease;
     stroke-width: 1.5;
@@ -45,11 +47,6 @@
 
 .toggle-group button:hover {
   background-color: var(--hover-bg);
-}
-
-svg {
-  width: 1.5rem;
-  height: 1.5rem;
 }
 
 .skeleton {

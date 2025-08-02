@@ -1,17 +1,17 @@
 .input-control {
   position: relative;
-  background-color: #171823;
-  border: 1px solid #3b3f4f;
+  background-color: var(--gray-950);
+  border: 1px solid var(--gray-800);
   border-radius: 0.375rem;
   padding: 0.5rem 0.75rem;
   margin: 0.5rem 0;
   display: flex;
-  color: #fff;
+  color: var(--white);
   transition: border-color 0.2s, box-shadow 0.2s;
 
   &:focus-within {
-    border-color: #699afc;
-    box-shadow: 0 0 0 4px #3e6ff44d;
+    border-color: var(--blue-400);
+    box-shadow: 0 0 0 4px var(--blue-400-alpha);
   }
 }
 

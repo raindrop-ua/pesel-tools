@@ -1,5 +1,4 @@
-@use "reset";
-@use "themes";
+@use "app/styles/main";
 
 :root {
   --container-max-width: 1200px;
@@ -21,7 +20,7 @@ html, html * {
 html, body {
   overflow-x: hidden;
   margin: 0;
-  background-color: #171823;
+  background-color: var(--gray-950);
 }
 
 body {
