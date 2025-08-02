@@ -1,0 +1,31 @@
+.pesel-wrapper {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--gray-950);
+  color: #fff;
+  border-radius: 0.75rem;
+  max-width: 500px;
+  margin: auto;
+  position: relative;
+}
+
+.pesel {
+  font-size: 2rem;
+  color: var(--yellow-400);
+  font-family: "IBM Plex Mono", monospace;
+  margin-top: 1rem;
+
+  &.fade-in {
+    animation: appear 0.5s ease forwards;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

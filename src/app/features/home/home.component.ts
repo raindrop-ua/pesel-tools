@@ -3,6 +3,7 @@ import { SectionComponent } from '../../core/layout/section/section.component';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { DisclaimerComponent } from '../../shared/components/disclaimer/disclaimer.component';
 import { MastheadComponent } from './components/masthead/masthead.component';
+import {PeselOfTheMomentComponent} from './components/pesel-of-the-moment/pesel-of-the-moment.component';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { MastheadComponent } from './components/masthead/masthead.component';
     CardComponent,
     DisclaimerComponent,
     MastheadComponent,
+    PeselOfTheMomentComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
