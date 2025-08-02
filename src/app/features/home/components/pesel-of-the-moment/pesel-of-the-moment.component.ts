@@ -1,18 +1,14 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { PeselGeneratorService } from '../../../../core/services/pesel-generator.service';
 import { interval } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
-import {CopyButtonComponent} from '../../../../shared/components/copy-button/copy-button.component';
+import { CopyButtonComponent } from '../../../../shared/components/copy-button/copy-button.component';
 
 @Component({
   selector: 'app-pesel-of-the-moment',
-  imports: [
-    AsyncPipe,
-    CopyButtonComponent
-  ],
+  imports: [CopyButtonComponent],
   templateUrl: './pesel-of-the-moment.component.html',
   styleUrl: './pesel-of-the-moment.component.scss'
 })
@@ -21,6 +17,7 @@ export class PeselOfTheMomentComponent implements OnInit {
   private readonly peselGenerator: PeselGeneratorService = inject(PeselGeneratorService);
   private readonly destroyRef = inject(DestroyRef);
   readonly pesel = signal<string>('Generating...');
+  readonly animated = signal(false);
 
   ngOnInit() {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -30,8 +27,20 @@ export class PeselOfTheMomentComponent implements OnInit {
     interval(10_000)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        console.log('[PeselOfTheMomentComponent] Generating new PESEL');
-        this.pesel.set(this.peselGenerator.generatePesel());
+        this.updatePesel()
       });
   }
+
+  private updatePesel() {
+    this.animated.set(true);
+
+    requestAnimationFrame(() => {
+      this.pesel.set(this.peselGenerator.generatePesel());
+
+      setTimeout(() => {
+        this.animated.set(false);
+      }, 500);
+    });
+  }
+
 }
