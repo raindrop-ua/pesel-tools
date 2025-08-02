@@ -11,6 +11,7 @@
           @for (item of navigation; track item.path) {
             <li>
               <a
+                class="link"
                 [routerLink]="item.path"
                 [class.active]="isLinkActive(item.path)"
                 (click)="closeMenu()"
@@ -23,7 +24,7 @@
       </nav>
     }
     <div class="logo">
-      <a [routerLink]="'/'">
+      <a class="logo-link" [routerLink]="'/'">
         PESEL Tools
       </a>
     </div>

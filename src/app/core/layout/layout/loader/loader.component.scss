@@ -1,7 +1,7 @@
 :host {
   position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--black-alpha-50);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -33,32 +33,31 @@
   height: 6em;
 }
 
-.pl__ring {
-  animation: ringA 2s linear infinite;
+.pl-ring {
+  animation: ring-a 2s linear infinite;
 }
 
-.pl__ring--a {
-  stroke: #f46725;
+.pl-ring-a {
+  stroke: var(--orange-600);
 }
 
-.pl__ring--b {
-  animation-name: ringB;
-  stroke: #f49725;
+.pl-ring-b {
+  animation-name: ring-b;
+  stroke: var(--orange-500);
 }
 
-.pl__ring--c {
-  animation-name: ringC;
-  stroke: #255ff4;
+.pl-ring-c {
+  animation-name: ring-c;
+  stroke: var(--blue-700);
 }
 
-.pl__ring--d {
-  animation-name: ringD;
-  stroke: #25c4f4;
+.pl-ring-d {
+  animation-name: ring-d;
+  stroke: var(--cyan-400);
 }
 
-/* Animations */
-@keyframes ringA {
-  from, 4% {
+@keyframes ring-a {
+  0%, 4% {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -330;
@@ -94,15 +93,15 @@
     stroke-dashoffset: -925;
   }
 
-  90%, to {
+  90%, 100% {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -990;
   }
 }
 
-@keyframes ringB {
-  from, 12% {
+@keyframes ring-b {
+  0%, 12% {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -110;
@@ -138,15 +137,15 @@
     stroke-dashoffset: -305;
   }
 
-  98%, to {
+  98%, 100% {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -330;
   }
 }
 
-@keyframes ringC {
-  from {
+@keyframes ring-c {
+  0% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: 0;
@@ -182,15 +181,15 @@
     stroke-dashoffset: -395;
   }
 
-  94%, to {
+  94%, 100% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -440;
   }
 }
 
-@keyframes ringD {
-  from, 8% {
+@keyframes ring-d {
+  0%, 8% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: 0;
@@ -226,7 +225,7 @@
     stroke-dashoffset: -395;
   }
 
-  86%, to {
+  86%, 100% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -440;

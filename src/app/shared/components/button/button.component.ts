@@ -18,6 +18,6 @@ export class ButtonComponent {
   @Input('app-button') appButton: ButtonType = 'primary';
 
   @HostBinding('class') get hostClasses(): string {
-    return `app-button app-button--${this.appButton}`;
+    return `app-button app-button-${this.appButton}`;
   }
 }

@@ -3,9 +3,9 @@
 }
 
 button {
-  background-color: #171823;
-  color: #737683;
-  border: 1px solid #3b3f4f;
+  background-color: var(--gray-950);
+  color: var(--gray-400);
+  border: 1px solid var(--gray-800);
   border-radius: 0.25rem;
   z-index: 10;
   top: 0.625rem;
@@ -22,9 +22,9 @@ button {
   transition: all 200ms ease;
 
   &:hover {
-    background-color: #2d2f3e;
-    border-color: #4f5363;
-    color: #ffffffb3;
+    background-color: var(--gray-850);
+    border-color: var(--gray-700);
+    color: var(--white)fffb3;
   }
 
   svg {

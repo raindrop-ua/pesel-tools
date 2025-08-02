@@ -4,8 +4,8 @@ import {
   ElementRef,
   ViewChild,
   OnDestroy,
-  Inject,
   PLATFORM_ID,
+  inject,
 } from '@angular/core';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 
@@ -17,12 +17,12 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
   imports: [NgOptimizedImage],
 })
 export class MastheadComponent implements AfterViewInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+
   @ViewChild('masthead') mastheadRef!: ElementRef;
   @ViewChild('parallaxImg') imgRef!: ElementRef;
 
   private mouseMoveHandler?: (event: MouseEvent) => void;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId) || this.isTouchDevice()) return;

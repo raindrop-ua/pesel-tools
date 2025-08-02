@@ -6,7 +6,6 @@ import { SeoService } from './core/services/seo.service';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   private _seo: SeoService = inject(SeoService);

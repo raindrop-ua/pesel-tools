@@ -2,9 +2,9 @@
   border-width: 1px;
   border-radius: 0.5rem;
   border-style: solid;
-  background-color: #242533;
-  border-color: #3b3f4f;
+  background-color: var(--gray-900);
+  border-color: var(--gray-800);
   padding: 1.5rem;
-  color: #e6e6e7;
+  color: var(--gray-100);
   margin-bottom: 2rem;
 }

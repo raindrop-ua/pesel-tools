@@ -1,11 +1,11 @@
 import {
   Injectable,
-  Inject,
   PLATFORM_ID,
   computed,
   signal,
   Signal,
   WritableSignal,
+  inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -13,14 +13,13 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root',
 })
 export class PeselStoreService {
+  private platformId = inject(PLATFORM_ID);
   private readonly STORAGE_KEY = 'pesel-list';
-
   private readonly _pesels: WritableSignal<string[]>;
-
   readonly pesels: Signal<string[]>;
   readonly hasPesels: Signal<boolean>;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: string) {
+  constructor() {
     const initial = this.isBrowser() ? this.load() : [];
     this._pesels = signal(initial);
     this.pesels = computed(() => this._pesels());
