@@ -1,7 +1,7 @@
 import { Component, HostListener, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { NAVIGATION_TOKEN } from '../../../config/navigation.config';
-import { ThemeSwitcherComponent } from '../../../shared/components/theme-switcher/theme-switcher.component';
+import { NAVIGATION_TOKEN } from '@config/navigation.config';
+import { ThemeSwitcherComponent } from '@components/theme-switcher/theme-switcher.component';
 
 @Component({
   selector: 'app-header',

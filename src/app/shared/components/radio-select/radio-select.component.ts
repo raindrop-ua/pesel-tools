@@ -1,5 +1,11 @@
-import { Component, forwardRef } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+export interface RadioOption<T> {
+  label: string;
+  name: string;
+  value: T;
+}
 
 @Component({
   selector: 'app-radio-select',
@@ -13,24 +19,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioSelectComponent implements ControlValueAccessor {
-  public value: 'male' | 'female' = 'female';
+export class RadioSelectComponent<T = string> implements ControlValueAccessor {
+  @Input() options: RadioOption<T>[] = [];
+  @Input() value!: T;
+  @Output() valueChange = new EventEmitter<T>();
   public disabled = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private onChange: (value: 'male' | 'female') => void = () => {};
+  private onChange: (val: T) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
-  selectGender(gender: 'male' | 'female') {
-    this.value = gender;
+  selectOption(opt: RadioOption<T>) {
+    if (this.disabled) return;
+    this.value = opt.value;
     this.onChange(this.value);
+    this.valueChange.emit(this.value);
     this.onTouched();
   }
 
-  writeValue(value: 'male' | 'female'): void {
-    this.value = value ?? 'female';
+  writeValue(val: T): void {
+    this.value = val;
   }
 
   registerOnChange(fn: () => void): void {

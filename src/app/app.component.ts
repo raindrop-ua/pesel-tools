@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SeoService } from './core/services/seo.service';
+import { SeoService } from '@services/seo.service';
 
 @Component({
   selector: 'app-root',

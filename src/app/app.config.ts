@@ -16,9 +16,9 @@ import {
 
 import { routes } from './app.routes';
 import { provideEnvironment } from './environment.providers';
-import { CustomPreloadingStrategy } from './core/strategies/custom-preloading.strategy';
+import { CustomPreloadingStrategy } from '@core/strategies/custom-preloading.strategy';
 import { provideServiceWorker } from '@angular/service-worker';
-import { NAVIGATION, NAVIGATION_TOKEN } from './config/navigation.config';
+import { NAVIGATION, NAVIGATION_TOKEN } from '@config/navigation.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [

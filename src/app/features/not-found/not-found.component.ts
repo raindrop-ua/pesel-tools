@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SectionComponent } from '../../core/layout/section/section.component';
-import { CardComponent } from '../../shared/components/card/card.component';
+import { SectionComponent } from '@core/layout/section/section.component';
+import { CardComponent } from '@components/card/card.component';
 
 @Component({
   selector: 'app-not-found',

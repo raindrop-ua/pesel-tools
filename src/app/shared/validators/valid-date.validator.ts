@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { isValidDate } from '../../core/services/pesel-utils';
+import { isValidDate } from '@services/pesel-utils';
 
 /**
  * Validator for a day/month/year group to ensure the date is valid.
@@ -15,7 +15,7 @@ export function validDateValidator(): ValidatorFn {
     if (!day || !month || !year) {
       return null; // don't validate if fields are missing
     }
-
+    console.log(day, month, year);
     if (
       isNaN(day) ||
       isNaN(month) ||
