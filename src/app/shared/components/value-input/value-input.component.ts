@@ -1,4 +1,4 @@
-import { Component, forwardRef, input } from '@angular/core';
+import {Component, ElementRef, forwardRef, input, ViewChild} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,6 +15,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class ValueInputComponent {
+  @ViewChild('nativeInput', { static: true }) nativeInput!: ElementRef<HTMLInputElement>;
   public placeholder = input<string>('');
 
   public value = '';
@@ -49,5 +50,9 @@ export class ValueInputComponent {
 
   handleBlur(): void {
     this.onTouched();
+  }
+
+  focus(): void {
+    this.nativeInput.nativeElement.focus();
   }
 }

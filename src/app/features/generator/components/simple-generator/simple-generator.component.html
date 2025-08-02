@@ -1,10 +1,10 @@
 <app-card>
   <p>Enter birthday and gender: </p>
   <app-birthday-input [formGroup]="birthdayGroup" />
-  @if (birthdayGroup.errors && birthdayGroup.touched) {
-    <p>Invalid date — check day, month, and year.</p>
+  @if (!birthdayGroup.valid) {
+    <p>Please provide a valid birthdate.</p>
   }
-  <button app-button="primary" (click)="generatePesel()" [disabled]="birthdayGroup.errors">Generate</button>
+  <button app-button="primary" (click)="generatePesel()" [disabled]="!birthdayGroup.valid">Generate</button>
   &nbsp;<span> or </span>&nbsp;
   <button app-button="primary" (click)="generateRandomPesel()">Generate Random</button>
   <br/>
