@@ -19,6 +19,14 @@ A lightweight Angular app that parses and validates Polish PESEL numbers with fu
 - Friendly UI with real-time feedback
 - Clean, documented TypeScript architecture
 
+### What is PESEL?
+
+PESEL (Powszechny Elektroniczny System Ewidencji Ludności) is Poland’s national identification number assigned to every resident. It’s an 11-digit number that encodes basic personal data and is widely used across public and private sectors for identification purposes.
+
+### Why is it needed?
+
+PESEL is used by government agencies, hospitals, banks, schools, and employers to uniquely identify individuals. It simplifies data management, helps prevent identity duplication, and allows easy retrieval of essential information like date of birth and gender.
+
 ## 🚀 Live Demo
 
 [🔗 Try it on pesel.dev](https://pesel.dev)
