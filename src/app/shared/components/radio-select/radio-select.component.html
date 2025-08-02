@@ -1,22 +1,14 @@
 <div class="radio-inputs">
-  <label class="radio">
-    <input
-      type="radio"
-      name="gender"
-      [checked]="value === 'male'"
-      (change)="selectGender('male')"
-      [disabled]="disabled"
-    />
-    <span class="name">Male</span>
-  </label>
-  <label class="radio">
-    <input
-      type="radio"
-      name="gender"
-      [checked]="value === 'female'"
-      (change)="selectGender('female')"
-      [disabled]="disabled"
-    />
-    <span class="name">Female</span>
-  </label>
+  @for(option of options; track option.value) {
+    <label class="radio">
+      <input
+        type="radio"
+        [name]="option.name"
+        [checked]="option.value === value"
+        (change)="selectOption(option)"
+        [disabled]="disabled"
+      />
+      <span class="name">{{ option.label }}</span>
+    </label>
+  }
 </div>

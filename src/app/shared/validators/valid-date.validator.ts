@@ -15,7 +15,7 @@ export function validDateValidator(): ValidatorFn {
     if (!day || !month || !year) {
       return null; // don't validate if fields are missing
     }
-
+    console.log(day, month, year);
     if (
       isNaN(day) ||
       isNaN(month) ||
