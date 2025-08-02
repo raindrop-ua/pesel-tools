@@ -3,19 +3,20 @@ import { BirthdayInputComponent } from "@components/birthday-input/birthday-inpu
 import { ButtonComponent } from "@components/button/button.component";
 import { CardComponent } from "@components/card/card.component";
 import { PeselOutputComponent } from "@components/pesel-output/pesel-output.component";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PeselGeneratorService } from '@services/pesel-generator.service';
 import { PeselStoreService } from '@services/pesel-store.service';
 import { validDateValidator } from '@shared/validators/valid-date.validator';
 
 @Component({
   selector: 'app-simple-generator',
-    imports: [
-        BirthdayInputComponent,
-        ButtonComponent,
-        CardComponent,
-        PeselOutputComponent
-    ],
+  imports: [
+    BirthdayInputComponent,
+    ButtonComponent,
+    CardComponent,
+    PeselOutputComponent,
+    ReactiveFormsModule
+  ],
   templateUrl: './simple-generator.component.html',
   styleUrl: './simple-generator.component.scss'
 })
@@ -41,21 +42,13 @@ export class SimpleGeneratorComponent {
     return this.form.get('birthday') as FormGroup;
   }
 
-  generatePesel(): void {
-    const group = this.form.get('birthday') as FormGroup;
-    if (!group || group.invalid) {
-      group.markAllAsTouched();
+  onSubmit() {
+    if (this.birthdayGroup.invalid) {
+      this.birthdayGroup.markAllAsTouched();
       return;
     }
-
-    const { day, month, year, gender } = group.value;
-    const pesel = this.generator.generatePesel({
-      year,
-      month,
-      day,
-      sex: gender,
-    });
-
+    const { day, month, year, gender } = this.birthdayGroup.value;
+    const pesel = this.generator.generatePesel({ year, month, day, sex: gender });
     this.peselStoreService.add(pesel);
   }
 
