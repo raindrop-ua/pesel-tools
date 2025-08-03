@@ -1,0 +1,20 @@
+
+a, button {
+  outline: none;
+  position: relative;
+
+  &:focus-visible {
+    transition: none;
+    border-radius: 0.5rem;
+    outline: 2px solid transparent;
+  }
+
+  &:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 2px solid var(--main-outline);
+    border-radius: 0.75rem;
+    pointer-events: none;
+  }
+}

@@ -33,23 +33,3 @@ button {
   white-space: nowrap;
   border-width: 0;
 }
-
-a, button {
-  outline: none;
-  position: relative;
-
-  &:focus-visible {
-    transition: none;
-    border-radius: 0.5rem;
-    outline: 2px solid transparent;
-  }
-
-  &:focus-visible::after {
-    content: '';
-    position: absolute;
-    inset: -8px;
-    border: 2px solid rgb(62 111 244 / 30%);
-    border-radius: 1rem;
-    pointer-events: none;
-  }
-}
