@@ -1,11 +1,7 @@
 .pesel-wrapper {
   text-align: center;
   padding: 2rem;
-  background: linear-gradient(
-      135deg,
-      #141a37 0%,
-      #253260 50%,
-      #141a37 100%);
+  background: var(--blue-gradient);
   border: 1px solid var(--gray-800);
   color: #fff;
   border-radius: 0.75rem;
