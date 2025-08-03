@@ -6,6 +6,7 @@
         @for (item of navigation; track item.path) {
           <li>
             <a
+              class="link"
               [routerLink]="item.path"
               [class.active]="isLinkActive(item.path)"
             >

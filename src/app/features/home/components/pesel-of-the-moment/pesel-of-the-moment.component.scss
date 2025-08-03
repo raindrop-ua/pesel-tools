@@ -1,9 +1,9 @@
 .pesel-wrapper {
   text-align: center;
   padding: 2rem;
-  background: var(--blue-gradient);
-  border: 1px solid var(--gray-800);
-  color: #fff;
+  background: var(--masthead-gradient);
+  border: 1px solid var(--card-border);
+  color: var(--card-text);
   border-radius: 0.75rem;
   max-width: 500px;
   margin: auto;
@@ -12,7 +12,7 @@
 
 .pesel {
   font-size: 2rem;
-  color: var(--yellow-400);
+  color: var(--pesel-number);
   margin-top: 0.5rem;
   display: flex;
   justify-content: center;
