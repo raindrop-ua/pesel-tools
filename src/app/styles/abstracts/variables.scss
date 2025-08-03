@@ -56,7 +56,7 @@
   --footer-attention: var(--color-cinnabar-600);
 
   /* masthead */
-  --masthead-background-gradient-1: var(--color-navy-950);
+  --masthead-background-gradient-1: var(--color-navy-900);
   --masthead-background-gradient-2: var(--color-navy-800);
   --masthead-background-gradient-3: var(--color-navy-950);
   --masthead-gradient: linear-gradient(
@@ -67,33 +67,4 @@
   --masthead-text: var(--color-portage-100);
   --masthead-attention: var(--color-cinnabar-800);
   --masthead-effect: var(--color-crater-brown-700);
-
-  /* legacy colors */
-  --white: hsl(0deg 0% 100%);
-  --white-alpha-75: hsl(0deg 0% 100% / 75%);
-  --black: hsl(0deg 0% 0%);
-  --gray-100: hsl(240deg 2% 90%);
-  --indigo-800-alpha: hsl(227deg 34% 24% / 80%);
-  --red-500: hsl(0deg 96% 55%);
-  --red-600: hsl(6deg 78% 57%);
-  --red-700: hsl(354deg 70% 54%);
-  --red-800: hsl(354deg 70% 46%);
-  --gray-400: hsl(229deg 7% 48%);
-  --gray-500: hsl(208deg 7% 46%);
-  --gray-600: hsl(206deg 7% 38%);
-  --gray-700: hsl(228deg 11% 35%);
-  --gray-800: hsl(228deg 14% 27%);
-  --gray-850: hsl(233deg 16% 21%);
-  --gray-900: hsl(236deg 17% 17%);
-  --gray-950: hsl(235deg 21% 11%);
-  --orange-400: hsl(27deg 96% 61%);
-  --orange-500: hsl(33deg 90% 55%);
-  --orange-600: hsl(19deg 90% 55%);
-  --yellow-400: hsl(48deg 96% 53%);
-  --cyan-400: hsl(194deg 90% 55%);
-  --blue-700: hsl(223deg 90% 55%);
-  --blue-400: hsl(220deg 96% 70%);
-  --blue-500-alpha-75: hsl(224deg 89% 60% / 75%);
-  --blue-400-alpha: hsl(224deg 89% 60% / 30%);
-  --red-400-alpha: hsl(359deg 100% 65% / 40%);
 }
