@@ -1,5 +1,5 @@
 header {
-  background-color: hsl(var(--blue-500) / 15%);
+  background-color: var(--blue-400-alpha);
   height: 64px;
   display: flex;
   flex-direction: row;
@@ -146,9 +146,10 @@ header {
   left: 0;
   width: 100%;
   height: calc(100vh - 64px);
-  background-color: var(--black-alpha-25);
+  background-color: var(--black-alpha-50);
   z-index: 5;
   backdrop-filter: blur(5px);
+
 
   @media (width >= 768px) {
     display: none;
