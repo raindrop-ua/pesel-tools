@@ -1,11 +1,11 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { PeselGeneratorService } from '@services/pesel-generator.service';
-import { interval } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
-import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
+import { interval } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PLATFORM_ID } from '@angular/core';
+import { PeselGeneratorService } from '@services/pesel-generator.service';
+import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
 
 @Component({
   selector: 'app-pesel-of-the-moment',
@@ -20,16 +20,25 @@ export class PeselOfTheMomentComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly digits = signal<number[]>(Array(11).fill(0));
+  readonly peselToCOpy = signal<string>('');
+
+  private generateAndApply() {
+    const pesel = this.peselGen.generatePesel();
+    this.peselToCOpy.set(pesel);
+    this.animateTo(pesel);
+  }
 
   ngOnInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    this.animateTo(this.peselGen.generatePesel());
+    this.generateAndApply();
 
     interval(5_000)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap(() => this.animateTo(this.peselGen.generatePesel())),
+        tap(() => {
+          this.generateAndApply();
+        }),
       )
       .subscribe();
   }
@@ -39,10 +48,11 @@ export class PeselOfTheMomentComponent implements OnInit {
       ? raw.split('').map(ch => +ch)
       : Array(11).fill(0);
 
-    target.forEach((tgtDigit, idx) => {
+    target.forEach((targetDigit, index) => {
       const arr = this.digits();
-      const current = arr[idx];
-      const steps = (tgtDigit - current + 10) % 10;
+      const current = arr[index];
+      const steps = (targetDigit - current + 10) % 10;
+
       if (steps === 0) return;
 
       interval(50)
@@ -51,7 +61,7 @@ export class PeselOfTheMomentComponent implements OnInit {
           map(i => (current + i) % 10),
           tap(val => {
             const newArr = [...this.digits()];
-            newArr[idx] = val;
+            newArr[index] = val;
             this.digits.set(newArr);
           }),
           takeUntilDestroyed(this.destroyRef),
