@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
-import { PeselInfo } from '@services/pesel-parser.service';
 import { DatePipe, TitleCasePipe } from '@angular/common';
+import { PeselInfo } from '@services/pesel-parser.service';
 import { CopyButtonComponent } from '../copy-button/copy-button.component';
 
 @Component({
