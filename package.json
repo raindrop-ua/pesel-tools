@@ -15,7 +15,10 @@
     "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix",
     "release": "standard-version",
     "storybook": "ng run pesel-tools:storybook",
-    "build-storybook": "ng run pesel-tools:build-storybook"
+    "build-storybook": "ng run pesel-tools:build-storybook",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +47,7 @@
     "@angular/compiler-cli": "^20.1.4",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@cypress/schematic": "^3.0.0",
     "@netlify/angular-runtime": "^2.4.0",
     "@storybook/addon-docs": "^9.0.18",
     "@storybook/addon-onboarding": "^9.0.18",
@@ -79,7 +83,8 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.33.1",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "cypress": "latest"
   },
   "lint-staged": {
     "*.{ts,js}": [
