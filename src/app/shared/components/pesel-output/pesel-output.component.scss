@@ -1,10 +1,10 @@
 .output-control {
-  background-color: var(--gray-950);
-  border: 1px solid var(--gray-800);
+  background-color: var(--control-background);
+  border: 1px solid var(--control-border);
   border-radius: 0.375rem;
   padding: 0;
   display: flex;
-  color: var(--white);
+  color: var(--control-text);
   position: relative;
 
   pre {
@@ -17,7 +17,7 @@
   }
 
   code {
-    color: var(--yellow-400);
+    color: var(--pesel-number);
     font-family: "IBM Plex Mono", monospace;
   }
 }
