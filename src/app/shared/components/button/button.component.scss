@@ -15,29 +15,29 @@
   }
 
   &.app-button-primary {
-    background-color: hsl(var(--blue-500));
-    color: white;
+    background-color: var(--button-primary-background);
+    color: var(--button-primary-text);
 
     &:not([disabled]):hover {
-      background-color: hsl(var(--blue-500-accent));
+      background-color: var(--button-primary-hover-background);
     }
   }
 
   &.app-button-secondary {
-    background-color: var(--gray-500);
-    color: white;
+    background-color: var(--button-secondary-background);
+    color: var(--button-secondary-text);
 
     &:not([disabled]):hover {
-      background-color: #5a6268;
+      background-color: var(--button-primary-hover-background);
     }
   }
 
   &.app-button-danger {
-    background-color: var(--red-700);
-    color: white;
+    background-color: var(--button-danger-background);
+    color: var(--button-danger-background-text);
 
     &:not([disabled]):hover {
-      background-color: var(--red-800);
+      background-color: var(--button-danger-hover-background);
     }
   }
 }

@@ -1,5 +1,5 @@
 .masthead {
-  background: linear-gradient(135deg, #141a37 0%, #253260 50%, #242533 100%);
+  background: var(--masthead-gradient);
   height: 340px;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   font-size: 2.5rem;
   font-weight: 400;
   line-height: 2.75rem;
-  color: var(--white);
+  color: var(--masthead-text);
   border-radius: 1rem;
   position: relative;
   margin-top: 1rem;
@@ -45,7 +45,7 @@
 
 .pulse-circle {
   position: absolute;
-  border: 2px solid var(--red-400-alpha);
+  border: 2px solid var(--masthead-effect);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -93,7 +93,7 @@
 }
 
 .dot {
-  color: var(--red-600);
+  color: var(--masthead-attention);
   display: inline-block;
   animation: flicker 1.2s infinite;
   font-size: 5rem;

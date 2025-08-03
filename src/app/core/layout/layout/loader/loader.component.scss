@@ -1,7 +1,7 @@
 :host {
   position: fixed;
   inset: 0;
-  background: var(--black-alpha-50);
+  background: var(--shadow-50);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -38,22 +38,22 @@
 }
 
 .pl-ring-a {
-  stroke: var(--orange-600);
+  stroke: var(--color-golden-tainoi-600);
 }
 
 .pl-ring-b {
   animation-name: ring-b;
-  stroke: var(--orange-500);
+  stroke: var(--color-golden-tainoi-400);
 }
 
 .pl-ring-c {
   animation-name: ring-c;
-  stroke: var(--blue-700);
+  stroke: var(--color-cobalt-600);
 }
 
 .pl-ring-d {
   animation-name: ring-d;
-  stroke: var(--cyan-400);
+  stroke: var(--color-portage-500);
 }
 
 @keyframes ring-a {

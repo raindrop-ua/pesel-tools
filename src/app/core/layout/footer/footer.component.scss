@@ -1,5 +1,5 @@
 footer {
-  background-color: hsl(var(--blue-500) / 15%);
+  background-color: var(--footer-background);
   height: 52px;
   display: flex;
   flex-direction: row;
@@ -7,7 +7,7 @@ footer {
   align-items: center;
   padding: 0 24px;
   gap: 24px;
-  color: var(--white);
+  color: var(--footer-text);
   font-size: 1rem;
 
   > div {
@@ -16,7 +16,7 @@ footer {
 
   svg {
     margin-left: 0.5rem;
-    color: var(--red-500);
+    color: var(--footer-attention);
   }
 }
 
@@ -28,14 +28,14 @@ footer {
     margin-left: 2rem;
     gap: 1rem;
 
-    a {
-      color: var(--white);
+    .link {
+      color: var(--footer-text);
       font-size: 1rem;
       text-decoration: none;
 
       &.active,
       &:hover {
-        color: var(--orange-400);
+        color: var(--footer-link-active);
         text-decoration: underline;
         text-underline-offset: 4px;
         text-decoration-thickness: 1px;

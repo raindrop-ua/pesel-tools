@@ -1,0 +1,70 @@
+:root {
+  /* generic */
+  --main-background: var(--color-blue-900);
+  --main-text: var(--color-blue-100);
+
+  /* pesel output */
+  --pesel-number: var(--color-golden-tainoi-300);
+
+  /* buttons */
+  --button-primary-background: var(--color-cobalt-700);
+  --button-primary-hover-background: var(--color-cobalt-600);
+  --button-primary-text: var(--color-cobalt-100);
+  --button-secondary-background: var(--color-nile-blue-700);
+  --button-secondary-hover-background: var(--color-nile-blue-600);
+  --button-secondary-text: var(--color-nile-blue-100);
+  --button-danger-background: var(--color-cinnabar-700);
+  --button-danger-hover-background: var(--color-cinnabar-600);
+  --button-danger-text: var(--color-cinnabar-100);
+
+  /* shadow */
+  --shadow-25: hsl(0deg 0% 0% / 25%);
+  --shadow-50: hsl(0deg 0% 0% / 50%);
+  --shadow-75: hsl(0deg 0% 0% / 75%);
+
+  /* header */
+  --header-background: var(--color-portage-950);
+  --header-background-secondary: var(--color-blue-900);
+  --header-text: var(--color-portage-100);
+  --header-link-active: var(--color-golden-tainoi-400);
+
+  /* card */
+  --card-background: var(--color-blue-800);
+  --card-text: var(--color-blue-100);
+  --card-border: var(--color-blue-700);
+
+  /* tool buttons */
+  --tool-background: var(--color-blue-900);
+  --tool-text: var(--color-blue-500);
+  --tool-border: var(--color-blue-700);
+  --tool-hover-background: var(--color-blue-800);
+  --tool-hover-text: var(--color-blue-300);
+  --tool-hover-border: var(--color-blue-600);
+
+  /* control */
+  --control-background: var(--color-blue-900);
+  --control-active-background: var(--color-blue-700);
+  --control-text: var(--color-blue-100);
+  --control-border: var(--color-blue-700);
+  --control-focus-border: var(--color-cobalt-700);
+  --control-focus-shadow: var(--color-cobalt-900);
+
+  /* footer */
+  --footer-background: var(--color-portage-950);
+  --footer-text: var(--color-portage-100);
+  --footer-link-active: var(--color-golden-tainoi-400);
+  --footer-attention: var(--color-cinnabar-600);
+
+  /* masthead */
+  --masthead-background-gradient-1: var(--color-navy-900);
+  --masthead-background-gradient-2: var(--color-navy-800);
+  --masthead-background-gradient-3: var(--color-navy-950);
+  --masthead-gradient: linear-gradient(
+      135deg,
+      var(--masthead-background-gradient-1) 0%,
+      var(--masthead-background-gradient-2) 50%,
+      var(--masthead-background-gradient-3) 100%);
+  --masthead-text: var(--color-portage-100);
+  --masthead-attention: var(--color-cinnabar-800);
+  --masthead-effect: var(--color-crater-brown-700);
+}

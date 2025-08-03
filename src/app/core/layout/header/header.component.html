@@ -1,9 +1,9 @@
 <header>
   <div class="main-block">
     <button class="burger" (click)="toggleMenu()" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
     </button>
     @if (menuOpen()) {
       <nav class="mobile-navigation">
@@ -33,6 +33,7 @@
         @for (item of navigation; track item.path) {
           <li>
             <a
+              class="link"
               [routerLink]="item.path"
               [class.active]="isLinkActive(item.path)"
             >
