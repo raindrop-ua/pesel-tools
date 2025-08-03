@@ -13,9 +13,9 @@ export function validDateValidator(): ValidatorFn {
     const year = Number(group.get('year')?.value);
 
     if (!day || !month || !year) {
-      return null; // don't validate if fields are missing
+      return { invalidDate: true };
     }
-    console.log(day, month, year);
+
     if (
       isNaN(day) ||
       isNaN(month) ||
