@@ -1,46 +1,62 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { PeselGeneratorService } from '../../../../core/services/pesel-generator.service';
+import { PeselGeneratorService } from '@services/pesel-generator.service';
 import { interval } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
-import { CopyButtonComponent } from '../../../../shared/components/copy-button/copy-button.component';
+import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
+import { map, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pesel-of-the-moment',
   imports: [CopyButtonComponent],
   templateUrl: './pesel-of-the-moment.component.html',
-  styleUrl: './pesel-of-the-moment.component.scss'
+  styleUrl: './pesel-of-the-moment.component.scss',
+  standalone: true,
 })
 export class PeselOfTheMomentComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly peselGenerator: PeselGeneratorService = inject(PeselGeneratorService);
+  private readonly peselGen = inject(PeselGeneratorService);
   private readonly destroyRef = inject(DestroyRef);
-  readonly pesel = signal<string>('Generating...');
-  readonly animated = signal(false);
+
+  readonly digits = signal<number[]>(Array(11).fill(0));
 
   ngOnInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    this.pesel.set(this.peselGenerator.generatePesel());
+    this.animateTo(this.peselGen.generatePesel());
 
-    interval(10_000)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.updatePesel()
-      });
+    interval(5_000)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(() => this.animateTo(this.peselGen.generatePesel())),
+      )
+      .subscribe();
   }
 
-  private updatePesel() {
-    this.animated.set(true);
+  private animateTo(raw: string) {
+    const target = /^\d{11}$/.test(raw)
+      ? raw.split('').map(ch => +ch)
+      : Array(11).fill(0);
 
-    requestAnimationFrame(() => {
-      this.pesel.set(this.peselGenerator.generatePesel());
+    target.forEach((tgtDigit, idx) => {
+      const arr = this.digits();
+      const current = arr[idx];
+      const steps = (tgtDigit - current + 10) % 10;
+      if (steps === 0) return;
 
-      setTimeout(() => {
-        this.animated.set(false);
-      }, 500);
+      interval(50)
+        .pipe(
+          take(steps + 1),
+          map(i => (current + i) % 10),
+          tap(val => {
+            const newArr = [...this.digits()];
+            newArr[idx] = val;
+            this.digits.set(newArr);
+          }),
+          takeUntilDestroyed(this.destroyRef),
+        )
+        .subscribe();
     });
   }
-
 }

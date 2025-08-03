@@ -1,5 +1,9 @@
 <section class="pesel-wrapper">
   <h2>PESEL of the moment</h2>
-  <p class="pesel" [class.fade-in]="animated()">{{ pesel() }}</p>
-  <app-copy-button [contentToCopy]="pesel()"></app-copy-button>
+  <p class="pesel">
+    @for(digits of digits(); track $index) {
+      <span class="digit">{{ digits }}</span>
+    }
+  </p>
+  <app-copy-button [contentToCopy]="digits().join('')"></app-copy-button>
 </section>
