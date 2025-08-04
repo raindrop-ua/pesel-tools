@@ -1,4 +1,3 @@
-
 .radio-inputs {
   position: relative;
   display: flex;
@@ -43,6 +42,7 @@
 
 .radio-inputs .radio input:checked + .name {
   background-color: var(--control-active-background);
+  color: var(--control-active-text);
 }
 
 .radio-inputs .radio input:focus-visible + .name {
