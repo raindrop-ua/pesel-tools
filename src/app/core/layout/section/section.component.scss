@@ -1,6 +1,6 @@
 :host {
-  max-width: 1024px;
-  padding: 24px;
+  max-width: var(--container-5xl);
+  padding: 1.5rem;
   display: block;
   margin: 0 auto;
   overflow-x: hidden;

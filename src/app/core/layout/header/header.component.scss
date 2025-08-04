@@ -1,6 +1,8 @@
 header {
+  position: relative;
+  z-index: 10;
   background-color: var(--header-background);
-  height: 64px;
+  height: 4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -17,14 +19,14 @@ header {
 }
 
 .logo {
-  font-size: 1.25rem;
-  line-height: 1.5rem;
-  font-weight: 800;
+  font-size: var(--text-xl);
+  line-height: var(--text-xl-line-height);
+  font-weight: var(--font-weight-extrabold);
   color: var(--header-text);
 
   @media screen and (width >= 640px) {
-    font-size: 2rem;
-    line-height: 2.25rem;
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl-line-height);
     margin-right: 1.5rem;
   }
 
@@ -60,8 +62,8 @@ header {
       line-height: 1.25rem;
 
       @media screen and (width >= 640px) {
-        font-size: 1.125rem;
-        line-height: 1.25rem;
+        font-size: var(--text-lg);
+        line-height: var(--text-lg-line-height);
       }
 
       &.active {
@@ -86,8 +88,8 @@ header {
   cursor: pointer;
 
   .line {
-    width: 24px;
-    height: 2px;
+    width: 1.5rem;
+    height: 0.125rem;
     background-color: var(--header-text);
     transition: 0.3s ease;
   }
@@ -99,7 +101,7 @@ header {
 
 .mobile-navigation {
   position: absolute;
-  top: 64px;
+  top: 4rem;
   left: 0;
   right: 0;
   background-color: var(--header-background-secondary);
@@ -125,11 +127,12 @@ header {
   }
 
   a.link {
-    font-size: 1.25rem;
-    line-height: 2rem;
+    font-size: var(--text-lg);
+    line-height: var(--text-lg-line-height);
     font-weight: 400;
     color: var(--header-text);
     text-decoration: none;
+    margin-bottom: 0.75rem;
 
     &.active {
       color: var(--header-link-active);
@@ -142,14 +145,10 @@ header {
 
 .overlay {
   position: fixed;
-  top: 64px;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 64px);
+  inset: 0;
   background-color: var(--shadow-50);
   z-index: 5;
   backdrop-filter: blur(5px);
-
 
   @media (width >= 768px) {
     display: none;
