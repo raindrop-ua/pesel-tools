@@ -10,6 +10,7 @@ html, body {
   margin: 0;
   background-color: var(--main-background);
   color: var(--main-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
