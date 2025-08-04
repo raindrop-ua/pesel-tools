@@ -26,4 +26,15 @@ input {
   border-width: 0;
   font-size: 1.25rem;
   width: 100%;
+
+  &::placeholder {
+    font-weight: 400;
+    opacity: 0.5;
+    color: var(--control-text);
+  }
+
+  &[type='number']::-webkit-outer-spin-button,
+  &[type='number']::-webkit-inner-spin-button {
+    appearance: none;
+  }
 }
