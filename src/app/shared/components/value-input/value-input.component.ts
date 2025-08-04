@@ -28,9 +28,7 @@ export class ValueInputComponent implements ControlValueAccessor {
   public value = '';
   public disabled = false;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: string) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
   writeValue(value: string): void {

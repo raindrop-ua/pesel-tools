@@ -34,9 +34,7 @@ export class RadioSelectComponent<T = string> implements ControlValueAccessor {
   @Output() valueChange = new EventEmitter<T>();
   public disabled = false;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (val: T) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
   selectOption(opt: RadioOption<T>) {
