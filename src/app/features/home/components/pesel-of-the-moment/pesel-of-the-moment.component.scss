@@ -12,7 +12,8 @@
 
 .pesel {
   font-size: 2rem;
-  color: var(--pesel-number);
+  color: var(--pesel-number-moment);
+  font-weight: 500;
   margin-top: 0.5rem;
   display: flex;
   justify-content: center;
