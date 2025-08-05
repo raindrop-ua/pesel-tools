@@ -1,39 +1,18 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import {
-  FormBuilder,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
-import { SectionComponent } from '@core/layout/section/section.component';
-import { CardComponent } from '@components/card/card.component';
+import { PeselInfo, PeselParserService } from '@services/pesel-parser.service';
 import { PeselInputComponent } from '@components/pesel-input/pesel-input.component';
 import { ResultOutputComponent } from '@components/result-output/result-output.component';
-import { DisclaimerComponent } from '@components/disclaimer/disclaimer.component';
-
 import { peselValidator } from '@shared/validators/pesel.validator';
-import {
-  PeselInfo,
-  PeselParserService,
-} from '@services/pesel-parser.service';
 
 @Component({
-  selector: 'app-parser',
-  imports: [
-    CardComponent,
-    FormsModule,
-    PeselInputComponent,
-    ReactiveFormsModule,
-    SectionComponent,
-    ResultOutputComponent,
-    DisclaimerComponent,
-  ],
-  templateUrl: './parser.component.html',
-  styleUrl: './parser.component.scss',
+  selector: 'app-pesel-generator',
+  templateUrl: './pesel-generator.component.html',
+  imports: [PeselInputComponent, ReactiveFormsModule, ResultOutputComponent],
+  styleUrl: './pesel-generator.component.scss',
 })
-export class ParserComponent implements OnInit {
+export class PeselGeneratorComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
   private peselParser = inject(PeselParserService);
@@ -49,6 +28,7 @@ export class ParserComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       const pesel = params.get('pesel');
+
       if (pesel) {
         this.form.patchValue({ pesel });
 

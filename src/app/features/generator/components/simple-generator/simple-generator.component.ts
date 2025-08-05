@@ -1,11 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { PeselGeneratorService } from '@services/pesel-generator.service';
 import { PeselStoreService } from '@services/pesel-store.service';
-import { BirthdayInputComponent } from "@components/birthday-input/birthday-input.component";
-import { ButtonComponent } from "@components/button/button.component";
-import { CardComponent } from "@components/card/card.component";
-import { PeselOutputComponent } from "@components/pesel-output/pesel-output.component";
+import { BirthdayInputComponent } from '../birthday-input/birthday-input.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { CardComponent } from '@components/card/card.component';
+import { PeselOutputComponent } from '@components/pesel-output/pesel-output.component';
 import { validDateValidator } from '@shared/validators/valid-date.validator';
 
 @Component({
@@ -15,10 +20,10 @@ import { validDateValidator } from '@shared/validators/valid-date.validator';
     ButtonComponent,
     CardComponent,
     PeselOutputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './simple-generator.component.html',
-  styleUrl: './simple-generator.component.scss'
+  styleUrl: './simple-generator.component.scss',
 })
 export class SimpleGeneratorComponent {
   private fb = inject(FormBuilder);
@@ -48,7 +53,12 @@ export class SimpleGeneratorComponent {
       return;
     }
     const { day, month, year, gender } = this.birthdayGroup.value;
-    const pesel = this.generator.generatePesel({ year, month, day, sex: gender });
+    const pesel = this.generator.generatePesel({
+      year,
+      month,
+      day,
+      sex: gender,
+    });
     this.peselStoreService.add(pesel);
   }
 

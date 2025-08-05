@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
-import { RadioSelectComponent } from '../radio-select/radio-select.component';
-import { ValueInputComponent } from '../value-input/value-input.component';
+import { RadioSelectComponent } from '@components/radio-select/radio-select.component';
+import { ValueInputComponent } from '@components/value-input/value-input.component';
 
 @Component({
   selector: 'app-birthday-input',
@@ -17,12 +17,14 @@ export class BirthdayInputComponent implements AfterViewInit {
   @ViewChild('yearComp') yearComp!: ValueInputComponent;
 
   ngAfterViewInit() {
-    this.formGroup.get('day')!.valueChanges
-      .pipe(filter((v: string) => v.length === 2))
+    this.formGroup
+      .get('day')!
+      .valueChanges.pipe(filter((v: string) => v.length === 2))
       .subscribe(() => this.monthComp.focus());
 
-    this.formGroup.get('month')!.valueChanges
-      .pipe(filter((v: string) => v.length === 2))
+    this.formGroup
+      .get('month')!
+      .valueChanges.pipe(filter((v: string) => v.length === 2))
       .subscribe(() => this.yearComp.focus());
   }
 }
