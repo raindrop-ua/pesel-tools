@@ -8,8 +8,9 @@ footer {
   padding: 0 24px;
   gap: 24px;
   color: var(--footer-text);
-  font-size: var(--text-base);
-  line-height: var(--text-base-line-height);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-lg-line-height);
 
   > div {
     display: flex;
@@ -31,8 +32,8 @@ footer {
 
     .link {
       color: var(--footer-text);
-      font-size: var(--text-base);
-      line-height: var(--text-base-line-height);
+      font-size: var(--text-lg);
+      line-height: var(--text-lg-line-height);
       text-decoration: none;
 
       &.active,
