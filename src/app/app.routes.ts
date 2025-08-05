@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from '@core/layout/layout/layout.component';
+import { AppRouteEnum } from '@core/enums/app-route.enum';
 
 export const routes: Routes = [
   {
@@ -7,7 +8,7 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '',
+        path: AppRouteEnum.Home,
         data: {
           preload: true,
           seo: {
@@ -17,10 +18,10 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./features/home/home.component').then((m) => m.HomeComponent),
+          import('./pages/home/home.component').then((m) => m.HomeComponent),
       },
       {
-        path: 'parser',
+        path: AppRouteEnum.Parser,
         data: {
           preload: true,
           seo: {
@@ -30,12 +31,12 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./features/parser/parser.component').then(
+          import('./pages/parser/parser.component').then(
             (m) => m.ParserComponent,
           ),
       },
       {
-        path: 'generator',
+        path: AppRouteEnum.Generator,
         data: {
           preload: true,
           seo: {
@@ -46,12 +47,12 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./features/generator/generator.component').then(
+          import('./pages/generator/generator.component').then(
             (m) => m.GeneratorComponent,
           ),
       },
       {
-        path: 'docs',
+        path: AppRouteEnum.Docs,
         data: {
           preload: true,
           seo: {
@@ -61,7 +62,7 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./features/doc/doc.component').then((m) => m.DocComponent),
+          import('./pages/doc/doc.component').then((m) => m.DocComponent),
       },
       {
         path: '**',
@@ -74,7 +75,7 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./features/not-found/not-found.component').then(
+          import('./pages/not-found/not-found.component').then(
             (m) => m.NotFoundComponent,
           ),
       },
