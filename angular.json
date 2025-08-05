@@ -172,18 +172,18 @@
   "cli": {
     "analytics": "1c5ed61a-45da-43a2-bc83-baf76d52f98c",
     "schematicCollections": [
+      "@schematics/angular",
       "@cypress/schematic",
-      "angular-eslint",
-      "@schematics/angular"
+      "angular-eslint"
     ]
   },
   "schematics": {
     "@schematics/angular:component": {
       "type": "component",
-      "standalone": true,
       "style": "scss",
+      "standalone": true,
       "skipTests": true,
-      "flat": false,
+      "flat": true,
       "changeDetection": "OnPush"
     },
     "@schematics/angular:directive": {
