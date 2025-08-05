@@ -1,9 +1,9 @@
 <app-card>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <p>Enter birthday and gender:</p>
+    <p class="label">Enter birthday and gender:</p>
     <app-birthday-input [formGroup]="birthdayGroup" />
     @if (!birthdayGroup.valid) {
-      <p>Please provide a valid birthdate.</p>
+      <p class="validation-label">Please provide a valid birthdate.</p>
     }
     <button
       app-button="primary"
@@ -18,7 +18,7 @@
     </button>
     <br />
     @if (peselList().length) {
-      <p>Generated PESEL(s)</p>
+      <p class="label">Generated PESEL(s):</p>
       <app-pesel-output [data]="peselList()" />
       <button app-button="primary" type="button" (click)="clearList()">
         Clear List

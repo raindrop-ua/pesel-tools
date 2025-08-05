@@ -4,7 +4,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { SectionComponent } from '@core/layout/section/section.component';
-import {SimpleGeneratorComponent} from '@features/generator/components/simple-generator/simple-generator.component';
+import { SimpleGeneratorComponent } from '@features/generator/components/simple-generator/simple-generator.component';
 import {
   AdvancedGeneratorComponent
 } from '@features/generator/components/advanced-generator/advanced-generator.component';
@@ -21,6 +21,4 @@ import {
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.scss',
 })
-export class GeneratorComponent {
-
-}
+export class GeneratorComponent {}

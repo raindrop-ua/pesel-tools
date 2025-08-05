@@ -9,6 +9,4 @@ import {ExternalLinkDirective} from '@shared/directives/external-link.directive'
   templateUrl: './disclaimer.component.html',
   styleUrl: './disclaimer.component.scss'
 })
-export class DisclaimerComponent {
-
-}
+export class DisclaimerComponent {}

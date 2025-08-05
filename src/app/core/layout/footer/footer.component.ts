@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NAVIGATION_TOKEN } from '@config/navigation.config';
-import { SvgIconComponent } from '@components/svg-icon/svg-icon.component';
+import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-footer',
@@ -13,7 +13,7 @@ export class FooterComponent {
   private router = inject(Router);
   public navigation = inject(NAVIGATION_TOKEN);
 
-  isLinkActive(path: string): boolean {
+  public isLinkActive(path: string): boolean {
     return this.router.isActive(path, {
       paths: 'exact',
       queryParams: 'ignored',

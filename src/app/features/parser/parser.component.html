@@ -1,7 +1,7 @@
 <app-section>
   <h1>PESEL Parser</h1>
   <app-card>
-    <p>Enter PESEL for parsing</p>
+    <p class="label">Enter PESEL for parsing</p>
     <form [formGroup]="form">
       <app-pesel-input formControlName="pesel" (paste)="onPaste($event)"></app-pesel-input>
 

@@ -1,19 +1,19 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   inject,
+  signal,
 } from '@angular/core';
 import {
-  Router,
-  NavigationStart,
-  NavigationEnd,
   NavigationCancel,
+  NavigationEnd,
   NavigationError,
+  NavigationStart,
+  Router,
   RouterOutlet,
 } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { LoaderComponent } from './loader/loader.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -24,13 +24,13 @@ import { FooterComponent } from '../footer/footer.component';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   imports: [HeaderComponent, LoaderComponent, RouterOutlet, FooterComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent implements AfterViewInit {
   private router = inject(Router);
-  private platformId = inject(PLATFORM_ID);
   private cdr = inject(ChangeDetectorRef);
   private loadingTimeout: ReturnType<typeof setTimeout> | undefined;
-  public loading = false;
+  public loading = signal(false);
 
   constructor() {
     this.router.events.subscribe((event) => {
@@ -50,32 +50,15 @@ export class LayoutComponent implements AfterViewInit {
 
   private startLoading(): void {
     this.loadingTimeout = setTimeout(() => {
-      this.loading = true;
-      this.blockBodyScroll(true);
+      this.loading.set(true);
     }, 200);
   }
 
   private stopLoading(): void {
     clearTimeout(this.loadingTimeout);
     setTimeout(() => {
-      this.loading = false;
-      this.blockBodyScroll(false);
+      this.loading.set(false);
     }, 200);
-  }
-
-  private blockBodyScroll(block: boolean): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const body = document.body;
-    if (block) {
-      body.style.overflow = 'hidden';
-    } else {
-      body.style.overflow = '';
-    }
-  }
-
-  prepareRoute(outlet: RouterOutlet) {
-    return outlet?.activatedRouteData?.['animation'];
   }
 
   ngAfterViewInit() {

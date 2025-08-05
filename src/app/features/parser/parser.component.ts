@@ -13,7 +13,7 @@ import { PeselInputComponent } from '@components/pesel-input/pesel-input.compone
 import { ResultOutputComponent } from '@components/result-output/result-output.component';
 import { DisclaimerComponent } from '@components/disclaimer/disclaimer.component';
 
-import { peselValidatorFactory } from '@shared/validators/pesel-validator.factory';
+import { peselValidator } from '@shared/validators/pesel.validator';
 import {
   PeselInfo,
   PeselParserService,
@@ -39,7 +39,7 @@ export class ParserComponent implements OnInit {
   private peselParser = inject(PeselParserService);
   public parsedData = signal<Omit<PeselInfo, 'message'> | null>(null);
   public form = this.fb.group({
-    pesel: ['', [Validators.required, peselValidatorFactory(this.peselParser)]],
+    pesel: ['', [Validators.required, peselValidator(this.peselParser)]],
   });
 
   get peselControl() {
@@ -67,7 +67,7 @@ export class ParserComponent implements OnInit {
     });
   }
 
-  onPaste(event: ClipboardEvent) {
+  public onPaste(event: ClipboardEvent) {
     event.preventDefault();
     const pasted = event.clipboardData?.getData('text')?.trim() ?? '';
     if (/^\d{11}$/.test(pasted)) {

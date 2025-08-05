@@ -35,6 +35,10 @@ export default tseslint.config(
           style: "kebab-case",
         },
       ],
+      "@typescript-eslint/no-empty-function": [
+        "warn",
+        { allow: ["arrowFunctions"] },
+      ],
     },
   },
   {

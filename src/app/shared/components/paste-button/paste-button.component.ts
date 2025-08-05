@@ -1,5 +1,5 @@
 import { Component, output, signal } from '@angular/core';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-paste-button',
@@ -11,7 +11,7 @@ export class PasteButtonComponent {
   public pasted = signal(false);
   public pastedValue = output<string>();
 
-  async pasteFromClipboard(): Promise<void> {
+  public async onPaste(): Promise<void> {
     try {
       const text = await navigator.clipboard.readText();
       const trimmed = text.trim();

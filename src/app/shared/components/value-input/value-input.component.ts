@@ -22,44 +22,42 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ValueInputComponent implements ControlValueAccessor {
   @ViewChild('nativeInput', { static: true })
-  nativeInput!: ElementRef<HTMLInputElement>;
+  private nativeInput!: ElementRef<HTMLInputElement>;
   public placeholder = input<string>('');
 
   public value = '';
   public disabled = false;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: string) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
-  writeValue(value: string): void {
+  public writeValue(value: string): void {
     this.value = value ?? '';
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  public registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
-  handleInput(event: Event): void {
+  public onInput(event: Event): void {
     const newValue = (event.target as HTMLInputElement).value;
     this.value = newValue;
     this.onChange(newValue);
   }
 
-  handleBlur(): void {
+  public onBlur(): void {
     this.onTouched();
   }
 
-  focus(): void {
+  public focus(): void {
     this.nativeInput.nativeElement.focus();
   }
 }

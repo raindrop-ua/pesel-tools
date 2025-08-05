@@ -1,5 +1,5 @@
 import { Component, input, signal } from '@angular/core';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-copy-button',
@@ -8,10 +8,10 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component';
   styleUrl: './copy-button.component.scss',
 })
 export class CopyButtonComponent {
-  contentToCopy = input.required<string>();
+  public contentToCopy = input.required<string>();
   public copied = signal(false);
 
-  copyToClipboard(): void {
+  public onCopy(): void {
     if (!this.contentToCopy()) return;
 
     navigator.clipboard.writeText(this.contentToCopy()).then(() => {

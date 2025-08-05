@@ -1,6 +1,6 @@
 <header>
   <div class="main-block">
-    <button class="burger" (click)="toggleMenu()" aria-label="Toggle menu">
+    <button class="burger" (click)="onMenuToggle()" aria-label="Toggle menu">
       <span class="line"></span>
       <span class="line"></span>
       <span class="line"></span>
@@ -14,7 +14,7 @@
                 class="link"
                 [routerLink]="item.path"
                 [class.active]="isLinkActive(item.path)"
-                (click)="closeMenu()"
+                (click)="onMenuClose()"
               >
                 {{ item.label }}
               </a>
@@ -52,8 +52,8 @@
     tabindex="0"
     role="button"
     aria-label="Close menu"
-    (click)="closeMenu()"
-    (keydown.enter)="closeMenu()"
-    (keydown.space)="closeMenu()"
+    (click)="onMenuClose()"
+    (keydown.enter)="onMenuClose()"
+    (keydown.space)="onMenuClose()"
   ></div>
 }

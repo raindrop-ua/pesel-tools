@@ -5,8 +5,8 @@
         type="radio"
         [name]="option.name"
         [checked]="option.value === value"
-        (change)="selectOption(option)"
         [disabled]="disabled"
+        (change)="onSelect(option)"
       />
       <span class="name">{{ option.label }}</span>
     </label>
