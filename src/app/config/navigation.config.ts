@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { AppRouteEnum } from '@core/enums/app-route.enum';
 
 export interface NavItem {
   path: string;
@@ -6,10 +7,10 @@ export interface NavItem {
 }
 
 export const NAVIGATION: NavItem[] = [
-  { path: '/', label: 'Home' },
-  { path: '/parser', label: 'Parser' },
-  { path: '/generator', label: 'Generator' },
-  { path: '/docs', label: 'Docs' },
+  { path: AppRouteEnum.Home, label: 'Home' },
+  { path: AppRouteEnum.Parser, label: 'Parser' },
+  { path: AppRouteEnum.Generator, label: 'Generator' },
+  { path: AppRouteEnum.Docs, label: 'Docs' },
 ];
 
 export const NAVIGATION_TOKEN = new InjectionToken<NavItem[]>('NAVIGATION');
