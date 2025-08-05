@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Theme, ThemeService } from '@services/theme.service';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 const themes = [
   { id: 'light', label: 'Light', icon: 'sun' },

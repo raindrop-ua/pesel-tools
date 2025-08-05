@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NAVIGATION_TOKEN } from '@config/navigation.config';
-import { SvgIconComponent } from '@components/svg-icon/svg-icon.component';
+import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-footer',
