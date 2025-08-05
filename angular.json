@@ -5,11 +5,6 @@
   "projects": {
     "pesel-tools": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -188,7 +183,8 @@
       "standalone": true,
       "style": "scss",
       "skipTests": true,
-      "flat": false
+      "flat": false,
+      "changeDetection": "OnPush"
     },
     "@schematics/angular:directive": {
       "type": "directive"
