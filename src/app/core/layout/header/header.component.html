@@ -24,9 +24,7 @@
       </nav>
     }
     <div class="logo">
-      <a class="logo-link" [routerLink]="'/'">
-        PESEL Tools
-      </a>
+      <a class="logo-link" [routerLink]="[AppRouteEnum.Home]"> PESEL Tools </a>
     </div>
     <nav class="navigation">
       <menu>
@@ -44,7 +42,7 @@
       </menu>
     </nav>
   </div>
-  <app-theme-switcher/>
+  <app-theme-switcher />
 </header>
 @if (menuOpen()) {
   <div
