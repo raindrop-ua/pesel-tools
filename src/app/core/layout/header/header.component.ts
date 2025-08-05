@@ -14,7 +14,7 @@ export class HeaderComponent {
   public navigation = inject(NAVIGATION_TOKEN);
   public menuOpen = signal(false);
 
-  isLinkActive(path: string): boolean {
+  public isLinkActive(path: string): boolean {
     return this.router.isActive(path, {
       paths: 'exact',
       queryParams: 'ignored',
@@ -23,16 +23,16 @@ export class HeaderComponent {
     });
   }
 
-  toggleMenu() {
+  public onMenuToggle() {
     this.menuOpen.update((value) => !value);
   }
 
-  closeMenu() {
+  public onMenuClose() {
     this.menuOpen.set(false);
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: UIEvent): void {
+  public onResize(event: UIEvent): void {
     const width = (event.target as Window).innerWidth;
     if (width > 767 && this.menuOpen) {
       this.menuOpen.set(false);

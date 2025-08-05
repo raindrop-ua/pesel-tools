@@ -24,34 +24,34 @@ export class PeselInputComponent implements ControlValueAccessor {
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
 
-  writeValue(value: string): void {
+  public writeValue(value: string): void {
     this.value = value ?? '';
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  public registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
-  handleInput(event: Event): void {
+  public onInput(event: Event): void {
     const newValue = (event.target as HTMLInputElement).value;
     this.value = newValue;
     this.onChange(newValue);
   }
 
-  handlePaste(value: string): void {
+  public onPaste(value: string): void {
     this.value = value;
     this.onChange(value);
   }
 
-  handleBlur(): void {
+  public onBlur(): void {
     this.onTouched();
   }
 }

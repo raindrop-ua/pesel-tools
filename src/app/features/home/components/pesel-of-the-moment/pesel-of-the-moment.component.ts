@@ -20,15 +20,13 @@ export class PeselOfTheMomentComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly digits = signal<number[]>(Array(11).fill(0));
-  readonly peselToCOpy = signal<string>('');
-
-  private generateAndApply() {
-    const pesel = this.peselGen.generatePesel();
-    this.peselToCOpy.set(pesel);
-    this.animateTo(pesel);
-  }
+  readonly peselToCopy = signal<string>('');
 
   ngOnInit() {
+    this.initGeneration();
+  }
+
+  private initGeneration() {
     if (!isPlatformBrowser(this.platformId)) return;
 
     this.generateAndApply();
@@ -41,6 +39,12 @@ export class PeselOfTheMomentComponent implements OnInit {
         }),
       )
       .subscribe();
+  }
+
+  private generateAndApply() {
+    const pesel = this.peselGen.generatePesel();
+    this.peselToCopy.set(pesel);
+    this.animateTo(pesel);
   }
 
   private animateTo(raw: string) {

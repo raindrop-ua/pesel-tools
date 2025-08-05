@@ -4,8 +4,8 @@
     [placeholder]="placeholder()"
     [value]="value"
     [disabled]="disabled"
-    (input)="handleInput($event)"
-    (blur)="handleBlur()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
   />
-  <app-paste-button (pastedValue)="handlePaste($event)" />
+  <app-paste-button (pastedValue)="onPaste($event)" />
 </div>

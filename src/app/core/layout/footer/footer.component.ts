@@ -13,7 +13,7 @@ export class FooterComponent {
   private router = inject(Router);
   public navigation = inject(NAVIGATION_TOKEN);
 
-  isLinkActive(path: string): boolean {
+  public isLinkActive(path: string): boolean {
     return this.router.isActive(path, {
       paths: 'exact',
       queryParams: 'ignored',

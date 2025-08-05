@@ -6,7 +6,7 @@ import {
   PeselParserService,
 } from '@services/pesel-parser.service';
 
-export function peselValidatorFactory(parser: PeselParserService): ValidatorFn {
+export function peselValidator(parser: PeselParserService): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
 

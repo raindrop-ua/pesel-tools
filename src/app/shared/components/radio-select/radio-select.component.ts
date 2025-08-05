@@ -7,12 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-export interface RadioOption<T> {
-  label: string;
-  name: string;
-  value: T;
-}
+import { RadioOption } from '@components/radio-select/model/radio-option.interface';
 
 @Component({
   selector: 'app-radio-select',
@@ -37,27 +32,27 @@ export class RadioSelectComponent<T = string> implements ControlValueAccessor {
   private onChange: (val: T) => void = () => {};
   private onTouched: () => void = () => {};
 
-  selectOption(opt: RadioOption<T>) {
+  public writeValue(val: T): void {
+    this.value = val;
+  }
+
+  public registerOnChange(fn: () => void): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  public onSelect(opt: RadioOption<T>) {
     if (this.disabled) return;
     this.value = opt.value;
     this.onChange(this.value);
     this.valueChange.emit(this.value);
     this.onTouched();
-  }
-
-  writeValue(val: T): void {
-    this.value = val;
-  }
-
-  registerOnChange(fn: () => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
   }
 }

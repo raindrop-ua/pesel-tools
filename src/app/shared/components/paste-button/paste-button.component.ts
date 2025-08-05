@@ -11,7 +11,7 @@ export class PasteButtonComponent {
   public pasted = signal(false);
   public pastedValue = output<string>();
 
-  async pasteFromClipboard(): Promise<void> {
+  public async onPaste(): Promise<void> {
     try {
       const text = await navigator.clipboard.readText();
       const trimmed = text.trim();
