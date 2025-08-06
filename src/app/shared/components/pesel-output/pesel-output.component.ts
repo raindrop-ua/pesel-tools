@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CopyButtonComponent } from '../copy-button/copy-button.component';
 
 @Component({
@@ -6,6 +6,7 @@ import { CopyButtonComponent } from '../copy-button/copy-button.component';
   imports: [CopyButtonComponent],
   templateUrl: './pesel-output.component.html',
   styleUrl: './pesel-output.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselOutputComponent {
   public data = input.required<string[]>();

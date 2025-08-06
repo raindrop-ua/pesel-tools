@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SectionComponent } from '@core/layout/section/section.component';
 import { CardComponent } from '@components/card/card.component';
 import { DisclaimerComponent } from '@components/disclaimer/disclaimer.component';
@@ -16,5 +16,6 @@ import { PeselOfTheMomentComponent } from '@features/home/components/pesel-of-th
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {}

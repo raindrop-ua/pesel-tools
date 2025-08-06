@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -24,6 +24,7 @@ import { validDateValidator } from '@shared/validators/valid-date.validator';
   ],
   templateUrl: './simple-generator.component.html',
   styleUrl: './simple-generator.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleGeneratorComponent {
   private fb = inject(FormBuilder);

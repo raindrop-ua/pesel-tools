@@ -1,9 +1,10 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PasteButtonComponent } from '../paste-button/paste-button.component';
 
 @Component({
   selector: 'app-pesel-input',
+  imports: [PasteButtonComponent],
   templateUrl: './pesel-input.component.html',
   styleUrls: ['./pesel-input.component.scss'],
   providers: [
@@ -13,7 +14,7 @@ import { PasteButtonComponent } from '../paste-button/paste-button.component';
       multi: true,
     },
   ],
-  imports: [PasteButtonComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselInputComponent implements ControlValueAccessor {
   public placeholder = input<string>('');
