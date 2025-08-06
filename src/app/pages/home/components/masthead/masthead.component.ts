@@ -6,15 +6,16 @@ import {
   OnDestroy,
   PLATFORM_ID,
   inject,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-masthead',
+  imports: [NgOptimizedImage],
   templateUrl: './masthead.component.html',
   styleUrl: './masthead.component.scss',
-  standalone: true,
-  imports: [NgOptimizedImage],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MastheadComponent implements AfterViewInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);

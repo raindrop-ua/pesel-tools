@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild} from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
 import { RadioSelectComponent } from '@components/radio-select/radio-select.component';
@@ -9,6 +9,7 @@ import { ValueInputComponent } from '@components/value-input/value-input.compone
   imports: [RadioSelectComponent, ReactiveFormsModule, ValueInputComponent],
   templateUrl: './birthday-input.component.html',
   styleUrl: './birthday-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BirthdayInputComponent implements AfterViewInit {
   @Input({ required: true }) formGroup!: FormGroup;

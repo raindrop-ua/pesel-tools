@@ -1,4 +1,4 @@
-import { Component, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
 import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 @Component({
@@ -6,6 +6,7 @@ import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
   imports: [SvgIconComponent],
   templateUrl: './paste-button.component.html',
   styleUrl: './paste-button.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasteButtonComponent {
   public pasted = signal(false);

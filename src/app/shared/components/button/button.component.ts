@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 type ButtonType = 'primary' | 'secondary' | 'danger';
 
@@ -9,10 +9,10 @@ type ButtonType = 'primary' | 'secondary' | 'danger';
   // Disabling eslint rule as this specific selector pattern is intentional.
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[app-button], a[app-button]',
-  standalone: true,
   imports: [],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   @Input('app-button') appButton: ButtonType = 'primary';
