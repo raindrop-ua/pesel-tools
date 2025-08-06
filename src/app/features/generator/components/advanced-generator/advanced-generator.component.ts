@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CardComponent } from '@components/card/card.component';
 
 @Component({
@@ -6,5 +6,6 @@ import { CardComponent } from '@components/card/card.component';
   imports: [CardComponent],
   templateUrl: './advanced-generator.component.html',
   styleUrl: './advanced-generator.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdvancedGeneratorComponent {}

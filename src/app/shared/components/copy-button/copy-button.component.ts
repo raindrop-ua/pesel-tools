@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 @Component({
@@ -6,6 +6,7 @@ import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
   imports: [SvgIconComponent],
   templateUrl: './copy-button.component.html',
   styleUrl: './copy-button.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyButtonComponent {
   public contentToCopy = input.required<string>();

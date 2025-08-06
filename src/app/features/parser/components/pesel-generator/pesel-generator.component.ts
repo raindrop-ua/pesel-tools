@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PeselInfo, PeselParserService } from '@services/pesel-parser.service';
@@ -8,9 +8,10 @@ import { peselValidator } from '@shared/validators/pesel.validator';
 
 @Component({
   selector: 'app-pesel-generator',
-  templateUrl: './pesel-generator.component.html',
   imports: [PeselInputComponent, ReactiveFormsModule, ResultOutputComponent],
+  templateUrl: './pesel-generator.component.html',
   styleUrl: './pesel-generator.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselGeneratorComponent implements OnInit {
   private route = inject(ActivatedRoute);
