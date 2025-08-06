@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { NAVIGATION_TOKEN } from '@config/navigation.config';
+import { NAVIGATION_TOKEN } from '@core/config/navigation.config';
 import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
 @Component({
