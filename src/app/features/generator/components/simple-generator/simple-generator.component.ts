@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -30,7 +30,7 @@ export class SimpleGeneratorComponent {
   private fb = inject(FormBuilder);
   private generator = inject(PeselGeneratorService);
   private peselStoreService = inject(PeselStoreService);
-  public peselList = this.peselStoreService.pesels;
+  public peselList = this.peselStoreService.data;
 
   form: FormGroup = this.fb.group({
     birthday: this.fb.group(
