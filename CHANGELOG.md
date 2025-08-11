@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
-## [0.12.4](https://github.com/raindrop-ua/pesel-tools/compare/v0.12.3...v0.12.4) (2025-08-11)
+### [0.12.4](https://github.com/raindrop-ua/pesel-tools/compare/v0.12.3...v0.12.4) (2025-08-11)
 
 
 ### Features
