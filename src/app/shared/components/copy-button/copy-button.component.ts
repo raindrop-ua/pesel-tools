@@ -16,15 +16,15 @@ import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-butto
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyButtonComponent {
-  contentToCopy = input.required<string>();
-  copied = signal(false);
-  disabled = signal(false);
+  public readonly contentToCopy = input.required<string>();
+  public readonly copied = signal(false);
+  public readonly disabled = signal(false);
 
   private readonly clipboard = inject(ClipboardService);
   private readonly destroyRef = inject(DestroyRef);
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  run = async () => {
+  public run = async () => {
     const text = this.contentToCopy();
     if (!text) return false;
     const ok = await this.clipboard.copy(text);
@@ -32,7 +32,7 @@ export class CopyButtonComponent {
     return ok;
   };
 
-  onSuccess() {
+  public onSuccess() {
     if (this.timeoutId) clearTimeout(this.timeoutId);
     this.disabled.set(true);
     this.timeoutId = setTimeout(() => {

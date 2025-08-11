@@ -16,15 +16,15 @@ import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-butto
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyJsonButtonComponent {
-  contentToCopy = input.required<string>();
-  copied = signal(false);
-  disabled = signal(false);
+  public readonly contentToCopy = input.required<string>();
+  public readonly copied = signal(false);
+  public readonly disabled = signal(false);
 
   private readonly clipboard = inject(ClipboardService);
   private readonly destroyRef = inject(DestroyRef);
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  run = async () => {
+  public run = async () => {
     const raw = this.contentToCopy();
     if (!raw) return false;
     const payload = raw.split('\n');
@@ -34,7 +34,7 @@ export class CopyJsonButtonComponent {
     return ok;
   };
 
-  onSuccess() {
+  public onSuccess() {
     if (this.timeoutId) clearTimeout(this.timeoutId);
     this.disabled.set(true);
     this.timeoutId = setTimeout(() => {

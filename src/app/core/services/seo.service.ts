@@ -28,7 +28,11 @@ export class SeoService {
       });
   }
 
-  update(seo: { title?: string; description?: string; keywords?: string }) {
+  public update(seo: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+  }) {
     if (seo.title) this.title.setTitle(seo.title);
     if (seo.description) {
       this.meta.updateTag({ name: 'description', content: seo.description });

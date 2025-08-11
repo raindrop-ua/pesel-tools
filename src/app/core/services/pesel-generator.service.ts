@@ -34,7 +34,7 @@ export class PeselGeneratorService {
    * @returns A valid PESEL number string.
    * @throws Error if unable to generate a valid PESEL (e.g., invalid date combination provided).
    */
-  generatePesel(options?: {
+  public generatePesel(options?: {
     year?: number;
     month?: number;
     day?: number;

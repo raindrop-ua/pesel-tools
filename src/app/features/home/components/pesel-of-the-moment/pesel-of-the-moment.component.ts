@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { interval } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
@@ -23,7 +30,7 @@ export class PeselOfTheMomentComponent implements OnInit {
   readonly digits = signal<number[]>(Array(11).fill(0));
   readonly peselToCopy = signal<string>('');
 
-  ngOnInit() {
+  public ngOnInit() {
     this.initGeneration();
   }
 
@@ -50,7 +57,7 @@ export class PeselOfTheMomentComponent implements OnInit {
 
   private animateTo(raw: string) {
     const target = /^\d{11}$/.test(raw)
-      ? raw.split('').map(ch => +ch)
+      ? raw.split('').map((ch) => +ch)
       : Array(11).fill(0);
 
     target.forEach((targetDigit, index) => {
@@ -63,8 +70,8 @@ export class PeselOfTheMomentComponent implements OnInit {
       interval(50)
         .pipe(
           take(steps + 1),
-          map(i => (current + i) % 10),
-          tap(val => {
+          map((i) => (current + i) % 10),
+          tap((val) => {
             const newArr = [...this.digits()];
             newArr[index] = val;
             this.digits.set(newArr);

@@ -6,7 +6,7 @@ import {
   input,
   ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-value-input',
@@ -25,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 export class ValueInputComponent implements ControlValueAccessor {
   @ViewChild('nativeInput', { static: true })
   private nativeInput!: ElementRef<HTMLInputElement>;
-  public placeholder = input<string>('');
+  public readonly placeholder = input<string>('');
 
   public value = '';
   public disabled = false;

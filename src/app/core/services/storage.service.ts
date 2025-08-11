@@ -15,7 +15,7 @@ export class StorageService implements Storage {
     return typeof window !== 'undefined' && isPlatformBrowser(this.platformId);
   }
 
-  getItem<T>(key: string): T | null {
+  public getItem<T>(key: string): T | null {
     if (!this.isBrowser()) return null;
     try {
       const raw = localStorage.getItem(key);
@@ -26,7 +26,7 @@ export class StorageService implements Storage {
     }
   }
 
-  setItem<T>(key: string, data: T): void {
+  public setItem<T>(key: string, data: T): void {
     if (!this.isBrowser()) return;
     try {
       localStorage.setItem(key, JSON.stringify(data));
@@ -35,7 +35,7 @@ export class StorageService implements Storage {
     }
   }
 
-  removeItem(key: string): void {
+  public removeItem(key: string): void {
     if (!this.isBrowser()) return;
     try {
       localStorage.removeItem(key);
@@ -44,7 +44,7 @@ export class StorageService implements Storage {
     }
   }
 
-  clear(): void {
+  public clear(): void {
     if (!this.isBrowser()) return;
     try {
       localStorage.clear();

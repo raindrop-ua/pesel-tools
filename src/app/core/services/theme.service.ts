@@ -32,7 +32,7 @@ export class ThemeService {
    * Initializes the theme from localStorage or defaults to "system".
    * Should be called from the root component on app startup.
    */
-  init(): void {
+  public init(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const savedTheme = this.getSavedTheme();
@@ -44,7 +44,7 @@ export class ThemeService {
    * @param theme The theme to apply.
    * @param updateCookie Whether to update the theme cookie. Defaults to true.
    */
-  setTheme(theme: Theme, updateCookie = true): void {
+  public setTheme(theme: Theme, updateCookie = true): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     this.currentThemeSubject.next(theme);

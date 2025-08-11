@@ -1,4 +1,10 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
 import { RadioSelectComponent } from '@components/radio-select/radio-select.component';
@@ -17,7 +23,7 @@ export class BirthdayInputComponent implements AfterViewInit {
   @ViewChild('monthComp') monthComp!: ValueInputComponent;
   @ViewChild('yearComp') yearComp!: ValueInputComponent;
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.formGroup
       .get('day')!
       .valueChanges.pipe(filter((v: string) => v.length === 2))

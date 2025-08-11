@@ -13,10 +13,10 @@ import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-butto
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasteButtonComponent {
-  pasted = signal(false);
-  pastedValue = output<string>();
+  public readonly pasted = signal(false);
+  public readonly pastedValue = output<string>();
 
-  run = async () => {
+  public run = async () => {
     try {
       const text = await navigator.clipboard.readText();
       const trimmed = text.trim();
@@ -33,5 +33,5 @@ export class PasteButtonComponent {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onSuccess() {}
+  public onSuccess() {}
 }

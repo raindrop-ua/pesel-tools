@@ -48,7 +48,7 @@ export class PeselParserService {
    * @throws InvalidPeselChecksumError if the PESEL checksum is invalid.
    * @throws InvalidPeselDateError if the derived birthdate is invalid.
    */
-  parsePesel(pesel: string): PeselInfo {
+  public parsePesel(pesel: string): PeselInfo {
     if (!isValidFormat(pesel)) {
       throw new InvalidPeselFormatError();
     }
@@ -105,7 +105,7 @@ export class PeselParserService {
    * @param pesel The PESEL number string.
    * @returns True if the PESEL is valid, false otherwise.
    */
-  validatePesel(pesel: string): boolean {
+  public validatePesel(pesel: string): boolean {
     if (!isValidFormat(pesel)) {
       return false;
     }

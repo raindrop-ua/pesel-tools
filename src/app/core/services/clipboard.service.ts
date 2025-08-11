@@ -7,7 +7,7 @@ export class ClipboardService {
   private readonly doc = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
 
-  async copy(text: string): Promise<boolean> {
+  public async copy(text: string): Promise<boolean> {
     if (!text) return false;
     if (!isPlatformBrowser(this.platformId)) return false;
 
@@ -40,7 +40,7 @@ export class ClipboardService {
     }
   }
 
-  copy$(text: string): Observable<boolean> {
+  public copy$(text: string): Observable<boolean> {
     return from(this.copy(text));
   }
 }
