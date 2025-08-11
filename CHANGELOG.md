@@ -1,6 +1,20 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [0.12.4](https://github.com/raindrop-ua/pesel-tools/compare/v0.12.3...v0.12.4) (2025-08-11)
+
+
+### Features
+
+* **core:** add `DownloadService` for handling file downloads ([aa23be3](https://github.com/raindrop-ua/pesel-tools/commit/aa23be3fc5ddf0b673c22d37af6bf9be747e1f91))
+* **core:** add ClipboardService and enhance CopyButton functionality ([62fac49](https://github.com/raindrop-ua/pesel-tools/commit/62fac497a01e8d06115efd2d613d95bd6c8ad3ad))
+* **ui:** add SaveButton component for saving JSON files ([aca3697](https://github.com/raindrop-ua/pesel-tools/commit/aca36971cdd9bdc5a308bb598d3d62de77421025))
+
+
+### Bug Fixes
+
+* **styles:** mobile version gaps in birthdate input ([cebdf74](https://github.com/raindrop-ua/pesel-tools/commit/cebdf74d82fc4a63e53652b513efc98190b2ec2a))
 
 ### 0.12.3 (2025-08-06)
 
