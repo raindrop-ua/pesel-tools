@@ -4,6 +4,8 @@
     <p>Age: {{ data.age }}</p>
     <p>Gender: {{ data.sex | titlecase }}</p>
     <p>Serial number: {{ data.serial }}</p>
-    <app-copy-button [contentToCopy]="dataString()" />
+    <div class="toolbar">
+      <app-copy-button [contentToCopy]="dataString()" />
+    </div>
   </div>
 }
