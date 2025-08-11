@@ -1,17 +1,31 @@
-import type { StorybookConfig } from '@storybook/angular';
+import type { StorybookConfig } from '@analogjs/storybook-angular';
+import { mergeConfig, type UserConfig } from 'vite';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 const config: StorybookConfig = {
-  "stories": [
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  stories: ['../src/**/*.stories.@(ts)'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@storybook/addon-a11y',
   ],
-  "addons": [
-    "@storybook/addon-docs",
-    "@storybook/addon-onboarding"
-  ],
-  "framework": {
-    "name": "@storybook/angular",
-    "options": {}
-  }
+  framework: {
+    name: '@analogjs/storybook-angular',
+    options: {},
+  },
+  staticDirs: [{ from: '../src/assets', to: '/assets' }],
 };
 export default config;
+
+export async function viteFinal(cfg: UserConfig) {
+  return mergeConfig(cfg, {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          loadPaths: ['src'],
+        },
+      },
+    },
+    plugins: [viteTsconfigPaths()],
+  });
+}
