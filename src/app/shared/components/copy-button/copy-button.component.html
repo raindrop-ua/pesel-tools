@@ -1,6 +1,8 @@
 <button
   type="button"
   class="copy-button"
+  aria-live="polite"
+  [disabled]="disabled()"
   [title]="copied() ? 'Copied!' : 'Copy'"
   (click)="onCopy()"
 >
