@@ -6,14 +6,13 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 import { ClipboardService } from '@services/clipboard.service';
+import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-button.component';
 
 @Component({
   selector: 'app-copy-button',
-  imports: [SvgIconComponent],
+  imports: [ToolbarButtonComponent],
   templateUrl: './copy-button.component.html',
-  styleUrl: './copy-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyButtonComponent {
@@ -22,34 +21,28 @@ export class CopyButtonComponent {
   disabled = signal(false);
 
   private readonly clipboard = inject(ClipboardService);
-  private timeoutId: ReturnType<typeof setTimeout> | null = null;
   private readonly destroyRef = inject(DestroyRef);
+  private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  constructor() {
-    const onDestroy = () => {
-      if (this.timeoutId) {
-        clearTimeout(this.timeoutId);
-        this.timeoutId = null;
-      }
-    };
-    this.destroyRef.onDestroy(onDestroy);
-  }
-
-  async onCopy(): Promise<void> {
+  run = async () => {
     const text = this.contentToCopy();
-    if (!text || this.disabled()) return;
-
+    if (!text) return false;
     const ok = await this.clipboard.copy(text);
-    if (!ok) return;
+    if (ok) this.copied.set(true);
+    return ok;
+  };
 
-    this.copied.set(true);
-    this.disabled.set(true);
-
+  onSuccess() {
     if (this.timeoutId) clearTimeout(this.timeoutId);
+    this.disabled.set(true);
     this.timeoutId = setTimeout(() => {
       this.copied.set(false);
       this.disabled.set(false);
       this.timeoutId = null;
     }, 2000);
+
+    this.destroyRef.onDestroy(() => {
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+    });
   }
 }

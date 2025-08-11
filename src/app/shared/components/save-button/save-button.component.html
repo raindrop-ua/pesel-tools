@@ -1,13 +1,11 @@
-<button
-  type="button"
-  class="save-button"
+<app-toolbar-button
+  [icon]="'json-file'"
+  [activeIcon]="'check'"
   [title]="saved() ? 'Saved!' : 'Save JSON File'"
-  (click)="onSave()"
->
-  <span class="sr-only">{{ saved() ? 'Saved!' : 'Save JSON File' }}</span>
-  @if (!saved()) {
-    <svg icon="json-file" width="24" height="24" stroke="currentColor" stroke-width="2"></svg>
-  } @else {
-    <svg icon="check" width="24" height="24" stroke="currentColor" stroke-width="2"></svg>
-  }
-</button>
+  [activeTitle]="'Saved!'"
+  [srText]="'Save JSON File'"
+  [srActiveText]="'Saved!'"
+  [externalDisabled]="false"
+  [run]="run"
+  (success)="onSuccess()"
+/>

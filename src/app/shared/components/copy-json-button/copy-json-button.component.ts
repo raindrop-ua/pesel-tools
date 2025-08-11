@@ -6,14 +6,13 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 import { ClipboardService } from '@services/clipboard.service';
+import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-button.component';
 
 @Component({
   selector: 'app-copy-json-button',
-  imports: [SvgIconComponent],
+  imports: [ToolbarButtonComponent],
   templateUrl: './copy-json-button.component.html',
-  styleUrl: './copy-json-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyJsonButtonComponent {
@@ -22,37 +21,30 @@ export class CopyJsonButtonComponent {
   disabled = signal(false);
 
   private readonly clipboard = inject(ClipboardService);
-  private timeoutId: ReturnType<typeof setTimeout> | null = null;
   private readonly destroyRef = inject(DestroyRef);
+  private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  constructor() {
-    const onDestroy = () => {
-      if (this.timeoutId) {
-        clearTimeout(this.timeoutId);
-        this.timeoutId = null;
-      }
-    };
-    this.destroyRef.onDestroy(onDestroy);
-  }
-
-  async onCopy(): Promise<void> {
-    const text = this.contentToCopy();
-    if (!text || this.disabled()) return;
-
-    const payload = this.contentToCopy().split('\n');
+  run = async () => {
+    const raw = this.contentToCopy();
+    if (!raw) return false;
+    const payload = raw.split('\n');
     const json = JSON.stringify(payload, null, 2);
     const ok = await this.clipboard.copy(json);
+    if (ok) this.copied.set(true);
+    return ok;
+  };
 
-    if (!ok) return;
-
-    this.copied.set(true);
-    this.disabled.set(true);
-
+  onSuccess() {
     if (this.timeoutId) clearTimeout(this.timeoutId);
+    this.disabled.set(true);
     this.timeoutId = setTimeout(() => {
       this.copied.set(false);
       this.disabled.set(false);
       this.timeoutId = null;
     }, 2000);
+
+    this.destroyRef.onDestroy(() => {
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+    });
   }
 }
