@@ -12,11 +12,12 @@ import { map, take, tap } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PLATFORM_ID } from '@angular/core';
 import { PeselGeneratorService } from '@services/pesel-generator.service';
-import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
+import { CopyButtonComponent } from '@components/toolbar/copy-button/copy-button.component';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-pesel-of-the-moment',
-  imports: [CopyButtonComponent],
+  imports: [CopyButtonComponent, ToolbarComponent],
   templateUrl: './pesel-of-the-moment.component.html',
   styleUrl: './pesel-of-the-moment.component.scss',
   standalone: true,

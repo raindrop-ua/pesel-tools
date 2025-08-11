@@ -1,11 +1,11 @@
 @if (data(); as data) {
   <div class="result">
-    <p>Birth Date: {{ data.birthDate | date: 'dd.MM.y' }}</p>
+    <p>Birth Date: {{ data.birthDate | date: "dd.MM.y" }}</p>
     <p>Age: {{ data.age }}</p>
     <p>Gender: {{ data.sex | titlecase }}</p>
     <p>Serial number: {{ data.serial }}</p>
-    <div class="toolbar">
+    <app-toolbar>
       <app-copy-button [contentToCopy]="dataString()" />
-    </div>
+    </app-toolbar>
   </div>
 }

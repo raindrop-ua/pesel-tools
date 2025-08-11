@@ -1,10 +1,10 @@
 <app-toolbar-button
   [icon]="'paste'"
   [activeIcon]="'check'"
-  [title]="pasted() ? 'Pasted' : 'Paste'"
+  [title]="'Paste'"
   [activeTitle]="'Pasted'"
   [srText]="'Paste'"
   [srActiveText]="'Pasted'"
-  [run]="run"
-  (success)="onSuccess()"
+  [action]="this"
+  (result)="emitResult($event)"
 />

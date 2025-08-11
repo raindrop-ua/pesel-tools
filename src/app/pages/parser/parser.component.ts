@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SectionComponent } from '@core/layout/section/section.component';
 import { CardComponent } from '@components/card/card.component';
 import { DisclaimerComponent } from '@components/disclaimer/disclaimer.component';
-import { PeselGeneratorComponent } from '@features/parser/components/pesel-generator/pesel-generator.component';
+import { PeselParserComponent } from '@features/parser/components/pesel-parser/pesel-parser.component';
 
 @Component({
   selector: 'app-parser',
@@ -10,7 +10,7 @@ import { PeselGeneratorComponent } from '@features/parser/components/pesel-gener
     CardComponent,
     SectionComponent,
     DisclaimerComponent,
-    PeselGeneratorComponent,
+    PeselParserComponent,
   ],
   templateUrl: './parser.component.html',
   styleUrl: './parser.component.scss',
