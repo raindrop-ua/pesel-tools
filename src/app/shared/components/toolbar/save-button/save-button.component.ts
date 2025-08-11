@@ -3,7 +3,6 @@ import {
   Component,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { DownloadService } from '@services/download.service';
 import { ToolbarButtonComponent } from '@components/toolbar/toolbar-button/toolbar-button.component';
@@ -20,7 +19,6 @@ import {
 })
 export class SaveButtonComponent implements ToolbarAction<void> {
   public readonly contentToSave = input.required<string>();
-  public readonly saved = signal(false);
 
   private readonly download = inject(DownloadService);
 
@@ -32,7 +30,6 @@ export class SaveButtonComponent implements ToolbarAction<void> {
     const date = new Date().toISOString().slice(0, 10);
 
     this.download.downloadJson(payload, `pesels-${date}.json`, 2);
-    this.saved.set(true);
 
     return { ok: true };
   }

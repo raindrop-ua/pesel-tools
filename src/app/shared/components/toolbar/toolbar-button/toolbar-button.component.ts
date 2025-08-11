@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
   output,
   signal,
@@ -21,6 +22,7 @@ import {
 export class ToolbarButtonComponent {
   public readonly icon = input.required<string>();
   public readonly activeIcon = input<string>('check');
+
   public readonly title = input.required<string>();
   public readonly activeTitle = input<string>('Done!');
   public readonly srText = input<string>('Action');
@@ -30,11 +32,15 @@ export class ToolbarButtonComponent {
   public readonly disableWhileRunning = input<boolean>(true);
   public readonly disableWhileSuccess = input<boolean>(true);
   public readonly externalDisabled = input<boolean>(false);
+
   public readonly action = input.required<ToolbarAction<unknown>>();
 
   public readonly active = signal(false);
-  public readonly running = signal(false);
   public readonly isDisabled = signal(false);
+  private readonly running = signal(false);
+  private readonly computedDisabled = computed(() => {
+    return this.externalDisabled() || this.isDisabled() || this.running();
+  });
 
   public readonly result = output<ActionResult<unknown>>();
   public readonly success = output<void>();
@@ -43,12 +49,12 @@ export class ToolbarButtonComponent {
   private successTimer: ReturnType<typeof setTimeout> | null = null;
 
   public async handleClick() {
-    if (this.computeDisabled()) return;
+    if (this.computedDisabled()) return;
 
     this.clicked.emit();
 
     try {
-      if (this.disableWhileRunning()) this.setDisabled(true);
+      if (this.disableWhileRunning()) this.isDisabled.set(true);
       this.running.set(true);
 
       const res = await this.action().run();
@@ -59,31 +65,23 @@ export class ToolbarButtonComponent {
         this.success.emit();
 
         this.running.set(false);
-        if (!this.disableWhileSuccess()) this.setDisabled(false);
+        if (!this.disableWhileSuccess()) this.isDisabled.set(false);
 
         if (this.successTimer) clearTimeout(this.successTimer);
         this.successTimer = setTimeout(() => {
           this.active.set(false);
-          if (this.disableWhileSuccess()) this.setDisabled(false);
+          if (this.disableWhileSuccess()) this.isDisabled.set(false);
           this.successTimer = null;
         }, this.successDuration());
       } else {
         this.running.set(false);
-        this.setDisabled(false);
+        this.isDisabled.set(false);
       }
     } catch (e) {
       const fail: ActionResult = { ok: false, error: e };
       this.result.emit(fail);
       this.running.set(false);
-      this.setDisabled(false);
+      this.isDisabled.set(false);
     }
-  }
-
-  private computeDisabled(): boolean {
-    return this.externalDisabled() || this.isDisabled() || this.running();
-  }
-
-  private setDisabled(v: boolean) {
-    this.isDisabled.set(v);
   }
 }
