@@ -1,5 +1,13 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
+import { ClipboardService } from '@services/clipboard.service';
 
 @Component({
   selector: 'app-copy-button',
@@ -9,15 +17,39 @@ import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyButtonComponent {
-  public contentToCopy = input.required<string>();
-  public copied = signal(false);
+  contentToCopy = input.required<string>();
+  copied = signal(false);
+  disabled = signal(false);
 
-  public onCopy(): void {
-    if (!this.contentToCopy()) return;
+  private readonly clipboard = inject(ClipboardService);
+  private timeoutId: ReturnType<typeof setTimeout> | null = null;
+  private readonly destroyRef = inject(DestroyRef);
 
-    navigator.clipboard.writeText(this.contentToCopy()).then(() => {
-      this.copied.set(true);
-      setTimeout(() => this.copied.set(false), 3000);
-    });
+  constructor() {
+    const onDestroy = () => {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = null;
+      }
+    };
+    this.destroyRef.onDestroy(onDestroy);
+  }
+
+  async onCopy(): Promise<void> {
+    const text = this.contentToCopy();
+    if (!text || this.disabled()) return;
+
+    const ok = await this.clipboard.copy(text);
+    if (!ok) return;
+
+    this.copied.set(true);
+    this.disabled.set(true);
+
+    if (this.timeoutId) clearTimeout(this.timeoutId);
+    this.timeoutId = setTimeout(() => {
+      this.copied.set(false);
+      this.disabled.set(false);
+      this.timeoutId = null;
+    }, 2000);
   }
 }

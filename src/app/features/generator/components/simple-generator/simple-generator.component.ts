@@ -10,7 +10,7 @@ import { PeselStoreService } from '@services/pesel-store.service';
 import { BirthdayInputComponent } from '../birthday-input/birthday-input.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { CardComponent } from '@components/card/card.component';
-import { PeselOutputComponent } from '@components/pesel-output/pesel-output.component';
+import { PeselOutputComponent } from '@features/generator/components/pesel-output/pesel-output.component';
 import { validDateValidator } from '@shared/validators/valid-date.validator';
 
 @Component({

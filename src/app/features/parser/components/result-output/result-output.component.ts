@@ -1,7 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { PeselInfo } from '@services/pesel-parser.service';
-import { CopyButtonComponent } from '../copy-button/copy-button.component';
+import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
 
 @Component({
   selector: 'app-result-output',
