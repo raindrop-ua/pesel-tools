@@ -1,7 +1,7 @@
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class DownloadService {
@@ -50,21 +50,21 @@ export class DownloadService {
     this.downloadBlob(blob, fileName);
   }
 
-  // downloadFrom$<T>(
-  //   source$: Observable<T>,
-  //   fileName: string,
-  //   mapToText?: (v: T) => string,
-  // ): Observable<void> {
-  //   return source$.pipe(
-  //     take(1),
-  //     tap((v) => {
-  //       if (mapToText) {
-  //         this.downloadText(mapToText(v), fileName);
-  //       } else {
-  //         this.downloadJson(v as T, fileName);
-  //       }
-  //     }),
-  //     tap(() => void 0),
-  //   );
-  // }
+  downloadFrom$<T>(
+    source$: Observable<T>,
+    fileName: string,
+    mapToText?: (v: T) => string,
+  ): Observable<void> {
+    return source$.pipe(
+      take(1),
+      tap((v) => {
+        if (mapToText) {
+          this.downloadText(mapToText(v), fileName);
+        } else {
+          this.downloadJson(v, fileName);
+        }
+      }),
+      map(() => undefined),
+    );
+  }
 }
