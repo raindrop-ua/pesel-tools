@@ -16,9 +16,9 @@ import {
 
 import { routes } from './app.routes';
 import { provideEnvironment } from './environment.providers';
-import { CustomPreloadingStrategy } from '@core/strategies/custom-preloading.strategy';
 import { provideServiceWorker } from '@angular/service-worker';
 import { NAVIGATION, NAVIGATION_TOKEN } from '@core/config/navigation.config';
+import { AfterFirstPaintPreloadingStrategy } from '@core/strategies/after-first-paint-preloading.strategy';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,
-      withPreloading(CustomPreloadingStrategy),
+      withPreloading(AfterFirstPaintPreloadingStrategy),
       withComponentInputBinding(),
       withRouterConfig({
         paramsInheritanceStrategy: 'always',
