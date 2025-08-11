@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,7 +10,7 @@ import { PeselStoreService } from '@services/pesel-store.service';
 import { BirthdayInputComponent } from '../birthday-input/birthday-input.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { CardComponent } from '@components/card/card.component';
-import { PeselOutputComponent } from '@components/pesel-output/pesel-output.component';
+import { PeselOutputComponent } from '@features/generator/components/pesel-output/pesel-output.component';
 import { validDateValidator } from '@shared/validators/valid-date.validator';
 
 @Component({
@@ -30,7 +30,7 @@ export class SimpleGeneratorComponent {
   private fb = inject(FormBuilder);
   private generator = inject(PeselGeneratorService);
   private peselStoreService = inject(PeselStoreService);
-  public peselList = this.peselStoreService.pesels;
+  public peselList = this.peselStoreService.data;
 
   form: FormGroup = this.fb.group({
     birthday: this.fb.group(

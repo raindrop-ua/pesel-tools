@@ -1,9 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PeselInfo, PeselParserService } from '@services/pesel-parser.service';
 import { PeselInputComponent } from '@components/pesel-input/pesel-input.component';
-import { ResultOutputComponent } from '@components/result-output/result-output.component';
+import { ResultOutputComponent } from '@features/parser/components/result-output/result-output.component';
 import { peselValidator } from '@shared/validators/pesel.validator';
 
 @Component({
