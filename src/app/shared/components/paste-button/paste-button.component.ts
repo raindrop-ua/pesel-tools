@@ -5,6 +5,10 @@ import {
   signal,
 } from '@angular/core';
 import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-button.component';
+import {
+  ActionResult,
+  ToolbarAction,
+} from '@components/toolbar-button/toolbar-action';
 
 @Component({
   selector: 'app-paste-button',
@@ -12,26 +16,21 @@ import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-butto
   templateUrl: './paste-button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasteButtonComponent {
+export class PasteButtonComponent implements ToolbarAction<string> {
+  public readonly result = output<ActionResult<string>>();
   public readonly pasted = signal(false);
-  public readonly pastedValue = output<string>();
 
-  public run = async () => {
+  async run(): Promise<ActionResult<string>> {
     try {
-      const text = await navigator.clipboard.readText();
-      const trimmed = text.trim();
-      if (/^\d{11}$/.test(trimmed)) {
-        this.pastedValue.emit(trimmed);
+      const text = (await navigator.clipboard.readText()).trim();
+      if (/^\d{11}$/.test(text)) {
         this.pasted.set(true);
-        return true;
+        setTimeout(() => this.pasted.set(false), 1500);
+        return { ok: true, data: text };
       }
-      return false;
+      return { ok: false, message: 'Invalid format' };
     } catch (e) {
-      console.error('Clipboard access denied:', e);
-      return false;
+      return { ok: false, error: e };
     }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public onSuccess() {}
+  }
 }

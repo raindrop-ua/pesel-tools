@@ -8,18 +8,18 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PeselInfo, PeselParserService } from '@services/pesel-parser.service';
-import { PeselInputComponent } from '@components/pesel-input/pesel-input.component';
+import { PeselInputComponent } from '@features/parser/components/pesel-input/pesel-input.component';
 import { ResultOutputComponent } from '@features/parser/components/result-output/result-output.component';
 import { peselValidator } from '@shared/validators/pesel.validator';
 
 @Component({
-  selector: 'app-pesel-generator',
+  selector: 'app-pesel-parser',
   imports: [PeselInputComponent, ReactiveFormsModule, ResultOutputComponent],
-  templateUrl: './pesel-generator.component.html',
-  styleUrl: './pesel-generator.component.scss',
+  templateUrl: './pesel-parser.component.html',
+  styleUrl: './pesel-parser.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PeselGeneratorComponent implements OnInit {
+export class PeselParserComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
   private peselParser = inject(PeselParserService);

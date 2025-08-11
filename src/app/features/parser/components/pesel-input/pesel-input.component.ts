@@ -5,10 +5,12 @@ import {
   input,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PasteButtonComponent } from '../paste-button/paste-button.component';
+import { PasteButtonComponent } from '@components/paste-button/paste-button.component';
+import { ActionResult } from '@components/toolbar-button/toolbar-action';
 
 @Component({
   selector: 'app-pesel-input',
+  standalone: true,
   imports: [PasteButtonComponent],
   templateUrl: './pesel-input.component.html',
   styleUrls: ['./pesel-input.component.scss'],
@@ -52,9 +54,11 @@ export class PeselInputComponent implements ControlValueAccessor {
     this.onChange(newValue);
   }
 
-  public onPaste(value: string): void {
-    this.value = value;
-    this.onChange(value);
+  public onPasteResult(res: ActionResult<string>): void {
+    if (res.ok && res.data) {
+      this.value = res.data;
+      this.onChange(res.data);
+    }
   }
 
   public onBlur(): void {
