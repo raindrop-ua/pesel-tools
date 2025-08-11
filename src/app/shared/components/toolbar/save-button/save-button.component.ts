@@ -6,11 +6,11 @@ import {
   signal,
 } from '@angular/core';
 import { DownloadService } from '@services/download.service';
-import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-button.component';
+import { ToolbarButtonComponent } from '@components/toolbar/toolbar-button/toolbar-button.component';
 import {
   ActionResult,
   ToolbarAction,
-} from '@components/toolbar-button/toolbar-action';
+} from '@components/toolbar/toolbar-button/toolbar-action';
 
 @Component({
   selector: 'app-save-button',

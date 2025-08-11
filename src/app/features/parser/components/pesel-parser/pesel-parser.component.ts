@@ -20,11 +20,11 @@ import { peselValidator } from '@shared/validators/pesel.validator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselParserComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private fb = inject(FormBuilder);
-  private peselParser = inject(PeselParserService);
-  public parsedData = signal<Omit<PeselInfo, 'message'> | null>(null);
-  public form = this.fb.group({
+  private readonly route = inject(ActivatedRoute);
+  private readonly fb = inject(FormBuilder);
+  private readonly peselParser = inject(PeselParserService);
+  public readonly parsedData = signal<Omit<PeselInfo, 'message'> | null>(null);
+  public readonly form = this.fb.group({
     pesel: ['', [Validators.required, peselValidator(this.peselParser)]],
   });
 

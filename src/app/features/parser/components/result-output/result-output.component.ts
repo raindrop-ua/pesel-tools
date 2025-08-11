@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { PeselInfo } from '@services/pesel-parser.service';
-import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
+import { CopyButtonComponent } from '@components/toolbar/copy-button/copy-button.component';
 
 @Component({
   selector: 'app-result-output',
@@ -16,9 +16,9 @@ import { CopyButtonComponent } from '@components/copy-button/copy-button.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultOutputComponent {
-  public data = input<Omit<PeselInfo, 'message'> | null>(null);
+  public readonly data = input<Omit<PeselInfo, 'message'> | null>(null);
 
-  public dataString = computed(() => {
+  public readonly dataString = computed(() => {
     const info = this.data();
     return info
       ? `PESEL info:\nSex: ${info.sex}\nDOB: ${info.birthDate}\nAge: ${info.age}\nSerial: ${info.serial}`

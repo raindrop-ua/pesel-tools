@@ -4,9 +4,9 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
-import { SaveButtonComponent } from '@components/save-button/save-button.component';
-import { CopyJsonButtonComponent } from '@components/copy-json-button/copy-json-button.component';
+import { CopyButtonComponent } from '@components/toolbar/copy-button/copy-button.component';
+import { SaveButtonComponent } from '@components/toolbar/save-button/save-button.component';
+import { CopyJsonButtonComponent } from '@components/toolbar/copy-json-button/copy-json-button.component';
 
 @Component({
   selector: 'app-pesel-output',

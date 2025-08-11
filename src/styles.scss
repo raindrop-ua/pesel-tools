@@ -1,16 +1,17 @@
 @use "app/styles/main";
 
-html, html * {
+html,
+html * {
   box-sizing: border-box;
   font-family: Lato, sans-serif;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
   margin: 0;
   background-color: var(--main-background);
   color: var(--main-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {

@@ -5,8 +5,8 @@ import {
   input,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PasteButtonComponent } from '@components/paste-button/paste-button.component';
-import { ActionResult } from '@components/toolbar-button/toolbar-action';
+import { PasteButtonComponent } from '@components/toolbar/paste-button/paste-button.component';
+import { ActionResult } from '@components/toolbar/toolbar-button/toolbar-action';
 
 @Component({
   selector: 'app-pesel-input',

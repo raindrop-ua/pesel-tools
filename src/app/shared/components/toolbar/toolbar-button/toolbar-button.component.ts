@@ -9,7 +9,7 @@ import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 import {
   ActionResult,
   ToolbarAction,
-} from '@components/toolbar-button/toolbar-action';
+} from '@components/toolbar/toolbar-button/toolbar-action';
 
 @Component({
   selector: 'app-toolbar-button',
