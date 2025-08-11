@@ -33,4 +33,8 @@ export class PasteButtonComponent implements ToolbarAction<string> {
       return { ok: false, error: e };
     }
   }
+
+  emitResult(res: ActionResult<unknown>) {
+    this.result.emit(res as ActionResult<string>);
+  }
 }

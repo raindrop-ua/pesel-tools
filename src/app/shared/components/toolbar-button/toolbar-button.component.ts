@@ -30,13 +30,13 @@ export class ToolbarButtonComponent {
   public readonly disableWhileRunning = input<boolean>(true);
   public readonly disableWhileSuccess = input<boolean>(true);
   public readonly externalDisabled = input<boolean>(false);
-  public readonly action = input.required<ToolbarAction<any>>();
+  public readonly action = input.required<ToolbarAction<unknown>>();
 
   public readonly active = signal(false);
   public readonly running = signal(false);
   public readonly isDisabled = signal(false);
 
-  public readonly result = output<ActionResult<any>>();
+  public readonly result = output<ActionResult<unknown>>();
   public readonly success = output<void>();
   public readonly clicked = output<void>();
 
