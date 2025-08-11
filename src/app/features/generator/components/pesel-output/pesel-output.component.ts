@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 import { CopyButtonComponent } from '@components/copy-button/copy-button.component';
 import { SaveButtonComponent } from '@components/save-button/save-button.component';
+import { CopyJsonButtonComponent } from '@components/copy-json-button/copy-json-button.component';
 
 @Component({
   selector: 'app-pesel-output',
-  imports: [CopyButtonComponent, SaveButtonComponent],
+  imports: [CopyButtonComponent, SaveButtonComponent, CopyJsonButtonComponent],
   templateUrl: './pesel-output.component.html',
   styleUrl: './pesel-output.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
