@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.app.json",
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["vitest", "@testing-library/jest-dom"],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
