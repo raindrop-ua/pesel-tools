@@ -27,7 +27,7 @@ export class SaveButtonComponent implements ToolbarAction<void> {
     if (!raw) return { ok: false, message: 'Empty content' };
 
     const payload = raw.split('\n');
-    const date = new Date().toISOString().slice(0, 10);
+    const date = Date.now();
 
     this.download.downloadJson(payload, `pesels-${date}.json`, 2);
 
