@@ -4,13 +4,19 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 import { CopyButtonComponent } from '@components/toolbar/copy-button/copy-button.component';
 import { SaveButtonComponent } from '@components/toolbar/save-button/save-button.component';
 import { CopyJsonButtonComponent } from '@components/toolbar/copy-json-button/copy-json-button.component';
 
 @Component({
   selector: 'app-pesel-output',
-  imports: [CopyButtonComponent, SaveButtonComponent, CopyJsonButtonComponent],
+  imports: [
+    CopyButtonComponent,
+    SaveButtonComponent,
+    CopyJsonButtonComponent,
+    ToolbarComponent,
+  ],
   templateUrl: './pesel-output.component.html',
   styleUrl: './pesel-output.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,11 +1,11 @@
 <section class="pesel-wrapper">
   <h2>PESEL of the moment</h2>
   <p class="pesel">
-    @for(digits of digits(); track $index) {
+    @for (digits of digits(); track $index) {
       <span class="digit">{{ digits }}</span>
     }
   </p>
-  <div class="toolbar">
+  <app-toolbar>
     <app-copy-button [contentToCopy]="peselToCopy()"></app-copy-button>
-  </div>
+  </app-toolbar>
 </section>

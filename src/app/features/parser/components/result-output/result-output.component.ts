@@ -7,10 +7,11 @@ import {
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { PeselInfo } from '@services/pesel-parser.service';
 import { CopyButtonComponent } from '@components/toolbar/copy-button/copy-button.component';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-result-output',
-  imports: [DatePipe, TitleCasePipe, CopyButtonComponent],
+  imports: [DatePipe, TitleCasePipe, CopyButtonComponent, ToolbarComponent],
   templateUrl: './result-output.component.html',
   styleUrl: './result-output.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

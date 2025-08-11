@@ -7,11 +7,12 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PasteButtonComponent } from '@components/toolbar/paste-button/paste-button.component';
 import { ActionResult } from '@components/toolbar/toolbar-button/toolbar-action';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-pesel-input',
   standalone: true,
-  imports: [PasteButtonComponent],
+  imports: [PasteButtonComponent, ToolbarComponent],
   templateUrl: './pesel-input.component.html',
   styleUrls: ['./pesel-input.component.scss'],
   providers: [
