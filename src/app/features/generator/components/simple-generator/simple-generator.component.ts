@@ -32,7 +32,7 @@ export class SimpleGeneratorComponent {
   private peselStoreService = inject(PeselStoreService);
   public peselList = this.peselStoreService.data;
 
-  form: FormGroup = this.fb.group({
+  public form: FormGroup = this.fb.group({
     birthday: this.fb.group(
       {
         day: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
@@ -48,7 +48,7 @@ export class SimpleGeneratorComponent {
     return this.form.get('birthday') as FormGroup;
   }
 
-  onSubmit() {
+  public onSubmit() {
     if (this.birthdayGroup.invalid) {
       this.birthdayGroup.markAllAsTouched();
       return;
@@ -63,12 +63,12 @@ export class SimpleGeneratorComponent {
     this.peselStoreService.add(pesel);
   }
 
-  generateRandomPesel(): void {
+  public generateRandomPesel(): void {
     const pesel = this.generator.generatePesel();
     this.peselStoreService.add(pesel);
   }
 
-  clearList(): void {
+  public clearList(): void {
     this.peselStoreService.clear();
   }
 }

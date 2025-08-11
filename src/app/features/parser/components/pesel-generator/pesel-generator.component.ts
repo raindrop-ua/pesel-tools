@@ -32,7 +32,7 @@ export class PeselGeneratorComponent implements OnInit {
     return this.form.get('pesel');
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       const pesel = params.get('pesel');
 

@@ -24,7 +24,7 @@ export class MastheadComponent implements AfterViewInit, OnDestroy {
   @ViewChild('masthead') mastheadRef!: ElementRef;
   @ViewChild('parallaxImg') imgRef!: ElementRef;
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId) || this.isTouchDevice()) return;
 
     const container = this.mastheadRef.nativeElement;
@@ -44,7 +44,7 @@ export class MastheadComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.mouseMoveHandler && this.mastheadRef?.nativeElement) {
       this.mastheadRef.nativeElement.removeEventListener(
         'mousemove',

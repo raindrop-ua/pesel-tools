@@ -1,17 +1,18 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, DestroyRef,
+  Component,
+  DestroyRef,
   HostListener,
   inject,
   OnInit,
-  signal
+  signal,
 } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { NAVIGATION_TOKEN } from '@core/config/navigation.config';
 import { ThemeSwitcherComponent } from '@core/components/theme-switcher/theme-switcher.component';
 import { AppRouteEnum } from '@core/enums/app-route.enum';
-import { filter} from 'rxjs';
+import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -28,11 +29,11 @@ export class HeaderComponent implements OnInit {
   public navigation = inject(NAVIGATION_TOKEN);
   public menuOpen = signal(false);
 
-  ngOnInit() {
+  public ngOnInit() {
     this.router.events
       .pipe(
         filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => {
         this.cdr.markForCheck();

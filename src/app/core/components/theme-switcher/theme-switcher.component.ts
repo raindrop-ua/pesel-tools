@@ -1,4 +1,9 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { Theme, ThemeService } from '@services/theme.service';
 import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 
@@ -24,9 +29,9 @@ export class ThemeSwitcherComponent {
     this.themeService.init();
   }
 
-  setTheme(theme: Theme) {
+  public setTheme(theme: Theme) {
     this.themeService.setTheme(theme);
   }
 
-  readonly themes = themes;
+  public readonly themes = themes;
 }

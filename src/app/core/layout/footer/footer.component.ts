@@ -6,7 +6,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { NavigationEnd, Router, RouterLink} from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { NAVIGATION_TOKEN } from '@core/config/navigation.config';
 import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
 import { filter } from 'rxjs';
@@ -25,11 +25,11 @@ export class FooterComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   public navigation = inject(NAVIGATION_TOKEN);
 
-  ngOnInit() {
+  public ngOnInit() {
     this.router.events
       .pipe(
         filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => {
         this.cdr.markForCheck();

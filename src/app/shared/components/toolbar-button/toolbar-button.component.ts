@@ -15,31 +15,30 @@ import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarButtonComponent {
-  icon = input.required<string>();
-  activeIcon = input<string>('check');
-  title = input.required<string>();
-  activeTitle = input<string>('Done!');
-  srText = input<string>('Action');
-  srActiveText = input<string>('Done!');
+  public readonly icon = input.required<string>();
+  public readonly activeIcon = input<string>('check');
+  public readonly title = input.required<string>();
+  public readonly activeTitle = input<string>('Done!');
+  public readonly srText = input<string>('Action');
+  public readonly srActiveText = input<string>('Done!');
 
-  successDuration = input<number>(2000);
-  disableWhileRunning = input<boolean>(true);
-  disableWhileSuccess = input<boolean>(true);
-  absolute = input<boolean>(false);
+  public readonly successDuration = input<number>(2000);
+  public readonly disableWhileRunning = input<boolean>(true);
+  public readonly disableWhileSuccess = input<boolean>(true);
 
-  active = signal(false);
-  running = signal(false);
-  externalDisabled = input<boolean>(false);
-  isDisabled = signal(false);
+  public readonly active = signal(false);
+  public readonly running = signal(false);
+  public readonly externalDisabled = input<boolean>(false);
+  public readonly isDisabled = signal(false);
 
-  run = input.required<() => Promise<boolean>>();
+  public readonly run = input.required<() => Promise<boolean>>();
 
-  success = output<void>();
-  clicked = output<void>();
+  public readonly success = output<void>();
+  public readonly clicked = output<void>();
 
   private successTimer: ReturnType<typeof setTimeout> | null = null;
 
-  async handleClick() {
+  public async handleClick() {
     if (this.computeDisabled()) return;
     this.clicked.emit();
 

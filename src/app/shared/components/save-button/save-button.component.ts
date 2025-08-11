@@ -16,14 +16,14 @@ import { ToolbarButtonComponent } from '@components/toolbar-button/toolbar-butto
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaveButtonComponent {
-  contentToSave = input.required<string>();
-  saved = signal(false);
+  public readonly contentToSave = input.required<string>();
+  public readonly saved = signal(false);
 
   private readonly download = inject(DownloadService);
   private readonly destroyRef = inject(DestroyRef);
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  run = async () => {
+  public run = async () => {
     const raw = this.contentToSave();
     if (!raw) return false;
     const payload = raw.split('\n');
@@ -33,7 +33,7 @@ export class SaveButtonComponent {
     return true;
   };
 
-  onSuccess() {
+  public onSuccess() {
     if (this.timeoutId) clearTimeout(this.timeoutId);
     this.timeoutId = setTimeout(() => {
       this.saved.set(false);

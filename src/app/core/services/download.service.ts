@@ -8,7 +8,7 @@ export class DownloadService {
   private readonly doc = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
 
-  downloadBlob(blob: Blob, fileName: string): void {
+  public downloadBlob(blob: Blob, fileName: string): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const url = URL.createObjectURL(blob);
@@ -26,7 +26,7 @@ export class DownloadService {
     }
   }
 
-  downloadJson<T>(
+  public downloadJson<T>(
     data: T,
     fileName = 'data.json',
     pretty: number | boolean = 0,
@@ -39,7 +39,7 @@ export class DownloadService {
     this.downloadBlob(blob, fileName);
   }
 
-  downloadText(
+  public downloadText(
     text: string,
     fileName = 'file.txt',
     mime = 'text/plain;charset=utf-8',
@@ -50,7 +50,7 @@ export class DownloadService {
     this.downloadBlob(blob, fileName);
   }
 
-  downloadFrom$<T>(
+  public downloadFrom$<T>(
     source$: Observable<T>,
     fileName: string,
     mapToText?: (v: T) => string,
