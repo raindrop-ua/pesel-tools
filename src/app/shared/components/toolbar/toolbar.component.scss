@@ -4,7 +4,7 @@
   right: 0.625rem;
   position: absolute;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 0.5rem;
 
   @media screen and (width >= 640px) {
