@@ -18,10 +18,9 @@
   align-items: center;
   justify-content: center;
   color: var(--header-text);
-  transition:
-    all 0.3s ease,
-    color 0.3s ease;
+  transition: all 0.3s ease, color 0.3s ease;
   position: relative;
+  border-radius: 50%;
 
   &.active,
   &:hover {
@@ -46,11 +45,11 @@
 
 .toggle-group button.active,
 .toggle-group button[aria-pressed="true"] {
-  background-color: var(--active-bg);
+  background-color: rgb(255 255 255 / 5%);
 }
 
 .toggle-group button:hover {
-  background-color: var(--hover-bg);
+  background-color: rgb(255 255 255 / 10%);
 }
 
 .skeleton {
