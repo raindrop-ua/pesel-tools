@@ -53,19 +53,38 @@ export class SimpleGeneratorComponent {
       this.birthdayGroup.markAllAsTouched();
       return;
     }
+
     const { day, month, year, gender } = this.birthdayGroup.value;
-    const pesel = this.generator.generatePesel({
+    const pesel = this.generateUniquePesel({
       year,
       month,
       day,
       sex: gender,
     });
-    this.peselStoreService.add(pesel);
+
+    if (pesel) this.peselStoreService.add(pesel);
+  }
+
+  private generateUniquePesel(
+    opts?: {
+      year?: number;
+      month?: number;
+      day?: number;
+      sex?: 'male' | 'female';
+    },
+    maxAttempts = 500,
+  ): string | null {
+    const existing = new Set(this.peselList());
+    for (let i = 0; i < maxAttempts; i++) {
+      const p = this.generator.generatePesel(opts);
+      if (!existing.has(p)) return p;
+    }
+    return null;
   }
 
   public generateRandomPesel(): void {
-    const pesel = this.generator.generatePesel();
-    this.peselStoreService.add(pesel);
+    const pesel = this.generateUniquePesel();
+    if (pesel) this.peselStoreService.add(pesel);
   }
 
   public clearList(): void {

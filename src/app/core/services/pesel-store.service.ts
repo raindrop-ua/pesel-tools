@@ -5,10 +5,18 @@ import { StorageService } from './storage.service';
 @Injectable({ providedIn: 'root' })
 export class PeselStoreService extends AbstractStore<string> {
   constructor() {
-    super(inject(StorageService), 'pesel-list');
+    super(inject(StorageService), 'pesel-list:v1');
   }
 
   protected equals(a: string, b: string): boolean {
     return a === b;
+  }
+
+  has(pesel: string): boolean {
+    return this.data().includes(pesel);
+  }
+
+  addIfAbsent(pesel: string): void {
+    if (!this.has(pesel)) this.add(pesel);
   }
 }
