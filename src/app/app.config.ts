@@ -1,7 +1,10 @@
 import {
   ApplicationConfig,
   provideZoneChangeDetection,
+  provideEnvironmentInitializer,
   isDevMode,
+  inject,
+  PLATFORM_ID,
 } from '@angular/core';
 import {
   provideRouter,
@@ -14,11 +17,14 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 
-import { routes } from './app.routes';
 import { provideEnvironment } from './environment.providers';
 import { provideServiceWorker } from '@angular/service-worker';
+import { isPlatformBrowser } from '@angular/common';
 import { NAVIGATION, NAVIGATION_TOKEN } from '@core/config/navigation.config';
+import { routes } from './app.routes';
 import { AfterFirstPaintPreloadingStrategy } from '@core/strategies/after-first-paint-preloading.strategy';
+import { SwUpdateService } from '@services/sw-update.service';
+import { SeoService } from '@services/seo.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -37,6 +43,13 @@ export const appConfig: ApplicationConfig = {
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
+    }),
+    provideEnvironmentInitializer(() => {
+      const platformId = inject(PLATFORM_ID);
+      if (isPlatformBrowser(platformId)) {
+        inject(SwUpdateService);
+      }
+      inject(SeoService);
     }),
   ],
 };
