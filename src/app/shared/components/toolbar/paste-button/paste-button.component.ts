@@ -14,7 +14,7 @@ import {
 export class PasteButtonComponent implements ToolbarAction<string> {
   public readonly result = output<ActionResult<string>>();
 
-  async run(): Promise<ActionResult<string>> {
+  public async run(): Promise<ActionResult<string>> {
     try {
       const text = (await navigator.clipboard.readText()).trim();
       if (/^\d{11}$/.test(text)) {

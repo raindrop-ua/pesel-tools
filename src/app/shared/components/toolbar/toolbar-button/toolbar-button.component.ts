@@ -2,6 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
+  inject,
   input,
   output,
   signal,
@@ -46,7 +48,20 @@ export class ToolbarButtonComponent {
   public readonly success = output<void>();
   public readonly clicked = output<void>();
 
+  private readonly destroyRef = inject(DestroyRef);
+  private destroyed = false;
+
   private successTimer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      this.destroyed = true;
+      if (this.successTimer) {
+        clearTimeout(this.successTimer);
+        this.successTimer = null;
+      }
+    });
+  }
 
   public async handleClick() {
     if (this.computedDisabled()) return;
@@ -58,6 +73,9 @@ export class ToolbarButtonComponent {
       this.running.set(true);
 
       const res = await this.action().run();
+
+      if (this.destroyed) return;
+
       this.result.emit(res);
 
       if (res.ok) {

@@ -22,7 +22,7 @@ export class SaveButtonComponent implements ToolbarAction<void> {
 
   private readonly download = inject(DownloadService);
 
-  async run(): Promise<ActionResult> {
+  public async run(): Promise<ActionResult> {
     const raw = this.contentToSave();
     if (!raw) return { ok: false, message: 'Empty content' };
 

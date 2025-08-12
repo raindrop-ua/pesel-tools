@@ -22,7 +22,7 @@ export class CopyJsonButtonComponent implements ToolbarAction<void> {
 
   private readonly clipboard = inject(ClipboardService);
 
-  async run(): Promise<ActionResult> {
+  public async run(): Promise<ActionResult> {
     const raw = this.contentToCopy();
     if (!raw) return { ok: false, message: 'Empty content' };
 
