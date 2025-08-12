@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SeoService } from '@services/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,4 @@ import { SeoService } from '@services/seo.service';
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  private _seo: SeoService = inject(SeoService);
-}
+export class AppComponent {}
