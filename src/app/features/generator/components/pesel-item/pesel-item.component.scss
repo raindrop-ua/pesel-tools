@@ -1,0 +1,45 @@
+:host {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.pesel-item {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+
+  pre {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+    overflow: auto hidden;
+    display: inline-block;
+  }
+
+  code {
+    color: var(--pesel-number);
+    font-family: var(--font-mono), monospace;
+  }
+
+  app-toolbar {
+    display: none;
+
+    @media screen and (width >= 640px) {
+      display: flex;
+      flex-direction: row;
+      visibility: hidden;
+      opacity: 0;
+      position: relative;
+      margin-top: -0.75rem;
+      transition: opacity 0.2s ease-in-out;
+    }
+  }
+
+  &:hover {
+    app-toolbar {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
