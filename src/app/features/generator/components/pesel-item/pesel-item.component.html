@@ -1,6 +1,7 @@
 <div class="pesel-item">
-  <pre><code>{{ peselNumber() }}</code></pre>
+  <span class="number">{{ peselNumber() }}</span>
   <app-toolbar>
+    <app-goto-parse-button [pesel]="peselNumber()" />
     <app-save-button [contentToSave]="peselNumber()" />
     <app-copy-json-button [contentToCopy]="peselNumber()" />
     <app-copy-button [contentToCopy]="peselNumber()" />
