@@ -1,5 +1,7 @@
 <div class="output-control">
-  <pre><code>{{ peselList() }}</code></pre>
+  @for (item of data(); track item) {
+    <app-pesel-item [peselNumber]="item"></app-pesel-item>
+  }
   <app-toolbar>
     <app-save-button [contentToSave]="peselList()" />
     <app-copy-json-button [contentToCopy]="peselList()" />

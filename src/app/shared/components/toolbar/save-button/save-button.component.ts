@@ -18,11 +18,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaveButtonComponent implements ToolbarAction<void> {
-  public readonly contentToSave = input.required<string>();
+  public readonly contentToSave = input.required<string | undefined>();
 
   private readonly download = inject(DownloadService);
 
-  async run(): Promise<ActionResult> {
+  public async run(): Promise<ActionResult> {
     const raw = this.contentToSave();
     if (!raw) return { ok: false, message: 'Empty content' };
 

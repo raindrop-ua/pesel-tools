@@ -18,7 +18,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyButtonComponent implements ToolbarAction<void> {
-  public readonly contentToCopy = input.required<string>();
+  public readonly contentToCopy = input.required<string | undefined>();
 
   private readonly clipboard = inject(ClipboardService);
 

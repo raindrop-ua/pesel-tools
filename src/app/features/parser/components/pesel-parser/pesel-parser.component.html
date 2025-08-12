@@ -4,19 +4,19 @@
 
   @if (peselControl?.errors && peselControl?.touched) {
     <div class="error">
-      @if (peselControl?.errors?.["required"]) {
-        <p>Please enter PESEL to parse ;)</p>
+      @if (peselControl?.errors?.['required']) {
+        <p>Please enter PESEL to parse</p>
       }
-      @if (peselControl?.errors?.["peselInvalidFormat"]) {
+      @if (peselControl?.errors?.['peselInvalidFormat']) {
         <p>Wrong PESEL format (should be 11 digits)</p>
       }
-      @if (peselControl?.errors?.["peselInvalidChecksum"]) {
+      @if (peselControl?.errors?.['peselInvalidChecksum']) {
         <p>Incorrect checksum</p>
       }
-      @if (peselControl?.errors?.["peselInvalidDate"]) {
+      @if (peselControl?.errors?.['peselInvalidDate']) {
         <p>Incorrect DOB</p>
       }
-      @if (peselControl?.errors?.["peselUnknownError"]) {
+      @if (peselControl?.errors?.['peselUnknownError']) {
         <p>Unknown error</p>
       }
     </div>
