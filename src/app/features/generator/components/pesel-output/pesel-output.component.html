@@ -1,8 +1,12 @@
 <div class="output-control">
-  @for (item of data(); track item) {
+  @let peselsData = data();
+  @for (item of peselsData; track item) {
     <app-pesel-item [peselNumber]="item"></app-pesel-item>
   }
   <app-toolbar>
+    @if (peselsData.length <= 1) {
+      <app-goto-parse-button [pesel]="peselsData[0]" />
+    }
     <app-save-button [contentToSave]="peselList()" />
     <app-copy-json-button [contentToCopy]="peselList()" />
     <app-copy-button [contentToCopy]="peselList()" />
