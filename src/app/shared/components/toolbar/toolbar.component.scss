@@ -4,6 +4,10 @@
   right: 0.625rem;
   position: absolute;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 0.5rem;
+
+  @media screen and (width >= 640px) {
+    flex-direction: row;
+  }
 }
