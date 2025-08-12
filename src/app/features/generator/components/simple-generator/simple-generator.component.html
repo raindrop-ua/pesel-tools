@@ -17,9 +17,10 @@
       Generate Random
     </button>
     <br />
-    @if (peselList().length) {
-      <p class="label">Generated PESEL(s):</p>
-      <app-pesel-output [data]="peselList()" />
+    @let pesels = peselList();
+    @if (pesels.length) {
+      <p class="label">Generated PESEL{{ pesels.length > 1 ? "s" : "" }}:</p>
+      <app-pesel-output [data]="pesels" />
       <button app-button="primary" type="button" (click)="clearList()">
         Clear List
       </button>
