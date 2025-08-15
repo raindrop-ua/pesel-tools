@@ -6,7 +6,9 @@
   padding: 0.5rem 0.75rem;
   display: flex;
   color: var(--control-text);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 
   &:focus-within {
     border-color: var(--control-focus-border);
@@ -33,8 +35,8 @@ input {
   }
 
   /* Chrome, Safari, Edge */
-  &[type='number']::-webkit-outer-spin-button,
-  &[type='number']::-webkit-inner-spin-button {
+  &[type="number"]::-webkit-outer-spin-button,
+  &[type="number"]::-webkit-inner-spin-button {
     appearance: none;
   }
 

@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { RadioOption } from '@components/radio-select/model/radio-option.interface';
+import { RadioOption } from '@features/generator/components/radio-select/model/radio-option.interface';
 
 @Component({
   selector: 'app-radio-select',
