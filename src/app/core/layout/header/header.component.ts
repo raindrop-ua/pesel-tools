@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { NAVIGATION_TOKEN } from '@core/config/navigation.config';
-import { ThemeSwitcherComponent } from '@core/components/theme-switcher/theme-switcher.component';
-import { AppRouteEnum } from '@core/enums/app-route.enum';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AppRouteEnum } from '@core/enums/app-route.enum';
+import { ThemeSwitcherComponent } from '@core/components/theme-switcher/theme-switcher.component';
 
 @Component({
   selector: 'app-header',

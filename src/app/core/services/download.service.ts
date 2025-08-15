@@ -12,6 +12,7 @@ export class DownloadService {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const url = URL.createObjectURL(blob);
+
     try {
       const a = this.doc.createElement('a');
       a.href = url;
@@ -36,6 +37,7 @@ export class DownloadService {
     const json = JSON.stringify(data, null, space || undefined);
     const parts = withBom ? ['\ufeff', json] : [json];
     const blob = new Blob(parts, { type: 'application/json;charset=utf-8' });
+
     this.downloadBlob(blob, fileName);
   }
 
