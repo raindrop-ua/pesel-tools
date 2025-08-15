@@ -3,9 +3,7 @@ import { ExternalLinkDirective } from '@shared/directives/external-link.directiv
 
 @Component({
   selector: 'app-disclaimer',
-  imports: [
-    ExternalLinkDirective
-  ],
+  imports: [ExternalLinkDirective],
   templateUrl: './disclaimer.component.html',
   styleUrl: './disclaimer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

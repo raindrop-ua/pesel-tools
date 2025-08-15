@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
-import { RadioSelectComponent } from '@components/radio-select/radio-select.component';
-import { ValueInputComponent } from '@components/value-input/value-input.component';
+import { RadioSelectComponent } from '@features/generator/components/radio-select/radio-select.component';
+import { ValueInputComponent } from '@features/generator/components/value-input/value-input.component';
 
 @Component({
   selector: 'app-birthday-input',
