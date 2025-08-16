@@ -1,13 +1,16 @@
 <div class="masthead" #masthead>
-  <div class="float float-1">Ultimate</div>
-  <div class="float float-2">PESEL</div>
-  <div class="float float-3">Tools<span class="dot">.</span></div>
-  <div class="pulses">
-    <div class="pulse-circle circle-1"></div>
-    <div class="pulse-circle circle-2"></div>
-    <div class="pulse-circle circle-3"></div>
+  <div class="masthead-inner-wrapper">
+    <div class="float float-1">Ultimate</div>
+    <div class="float float-2">PESEL</div>
+    <div class="float float-3">Tools<span class="dot">.</span></div>
+    <div class="pulses">
+      <div class="pulse-circle circle-1"></div>
+      <div class="pulse-circle circle-2"></div>
+      <div class="pulse-circle circle-3"></div>
+    </div>
   </div>
   <img
+    class="masthead-image"
     [ngSrc]="'/assets/masthead-girl.webp'"
     #parallaxImg
     width="880"
@@ -17,3 +20,9 @@
     decoding="async"
   />
 </div>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="1" stitchTiles="stitch" />
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+</svg>
