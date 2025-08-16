@@ -1,0 +1,14 @@
+h3 {
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl-line-height);
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: var(--text-xl);
+  line-height: var(--text-xl-line-height);
+}
+
+p:not(:last-child) {
+  margin: 0 0 1.5rem;
+}
