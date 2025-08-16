@@ -1,6 +1,6 @@
 .pesel-wrapper {
   text-align: center;
-  padding: 2rem;
+  padding: 2.5rem;
   background: var(--masthead-gradient);
   border: 1px solid var(--card-border);
   color: var(--card-text);
@@ -8,6 +8,21 @@
   max-width: 500px;
   margin: auto;
   position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    filter: url("#grain") contrast(180%) brightness(100%);
+    mix-blend-mode: overlay;
+    opacity: 0.33;
+  }
+}
+
+.title {
+  margin-bottom: 0.25rem;
 }
 
 .pesel {
