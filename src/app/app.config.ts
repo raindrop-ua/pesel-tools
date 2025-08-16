@@ -1,10 +1,10 @@
 import {
   ApplicationConfig,
-  provideZoneChangeDetection,
   provideEnvironmentInitializer,
   isDevMode,
   inject,
   PLATFORM_ID,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import {
   provideRouter,
@@ -29,7 +29,7 @@ import { SeoService } from '@services/seo.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: NAVIGATION_TOKEN, useValue: NAVIGATION },
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideRouter(
       routes,
       withPreloading(AfterFirstPaintPreloadingStrategy),
