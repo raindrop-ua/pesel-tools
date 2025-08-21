@@ -17,6 +17,7 @@
     overflow: auto hidden;
     color: var(--pesel-number);
     font-family: var(--font-mono), monospace;
+    font-variant-numeric: tabular-nums;
   }
 
   app-toolbar {
