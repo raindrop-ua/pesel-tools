@@ -41,9 +41,8 @@ export const routes: Routes = [
           preload: true,
           seo: {
             title: 'Generator | Ultimate PESEL Tools',
-            description:
-              'Generate valid PESEL numbers by birthdate and gender.',
-            keywords: 'pesel generator, birthdate, gender',
+            description: 'Generate valid PESEL numbers by birthdate and sex.',
+            keywords: 'pesel generator, birthdate, sex',
           },
         },
         loadComponent: () =>

@@ -1,6 +1,6 @@
 <app-card>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <p class="label">Enter birthday and gender:</p>
+    <p class="label">Enter birthday and sex:</p>
     <app-birthday-input [formGroup]="birthdayGroup" />
     @if (!birthdayGroup.valid) {
       <p class="validation-label">Please provide a valid birthdate.</p>
