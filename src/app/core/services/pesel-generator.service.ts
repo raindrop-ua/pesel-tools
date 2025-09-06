@@ -112,10 +112,10 @@ export class PeselGeneratorService {
       monthCode.toString().padStart(2, '0') +
       birthDay.toString().padStart(2, '0');
 
-    // 4. Generate last 4 digits (unique number + gender)
-    // The ninth digit (0-9) indicates gender: even for females, odd for males.
+    // 4. Generate last 4 digits (unique number + sex)
+    // The ninth digit (0-9) indicates sex: even for females, odd for males.
     // The last (eleventh) digit is the checksum.
-    // Generate 3 random digits for the number, and the 4th (the tenth in the full PESEL) will determine the gender.
+    // Generate 3 random digits for the number, and the 4th (the tenth in the full PESEL) will determine the sex.
 
     let serialPart = '';
     for (let i = 0; i < 3; i++) {

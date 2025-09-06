@@ -38,7 +38,7 @@ export class SimpleGeneratorComponent {
         day: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
         month: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
         year: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
-        gender: ['female', Validators.required],
+        sex: ['female', Validators.required],
       },
       { validators: [validDateValidator()] },
     ),
@@ -54,12 +54,12 @@ export class SimpleGeneratorComponent {
       return;
     }
 
-    const { day, month, year, gender } = this.birthdayGroup.value;
+    const { day, month, year, sex } = this.birthdayGroup.value;
     const pesel = this.generateUniquePesel({
       year,
       month,
       day,
-      sex: gender,
+      sex,
     });
 
     if (pesel) this.peselStoreService.add(pesel);
