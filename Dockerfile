@@ -16,8 +16,8 @@ RUN npm ci --omit=dev
 
 COPY --from=build /app/dist /app/dist
 
-ENV PORT=4000
+ENV PORT=4050
 ENV HOST=0.0.0.0
-EXPOSE 4000
+EXPOSE 4050
 
 CMD ["npm", "run", "start:ssr"]
