@@ -19,12 +19,14 @@ input {
   background-color: transparent;
   flex: 1 1 0;
   text-align: left;
-  color: inherit;
   margin: 0;
   padding: 0;
   border-width: 0;
   font-size: 1.25rem;
   width: 100%;
+  color: var(--pesel-number);
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
 
   &::placeholder {
     font-weight: 400;
