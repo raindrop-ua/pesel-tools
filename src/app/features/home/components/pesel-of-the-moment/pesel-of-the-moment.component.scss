@@ -26,13 +26,19 @@
 }
 
 .pesel {
-  font-size: 2rem;
   color: var(--pesel-number-moment);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl-line-height);
   margin-top: 0.5rem;
   display: flex;
   justify-content: center;
   gap: 0.25rem;
+
+  @media screen and (width >= 412px) {
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl-line-height);
+  }
 }
 
 .digit {
