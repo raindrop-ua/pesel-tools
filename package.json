@@ -42,7 +42,10 @@
   },
   "devDependencies": {
     "@analogjs/storybook-angular": "^1.22.4",
+    "@analogjs/vite-plugin-angular": "^2.0.4",
+    "@angular-devkit/architect": "^0.2003.10",
     "@angular-devkit/build-angular": "^20.3.10",
+    "@angular-devkit/core": "^20.3.10",
     "@angular/build": "^20.3.9",
     "@angular/cli": "^20.3.10",
     "@angular/compiler-cli": "^20.3.11",
@@ -80,6 +83,7 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.33.1",
+    "vite": "^5.4.21",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
