@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
     this.menuOpen.set(false);
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   public onResize(): void {
     this.menuOpen.set(false);
   }
