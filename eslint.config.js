@@ -2,7 +2,6 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import angular from "angular-eslint";
-import storybook from "eslint-plugin-storybook";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default tseslint.config(
@@ -14,9 +13,7 @@ export default tseslint.config(
       ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended,
     ],
-    plugins: {
-      storybook,
-    },
+    plugins: {},
     processor: angular.processInlineTemplates,
     rules: {
       "@angular-eslint/directive-selector": [
