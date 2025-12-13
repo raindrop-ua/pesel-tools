@@ -18,7 +18,7 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./pages/home/home.component').then((m) => m.HomeComponent),
+          import('@features/home/feature/home.component').then((m) => m.HomeComponent),
       },
       {
         path: AppRouteEnum.Parser,
@@ -31,7 +31,7 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./pages/parser/parser.component').then(
+          import('@features/parser/feature/parser.component').then(
             (m) => m.ParserComponent,
           ),
       },
@@ -46,7 +46,7 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./pages/generator/generator.component').then(
+          import('@features/generator/feature/generator.component').then(
             (m) => m.GeneratorComponent,
           ),
       },
@@ -61,7 +61,7 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./pages/doc/doc.component').then((m) => m.DocComponent),
+          import('@features/static/doc/feature/doc.component').then((m) => m.DocComponent),
       },
       {
         path: '**',
@@ -74,7 +74,7 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('./pages/not-found/not-found.component').then(
+          import('@features/static/not-found/feature/not-found.component').then(
             (m) => m.NotFoundComponent,
           ),
       },
