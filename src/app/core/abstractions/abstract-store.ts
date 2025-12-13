@@ -16,17 +16,17 @@ export abstract class AbstractStore<T> {
     this.hasData = computed(() => this._data().length > 0);
   }
 
-  add(item: T) {
+  public add(item: T) {
     const updated = [item, ...this._data()];
     this._update(updated);
   }
 
-  remove(item: T) {
+  public remove(item: T) {
     const updated = this._data().filter((i) => !this.equals(i, item));
     this._update(updated);
   }
 
-  clear() {
+  public clear() {
     this._update([]);
   }
 

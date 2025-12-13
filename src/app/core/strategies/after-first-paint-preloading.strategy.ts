@@ -69,7 +69,7 @@ function canPreloadNow(): boolean {
 export class AfterFirstPaintPreloadingStrategy implements PreloadingStrategy {
   private ready$ = race(appStableOnce(), afterFirstPaint()).pipe(first());
 
-  preload(route: Route, load: () => Observable<unknown>): Observable<unknown> {
+  public preload(route: Route, load: () => Observable<unknown>): Observable<unknown> {
     const mode = (route.data?.['preload'] ?? 'idle') as
       | 'eager'
       | 'idle'
