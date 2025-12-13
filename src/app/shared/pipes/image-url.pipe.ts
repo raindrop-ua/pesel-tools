@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'imageUrl',
 })
 export class ImageUrlPipe implements PipeTransform {
-  transform(value: string | null): string | null {
+  public transform(value: string | null): string | null {
     if (!value) {
       return null;
     }

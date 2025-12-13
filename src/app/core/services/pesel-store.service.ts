@@ -12,11 +12,11 @@ export class PeselStoreService extends AbstractStore<string> {
     return a === b;
   }
 
-  has(pesel: string): boolean {
+  public has(pesel: string): boolean {
     return this.data().includes(pesel);
   }
 
-  addIfAbsent(pesel: string): void {
+  public addIfAbsent(pesel: string): void {
     if (!this.has(pesel)) this.add(pesel);
   }
 }
