@@ -25,6 +25,8 @@ export class FooterComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   public navigation = inject(NAVIGATION_TOKEN);
 
+  public currentYear = new Date().getFullYear();
+
   public ngOnInit() {
     this.router.events
       .pipe(
