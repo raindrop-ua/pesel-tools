@@ -51,19 +51,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: AppRouteEnum.Docs,
-        data: {
-          preload: true,
-          seo: {
-            title: 'Docs | Ultimate PESEL Tools',
-            description: 'Documentation and details about PESEL tools.',
-            keywords: 'pesel docs, documentation, PESEL tools',
-          },
-        },
-        loadComponent: () =>
-          import('@features/static/doc/feature/doc.component').then((m) => m.DocComponent),
-      },
-      {
         path: '**',
         data: {
           preload: false,
