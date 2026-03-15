@@ -1,0 +1,42 @@
+<section class="pesel-wrapper">
+  <h3>PESEL Generator API</h3>
+  <p>You can generate valid PESEL numbers not only in the browser UI but also via a simple HTTP API.</p>
+  <p>This is useful for:</p>
+  <ul>
+    <li>automated testing</li>
+    <li>generating test users</li>
+    <li>QA environments</li>
+    <li>scripting</li>
+    <li>integration with other systems</li>
+  </ul>
+  <p>Base endpoint:</p>
+  <pre>
+        <code>GET https://api.pesel.dev/generator</code>
+      </pre>
+  <h4>Query Parameters</h4>
+  <p>All parameters are optional.</p>
+  <table>
+    <tbody>
+    <tr>
+      <td>Parameter</td>
+      <td>Type</td>
+      <td>Description</td>
+    </tr>
+    <tr>
+      <td>quantity</td>
+      <td>number</td>
+      <td>Number of PESEL numbers to generate (1–10000). Default: 1</td>
+    </tr>
+    <tr>
+      <td>sex</td>
+      <td>string</td>
+      <td>Filter by sex: male or female</td>
+    </tr>
+    <tr>
+      <td>dob</td>
+      <td>string</td>
+      <td>Date of birth in format dd.MM.yyyy</td>
+    </tr>
+    </tbody>
+  </table>
+</section>
