@@ -10,7 +10,7 @@ A lightweight app that parses and validates Polish PESEL numbers with full birth
 
 ![Preview](docs/splash.png)
 
-## ✨ Features
+## Features
 
 - PESEL validation (format, checksum, and birthdate)
 - Extracts birthdate
@@ -26,11 +26,11 @@ PESEL (Powszechny Elektroniczny System Ewidencji Ludności) is Poland’s nation
 
 PESEL is used by government agencies, hospitals, banks, schools, and employers to uniquely identify individuals. It simplifies data management, helps prevent identity duplication, and allows easy retrieval of essential information like date of birth and gender.
 
-## 🚀 Live Demo
+## Live Demo
 
 [🔗 Try it on pesel.dev](https://pesel.dev)
 
-## 📦 Run locally
+## Run locally
 
 ```bash
 git clone https://github.com/raindrop-ua/pesel-tools.git
@@ -41,4 +41,4 @@ ng serve
 
 ---
 
-👨‍💻 Made with ❤️ by [Anton Sizov](https://antonsizov.com)
+Made with ❤️ by [Anton Sizov](https://antonsizov.com)

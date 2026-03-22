@@ -11,22 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🧾 Checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: 🔧 Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - name: 📦 Install deps
+      - name: Install deps
         run: npm ci
 
-      - name: 🧹 Lint
+      - name: Lint
         run: npm run lint
 
-      - name: ✅ Run tests
+      - name: Run tests
         run: npm test
 
-      - name: 📊 Coverage
+      - name: Coverage
         run: npm run test:coverage || true
