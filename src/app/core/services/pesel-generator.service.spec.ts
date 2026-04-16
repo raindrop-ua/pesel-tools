@@ -107,4 +107,24 @@ describe('PeselGeneratorService — 100% coverage', () => {
       expect(utils.calculateChecksumDigit(body)).toBe(checksum);
     });
   });
+
+  describe('generateUniquePesel', () => {
+    it('returns the first unique generated PESEL', () => {
+      vi.spyOn(service, 'generatePesel')
+        .mockReturnValueOnce('11111111111')
+        .mockReturnValueOnce('22222222222');
+
+      const result = service.generateUniquePesel(['11111111111']);
+
+      expect(result).toBe('22222222222');
+    });
+
+    it('returns null when max attempts are exhausted', () => {
+      vi.spyOn(service, 'generatePesel').mockReturnValue('11111111111');
+
+      const result = service.generateUniquePesel(['11111111111'], undefined, 2);
+
+      expect(result).toBeNull();
+    });
+  });
 });
