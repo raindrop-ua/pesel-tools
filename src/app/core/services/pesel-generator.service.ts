@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { calculateChecksumDigit, isValidDate } from './pesel-utils';
 
+export interface PeselGenerationOptions {
+  year?: number;
+  month?: number;
+  day?: number;
+  sex?: 'male' | 'female';
+}
+
 export class InvalidBirthDateError extends Error {
   constructor(message = 'Provided birth date is invalid.') {
     super(message);
@@ -34,12 +41,7 @@ export class PeselGeneratorService {
    * @returns A valid PESEL number string.
    * @throws Error if unable to generate a valid PESEL (e.g., invalid date combination provided).
    */
-  public generatePesel(options?: {
-    year?: number;
-    month?: number;
-    day?: number;
-    sex?: 'male' | 'female';
-  }): string {
+  public generatePesel(options?: PeselGenerationOptions): string {
     const today = new Date();
     const currentYear = today.getFullYear();
 
@@ -138,5 +140,20 @@ export class PeselGeneratorService {
 
     // 6. Formation of the final PESEL
     return firstTenDigits + checksumDigit.toString();
+  }
+
+  public generateUniquePesel(
+    existing: Iterable<string>,
+    options?: PeselGenerationOptions,
+    maxAttempts = 500,
+  ): string | null {
+    const existingSet = new Set(existing);
+
+    for (let i = 0; i < maxAttempts; i++) {
+      const pesel = this.generatePesel(options);
+      if (!existingSet.has(pesel)) return pesel;
+    }
+
+    return null;
   }
 }

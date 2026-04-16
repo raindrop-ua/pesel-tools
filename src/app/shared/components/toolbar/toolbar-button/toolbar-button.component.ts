@@ -38,11 +38,23 @@ export class ToolbarButtonComponent {
   public readonly action = input.required<ToolbarAction<unknown>>();
 
   public readonly active = signal(false);
-  public readonly isDisabled = signal(false);
   private readonly running = signal(false);
-  private readonly computedDisabled = computed(() => {
-    return this.externalDisabled() || this.isDisabled() || this.running();
+  public readonly disabled = computed(() => {
+    return (
+      this.externalDisabled() ||
+      (this.disableWhileRunning() && this.running()) ||
+      (this.disableWhileSuccess() && this.active())
+    );
   });
+  public readonly iconToShow = computed(() =>
+    this.active() ? this.activeIcon() : this.icon(),
+  );
+  public readonly titleToShow = computed(() =>
+    this.active() ? this.activeTitle() : this.title(),
+  );
+  public readonly srTextToShow = computed(() =>
+    this.active() ? this.srActiveText() : this.srText(),
+  );
 
   public readonly result = output<ActionResult<unknown>>();
   public readonly success = output<void>();
@@ -56,50 +68,51 @@ export class ToolbarButtonComponent {
   constructor() {
     this.destroyRef.onDestroy(() => {
       this.destroyed = true;
-      if (this.successTimer) {
-        clearTimeout(this.successTimer);
-        this.successTimer = null;
-      }
+      this.clearSuccessTimer();
     });
   }
 
   public async handleClick() {
-    if (this.computedDisabled()) return;
+    if (this.disabled()) return;
 
     this.clicked.emit();
+    this.running.set(true);
 
+    const res = await this.runAction();
+    if (this.destroyed) return;
+
+    this.running.set(false);
+    this.result.emit(res);
+
+    if (res.ok) {
+      this.showSuccess();
+      this.success.emit();
+    }
+  }
+
+  private async runAction(): Promise<ActionResult<unknown>> {
     try {
-      if (this.disableWhileRunning()) this.isDisabled.set(true);
-      this.running.set(true);
+      return await this.action().run();
+    } catch (error) {
+      return { ok: false, error };
+    }
+  }
 
-      const res = await this.action().run();
+  private showSuccess(): void {
+    this.active.set(true);
+    this.clearSuccessTimer();
 
+    this.successTimer = setTimeout(() => {
       if (this.destroyed) return;
+      this.active.set(false);
+      this.successTimer = null;
+    }, this.successDuration());
+  }
 
-      this.result.emit(res);
-
-      if (res.ok) {
-        this.active.set(true);
-        this.success.emit();
-
-        this.running.set(false);
-        if (!this.disableWhileSuccess()) this.isDisabled.set(false);
-
-        if (this.successTimer) clearTimeout(this.successTimer);
-        this.successTimer = setTimeout(() => {
-          this.active.set(false);
-          if (this.disableWhileSuccess()) this.isDisabled.set(false);
-          this.successTimer = null;
-        }, this.successDuration());
-      } else {
-        this.running.set(false);
-        this.isDisabled.set(false);
-      }
-    } catch (e) {
-      const fail: ActionResult = { ok: false, error: e };
-      this.result.emit(fail);
-      this.running.set(false);
-      this.isDisabled.set(false);
+  private clearSuccessTimer(): void {
+    if (this.successTimer) {
+      clearTimeout(this.successTimer);
+      this.successTimer = null;
     }
   }
 }

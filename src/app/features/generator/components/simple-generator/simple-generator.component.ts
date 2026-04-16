@@ -55,7 +55,7 @@ export class SimpleGeneratorComponent {
     }
 
     const { day, month, year, sex } = this.birthdayGroup.value;
-    const pesel = this.generateUniquePesel({
+    const pesel = this.generator.generateUniquePesel(this.peselList(), {
       year,
       month,
       day,
@@ -65,25 +65,8 @@ export class SimpleGeneratorComponent {
     if (pesel) this.peselStoreService.add(pesel);
   }
 
-  private generateUniquePesel(
-    opts?: {
-      year?: number;
-      month?: number;
-      day?: number;
-      sex?: 'male' | 'female';
-    },
-    maxAttempts = 500,
-  ): string | null {
-    const existing = new Set(this.peselList());
-    for (let i = 0; i < maxAttempts; i++) {
-      const p = this.generator.generatePesel(opts);
-      if (!existing.has(p)) return p;
-    }
-    return null;
-  }
-
   public generateRandomPesel(): void {
-    const pesel = this.generateUniquePesel();
+    const pesel = this.generator.generateUniquePesel(this.peselList());
     if (pesel) this.peselStoreService.add(pesel);
   }
 
