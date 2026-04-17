@@ -22,6 +22,15 @@ export class InvalidDateRangeError extends Error {
   }
 }
 
+export class InvalidGenerationOptionsError extends Error {
+  constructor(
+    message = 'If birth date is provided, year, month, and day must all be specified.',
+  ) {
+    super(message);
+    this.name = 'InvalidGenerationOptionsError';
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -49,12 +58,19 @@ export class PeselGeneratorService {
     let birthMonth: number;
     let birthDay: number;
     let sex: 'male' | 'female';
+    const dateParts = [options?.year, options?.month, options?.day];
+    const hasAnyDatePart = dateParts.some((part) => part !== undefined);
+    const hasAllDateParts = dateParts.every((part) => part !== undefined);
+
+    if (hasAnyDatePart && !hasAllDateParts) {
+      throw new InvalidGenerationOptionsError();
+    }
 
     // 1. Determining the year, month and day of birth
-    if (options?.year && options?.month && options?.day) {
-      birthYear = Number(options.year);
-      birthMonth = Number(options.month);
-      birthDay = Number(options.day);
+    if (hasAllDateParts) {
+      birthYear = Number(options?.year);
+      birthMonth = Number(options?.month);
+      birthDay = Number(options?.day);
 
       // Simple check of validity of entered date before proceeding
       if (!isValidDate(birthYear, birthMonth, birthDay)) {
