@@ -26,6 +26,7 @@ export class ValueInputComponent implements ControlValueAccessor {
   @ViewChild('nativeInput', { static: true })
   private nativeInput!: ElementRef<HTMLInputElement>;
   public readonly placeholder = input<string>('');
+  public readonly ariaLabel = input<string>('');
 
   public value = '';
   public disabled = false;

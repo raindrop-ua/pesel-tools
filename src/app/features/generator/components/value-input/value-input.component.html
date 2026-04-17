@@ -1,7 +1,11 @@
 <div class="input-control">
   <input
     #nativeInput
-    type="number"
+    type="text"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    autocomplete="off"
+    [attr.aria-label]="ariaLabel() || placeholder()"
     [placeholder]="placeholder()"
     [value]="value"
     [disabled]="disabled"
