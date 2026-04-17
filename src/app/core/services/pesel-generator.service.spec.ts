@@ -2,6 +2,7 @@ import {
   PeselGeneratorService,
   InvalidBirthDateError,
   InvalidDateRangeError,
+  InvalidGenerationOptionsError,
 } from './pesel-generator.service';
 import * as utils from './pesel-utils';
 
@@ -73,6 +74,12 @@ describe('PeselGeneratorService — 100% coverage', () => {
   });
 
   describe('generatePesel — error handling', () => {
+    it('throws InvalidGenerationOptionsError for partial birth date options', () => {
+      expect(() => service.generatePesel({ year: 2000, month: 1 })).toThrow(
+        InvalidGenerationOptionsError,
+      );
+    });
+
     it('throws InvalidBirthDateError for invalid date', () => {
       expect(() =>
         service.generatePesel({ year: 2000, month: 2, day: 30 }),
