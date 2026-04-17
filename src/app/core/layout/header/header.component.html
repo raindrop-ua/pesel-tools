@@ -1,57 +1,63 @@
 <header>
   <div class="main-block">
-    <button class="burger" (click)="onMenuToggle()" aria-label="Toggle menu">
+    <button
+      class="burger"
+      type="button"
+      (click)="onMenuToggle()"
+      aria-label="Toggle menu"
+      aria-controls="mobile-navigation"
+      [attr.aria-expanded]="menuOpen()"
+    >
       <span class="line"></span>
       <span class="line"></span>
       <span class="line"></span>
     </button>
     @if (menuOpen()) {
-      <nav class="mobile-navigation">
-        <menu>
+      <nav id="mobile-navigation" class="mobile-navigation" aria-label="Mobile">
+        <ul>
           @for (item of navigation; track item.path) {
             <li>
               <a
                 class="link"
                 [routerLink]="item.path"
                 [class.active]="isLinkActive(item.path)"
+                [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
                 (click)="onMenuClose()"
               >
                 {{ item.label }}
               </a>
             </li>
           }
-        </menu>
+        </ul>
       </nav>
     }
     <div class="logo">
       <a class="logo-link" [routerLink]="[AppRouteEnum.Home]"> PESEL Tools </a>
     </div>
-    <nav class="navigation">
-      <menu>
+    <nav class="navigation" aria-label="Main">
+      <ul>
         @for (item of navigation; track item.path) {
           <li>
             <a
               class="link"
               [routerLink]="item.path"
               [class.active]="isLinkActive(item.path)"
+              [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
             >
               {{ item.label }}
             </a>
           </li>
         }
-      </menu>
+      </ul>
     </nav>
   </div>
   <app-theme-switcher />
 </header>
 @if (menuOpen()) {
-  <div
+  <button
+    type="button"
     class="overlay"
-    tabindex="0"
-    role="button"
     aria-label="Close menu"
     (click)="onMenuClose()"
-    (keydown.enter)="onMenuClose()"
-    (keydown.space)="onMenuClose()"
-  ></div>
+  ></button>
 }

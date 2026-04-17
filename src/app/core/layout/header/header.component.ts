@@ -62,5 +62,10 @@ export class HeaderComponent implements OnInit {
     this.menuOpen.set(false);
   }
 
+  @HostListener('document:keydown.escape')
+  public onEscape(): void {
+    this.menuOpen.set(false);
+  }
+
   protected readonly AppRouteEnum = AppRouteEnum;
 }

@@ -3,7 +3,9 @@
     <p class="label">Enter birthdate and sex:</p>
     <app-birthday-input [formGroup]="birthdayGroup" />
     @if (!birthdayGroup.valid) {
-      <p class="validation-label">Please provide a valid birthdate.</p>
+      <p class="validation-label" role="status" aria-live="polite">
+        Please provide a valid birthdate.
+      </p>
     }
     <button
       app-button="primary"

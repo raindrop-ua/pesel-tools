@@ -26,6 +26,8 @@ import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 })
 export class PeselInputComponent implements ControlValueAccessor {
   public readonly placeholder = input<string>('');
+  public readonly ariaLabel = input<string>('PESEL');
+  public readonly ariaDescribedBy = input<string | null>(null);
 
   public value = '';
   public disabled = false;
