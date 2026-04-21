@@ -30,6 +30,11 @@ PESEL is used by government agencies, hospitals, banks, schools, and employers t
 
 [🔗 Try it on pesel.dev](https://pesel.dev)
 
+## Documentation
+
+- [Contributing Guide](CONTRIBUTING.md)
+- [Architecture Overview](ARCHITECTURE.md)
+
 ## Run locally
 
 ```bash
