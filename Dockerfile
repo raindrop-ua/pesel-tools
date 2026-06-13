@@ -1,5 +1,10 @@
-FROM node:24-alpine AS build
+FROM node:24.16.0-alpine AS build
 WORKDIR /app
+
+ENV CYPRESS_INSTALL_BINARY=0 \
+    NG_CLI_ANALYTICS=false \
+    NPM_CONFIG_AUDIT=false \
+    NPM_CONFIG_FUND=false
 
 COPY package*.json ./
 RUN npm ci
@@ -7,9 +12,11 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:24-bullseye-slim AS runtime
+FROM node:24.16.0-bookworm-slim AS runtime
 WORKDIR /app
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    NPM_CONFIG_AUDIT=false \
+    NPM_CONFIG_FUND=false
 
 COPY package*.json ./
 RUN npm ci --omit=dev
@@ -20,4 +27,4 @@ ENV PORT=4050
 ENV HOST=0.0.0.0
 EXPOSE 4050
 
-CMD ["npm", "run", "start:ssr"]
+CMD ["node", "dist/pesel-tools/server/server.mjs"]
