@@ -15,6 +15,7 @@ import {
 import {
   provideClientHydration,
   withEventReplay,
+  withNoIncrementalHydration,
 } from '@angular/platform-browser';
 
 import { provideEnvironment } from './environment.providers';
@@ -38,7 +39,7 @@ export const appConfig: ApplicationConfig = {
         paramsInheritanceStrategy: 'always',
       }),
     ),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
     provideEnvironment(),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
