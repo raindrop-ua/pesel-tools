@@ -40,7 +40,13 @@
               "entry": "src/server.ts"
             },
             "security": {
-              "allowedHosts": ["pesel.dev", "www.pesel.dev"]
+              "allowedHosts": [
+                "localhost",
+                "127.0.0.1",
+                "[::1]",
+                "pesel.dev",
+                "www.pesel.dev"
+              ]
             }
           },
           "configurations": {
@@ -71,7 +77,14 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "pesel-tools:build:development"
+            "buildTarget": "pesel-tools:build:development",
+            "allowedHosts": [
+              "localhost",
+              "127.0.0.1",
+              "[::1]",
+              "pesel.dev",
+              "www.pesel.dev"
+            ]
           },
           "configurations": {
             "production": {

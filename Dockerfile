@@ -7,7 +7,7 @@ ENV CYPRESS_INSTALL_BINARY=0 \
     NPM_CONFIG_FUND=false
 
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 COPY . .
 RUN npm run build
@@ -19,7 +19,7 @@ ENV NODE_ENV=production \
     NPM_CONFIG_FUND=false
 
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --ignore-scripts
 
 COPY --from=build /app/dist /app/dist
 
