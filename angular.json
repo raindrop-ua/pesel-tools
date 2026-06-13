@@ -38,6 +38,9 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
+            },
+            "security": {
+              "allowedHosts": ["localhost", "127.0.0.1", "[::1]", "pesel.dev"]
             }
           },
           "configurations": {
@@ -67,6 +70,10 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "buildTarget": "pesel-tools:build:development",
+            "allowedHosts": ["localhost", "127.0.0.1", "[::1]", "pesel.dev"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "pesel-tools:build:production"
