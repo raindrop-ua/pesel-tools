@@ -54,8 +54,6 @@
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.0.12",
     "angular-eslint": "^22.0.0",
-    "commit-and-tag-version": "^12.6.1",
-    "commitlint": "^19.8.1",
     "cypress": "latest",
     "eslint": "^9.28.0",
     "husky": "^8.0.0",
