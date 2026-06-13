@@ -4,7 +4,7 @@
 These instructions apply to the entire repository unless a deeper `AGENTS.md` overrides them.
 
 ## Project Summary
-- App: Angular 21 application for validating and parsing Polish PESEL numbers.
+- App: Angular 22 application for validating and parsing Polish PESEL numbers.
 - Tooling: Angular CLI, TypeScript, Vitest, ESLint, Stylelint, Prettier, Cypress.
 - Package manager: `npm`.
 

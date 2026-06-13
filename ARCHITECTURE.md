@@ -2,7 +2,7 @@
 
 ## Overview
 
-`pesel-tools` is an Angular 21 application that validates, parses, and generates PESEL numbers.
+`pesel-tools` is an Angular 22 application that validates, parses, and generates PESEL numbers.
 
 Core characteristics:
 
