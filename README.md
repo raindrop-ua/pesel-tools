@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/raindrop-ua/pesel-tools/actions/workflows/ci.yml/badge.svg)
 ![Commits](https://img.shields.io/badge/commits-conventional-brightgreen)
-![MIT License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-proprietary-red)
 ![Angular](https://img.shields.io/badge/angular-22-brightgreen)
 ![Build](https://img.shields.io/github/actions/workflow/status/raindrop-ua/pesel-tools/ci.yml?branch=main)
 
