@@ -23,8 +23,8 @@ RUN npm ci --omit=dev --ignore-scripts
 
 COPY --from=build /app/dist /app/dist
 
-ENV PORT=4050
+ENV PORT=4200
 ENV HOST=0.0.0.0
-EXPOSE 4050
+EXPOSE 4200
 
 CMD ["node", "dist/pesel-tools/server/server.mjs"]
