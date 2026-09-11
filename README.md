@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/raindrop-ua/pesel-tools/actions/workflows/ci.yml/badge.svg)
 ![Commits](https://img.shields.io/badge/commits-conventional-brightgreen)
-![License](https://img.shields.io/badge/license-proprietary-red)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Angular](https://img.shields.io/badge/angular-22-brightgreen)
 ![Build](https://img.shields.io/github/actions/workflow/status/raindrop-ua/pesel-tools/ci.yml?branch=main)
 
@@ -34,6 +34,15 @@ PESEL is used by government agencies, hospitals, banks, schools, and employers t
 
 - [Contributing Guide](CONTRIBUTING.md)
 - [Architecture Overview](ARCHITECTURE.md)
+
+## License
+
+The application source code is available under the [MIT License](LICENSE).
+
+The self-hosted fonts are licensed under the SIL Open Font License 1.1 (OFL):
+
+- [Quicksand](src/assets/fonts/quicksand/OFL.txt)
+- [JetBrains Mono](src/assets/fonts/jetbrains/OFL.txt)
 
 ## Run locally
 
