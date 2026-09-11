@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
-  const port = Number(process.env['PORT'] || 4050);
+  const port = Number(process.env['PORT'] || 4200);
   const host = process.env['HOST'] ?? '0.0.0.0';
 
   app.listen(port, host, () => {
