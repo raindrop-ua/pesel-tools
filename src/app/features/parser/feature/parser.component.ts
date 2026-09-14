@@ -13,7 +13,7 @@ import { PeselParserComponent } from '@features/parser/components/pesel-parser/p
     PeselParserComponent,
   ],
   templateUrl: './parser.component.html',
-  styleUrl: './parser.component.scss',
+  host: { class: 'block' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ParserComponent {}

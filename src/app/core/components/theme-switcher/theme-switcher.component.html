@@ -1,14 +1,19 @@
 @defer (on idle) {
-  <div role="group" aria-label="Theme toggle" class="toggle-group">
+  <div
+    role="group"
+    aria-label="Theme toggle"
+    class="inline-flex rounded-lg border border-header-text/15 bg-header-background"
+  >
     @for (theme of themes; track theme.id) {
       <button
+        class="group relative flex cursor-pointer items-center justify-center rounded-full p-2 text-header-text transition-colors duration-300 hover:bg-white/10 hover:text-header-link-active aria-pressed:bg-white/5 aria-pressed:text-header-link-active motion-reduce:transition-none"
         type="button"
         (click)="setTheme(theme.id)"
         [attr.aria-pressed]="currentTheme() === theme.id"
-        [class.active]="currentTheme() === theme.id"
         [title]="theme.label"
       >
         <svg
+          class="size-6 min-w-6 stroke-[1.5] transition-[stroke-width,color] duration-300 group-hover:stroke-3 motion-reduce:transition-none"
           [icon]="theme.icon"
           width="24"
           height="24"
@@ -20,9 +25,13 @@
     }
   </div>
 } @placeholder {
-  <div class="toggle-group skeleton">
+  <div
+    class="inline-flex rounded-lg border border-header-text/15 bg-header-background"
+  >
     @for (theme of themes; track theme.id) {
-      <div class="skeleton-button"></div>
+      <div
+        class="size-10 rounded-lg bg-white/10 motion-safe:animate-pulse"
+      ></div>
     }
   </div>
 }

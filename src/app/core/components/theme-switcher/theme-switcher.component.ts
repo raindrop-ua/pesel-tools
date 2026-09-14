@@ -17,7 +17,7 @@ const themes = [
   selector: 'app-theme-switcher',
   imports: [SvgIconComponent],
   templateUrl: './theme-switcher.component.html',
-  styleUrls: ['./theme-switcher.component.scss'],
+  host: { class: 'flex' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSwitcherComponent {

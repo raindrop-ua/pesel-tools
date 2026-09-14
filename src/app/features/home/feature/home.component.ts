@@ -17,7 +17,6 @@ import { PeselOfTheMomentComponent } from '@features/home/components/pesel-of-th
     WhatIsPeselComponent,
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {}

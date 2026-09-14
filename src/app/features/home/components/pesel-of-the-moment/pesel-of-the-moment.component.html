@@ -1,8 +1,17 @@
-<section class="pesel-wrapper">
-  <h2 class="title">PESEL of&nbsp;the&nbsp;moment</h2>
-  <p class="pesel">
+<section
+  class="relative mx-auto max-w-[500px] overflow-hidden rounded-xl border border-card-border bg-(image:--masthead-gradient) p-5 text-center text-card-text sm:p-10 after:pointer-events-none after:absolute after:inset-0 after:opacity-33 after:mix-blend-overlay after:[filter:url(#grain)_contrast(180%)_brightness(100%)]"
+>
+  <h2 class="mb-1 text-2xl font-bold leading-normal">
+    PESEL of&nbsp;the&nbsp;moment
+  </h2>
+  <p
+    class="mt-2 flex justify-center gap-1 text-2xl font-medium text-pesel-number-moment min-[412px]:text-3xl"
+  >
     @for (digits of digits(); track $index) {
-      <span class="digit">{{ digits }}</span>
+      <span
+        class="inline-block w-[1ch] text-center font-mono font-bold tabular-nums"
+        >{{ digits }}</span
+      >
     }
   </p>
   <app-toolbar>

@@ -14,7 +14,6 @@ import { ToolbarComponent } from '@components/toolbar/toolbar.component';
   standalone: true,
   imports: [PasteButtonComponent, ToolbarComponent],
   templateUrl: './pesel-input.component.html',
-  styleUrls: ['./pesel-input.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

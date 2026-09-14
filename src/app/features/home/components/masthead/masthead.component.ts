@@ -14,7 +14,7 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
   selector: 'app-masthead',
   imports: [NgOptimizedImage],
   templateUrl: './masthead.component.html',
-  styleUrl: './masthead.component.scss',
+  host: { class: 'relative mt-4 mb-8 block size-full' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MastheadComponent implements AfterViewInit, OnDestroy {

@@ -1,5 +1,5 @@
-<p class="label">Enter PESEL for parsing</p>
-<form [formGroup]="form">
+<p class="mb-2 text-xl">Enter PESEL for parsing</p>
+<form class="mb-4" [formGroup]="form">
   <app-pesel-input
     formControlName="pesel"
     [ariaDescribedBy]="
@@ -9,20 +9,20 @@
   />
 
   @if (peselControl?.errors && peselControl?.touched) {
-    <div id="pesel-error" class="error" role="status" aria-live="polite">
-      @if (peselControl?.errors?.['required']) {
+    <div id="pesel-error" class="mb-2" role="status" aria-live="polite">
+      @if (peselControl?.errors?.["required"]) {
         <p>Please enter PESEL to parse</p>
       }
-      @if (peselControl?.errors?.['peselInvalidFormat']) {
+      @if (peselControl?.errors?.["peselInvalidFormat"]) {
         <p>Wrong PESEL format (should be 11 digits)</p>
       }
-      @if (peselControl?.errors?.['peselInvalidChecksum']) {
+      @if (peselControl?.errors?.["peselInvalidChecksum"]) {
         <p>Incorrect checksum</p>
       }
-      @if (peselControl?.errors?.['peselInvalidDate']) {
+      @if (peselControl?.errors?.["peselInvalidDate"]) {
         <p>Incorrect DOB</p>
       }
-      @if (peselControl?.errors?.['peselUnknownError']) {
+      @if (peselControl?.errors?.["peselUnknownError"]) {
         <p>Unknown error</p>
       }
     </div>

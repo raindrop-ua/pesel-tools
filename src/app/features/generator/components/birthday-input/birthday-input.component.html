@@ -1,28 +1,28 @@
-<div class="inputs" [formGroup]="formGroup">
-  <div class="dob">
+<div class="flex flex-col gap-4 sm:flex-row" [formGroup]="formGroup">
+  <div class="relative flex gap-4">
     <app-value-input
       #dayComp
-      class="input-s day"
+      class="relative w-[65px] after:absolute after:right-[-0.75rem] after:bottom-3 after:size-2 after:rounded-full after:bg-card-border"
       placeholder="DD"
       ariaLabel="Day of birth"
       formControlName="day"
     />
     <app-value-input
       #monthComp
-      class="input-s month"
+      class="relative w-[65px] after:absolute after:right-[-0.75rem] after:bottom-3 after:size-2 after:rounded-full after:bg-card-border"
       placeholder="MM"
       ariaLabel="Month of birth"
       formControlName="month"
     />
     <app-value-input
       #yearComp
-      class="input-l year"
+      class="w-[85px]"
       placeholder="YYYY"
       ariaLabel="Year of birth"
       formControlName="year"
     />
   </div>
-  <div class="sex">
+  <div class="relative">
     <app-radio-select
       [options]="[
         { label: 'Male', value: 'male', name: 'sex' },

@@ -1,4 +1,6 @@
-<div class="output-control">
+<div
+  class="relative flex min-h-[175px] flex-col rounded-md border border-control-border bg-control-background pt-4 pr-12 pb-2 pl-4 text-control-text sm:min-h-0 sm:pr-32"
+>
   @let peselsData = data();
   @for (item of peselsData; track item) {
     <app-pesel-item [peselNumber]="item"></app-pesel-item>

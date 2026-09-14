@@ -1,14 +1,20 @@
-<div class="radio-inputs">
+<div
+  class="relative flex h-12 w-50 flex-wrap rounded-lg border border-control-border bg-control-background p-1 text-base"
+>
   @for (option of options; track option.value) {
-    <label class="radio">
+    <label class="flex-auto text-center">
       <input
+        class="peer sr-only"
         type="radio"
         [name]="option.name"
         [checked]="option.value === value"
         [disabled]="disabled"
         (change)="onSelect(option)"
       />
-      <span class="name">{{ option.label }}</span>
+      <span
+        class="flex h-9.5 cursor-pointer items-center justify-center rounded-sm border-0 py-2 text-control-text transition-colors duration-150 peer-checked:bg-control-active-background peer-checked:text-control-active-text peer-focus-visible:rounded-lg peer-focus-visible:outline-2 peer-focus-visible:-outline-offset-2 peer-focus-visible:outline-control-focus-border peer-disabled:cursor-default motion-reduce:transition-none"
+        >{{ option.label }}</span
+      >
     </label>
   }
 </div>

@@ -13,12 +13,12 @@
     "start:ssr": "node dist/pesel-tools/server/server.mjs",
     "serve:ssr:pesel-tools": "node dist/pesel-tools/server/server.mjs",
     "lint": "ng lint",
-    "lint:scss": "stylelint \"src/**/*.scss\"",
-    "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix",
     "release": "commit-and-tag-version",
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:css:fix": "stylelint \"src/**/*.css\" --fix"
   },
   "private": true,
   "license": "MIT",
@@ -47,6 +47,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@cypress/schematic": "^3.0.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/angular": "^19.3.0",
     "@testing-library/jest-dom": "^6.6.4",
     "@types/cookie-parser": "^1.4.8",
@@ -60,12 +61,11 @@
     "husky": "^8.0.0",
     "jsdom": "^27.1.0",
     "lint-staged": "^16.1.2",
-    "postcss-scss": "^4.0.9",
+    "postcss": "^8.5.28",
     "prettier": "^3.6.2",
-    "sass": "^1.90.0",
     "stylelint": "^16.22.0",
-    "stylelint-config-standard-scss": "^15.0.1",
-    "stylelint-scss": "^6.12.1",
+    "stylelint-config-standard": "^38.0.0",
+    "tailwindcss": "^4.3.3",
     "tsconfig-paths": "^4.2.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.33.1",
@@ -76,10 +76,10 @@
     "*.{ts,js}": [
       "eslint --fix"
     ],
-    "*.{scss,css}": [
+    "*.css": [
       "stylelint --fix"
     ],
-    "*.{ts,js,scss,json,html,md}": [
+    "*.{ts,js,css,json,html,md}": [
       "prettier --write"
     ]
   },

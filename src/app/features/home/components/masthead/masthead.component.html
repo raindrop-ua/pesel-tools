@@ -1,16 +1,40 @@
-<div class="masthead" #masthead>
-  <div class="masthead-inner-wrapper">
-    <div class="float float-1">Ultimate</div>
-    <div class="float float-2">PESEL</div>
-    <div class="float float-3">Tools<span class="dot">.</span></div>
-    <div class="pulses">
-      <div class="pulse-circle circle-1"></div>
-      <div class="pulse-circle circle-2"></div>
-      <div class="pulse-circle circle-3"></div>
+<div
+  class="relative mt-4 flex h-[340px] flex-col justify-start rounded-2xl bg-(image:--masthead-gradient) text-[2.5rem]/11 font-normal text-masthead-text min-[540px]:h-[380px] min-[540px]:justify-center min-[540px]:text-5xl/14 md:mt-10 md:h-[400px] md:text-[4rem]/20"
+  #masthead
+>
+  <div
+    class="relative size-full overflow-hidden rounded-2xl p-6 after:pointer-events-none after:absolute after:inset-0 after:opacity-33 after:mix-blend-overlay after:[filter:url(#grain)_contrast(180%)_brightness(100%)]"
+  >
+    <div class="relative left-3 z-3 block whitespace-nowrap min-[540px]:left-5">
+      Ultimate
+    </div>
+    <div
+      class="relative left-8 z-3 -mb-4 block whitespace-nowrap min-[540px]:left-14"
+    >
+      PESEL
+    </div>
+    <div class="relative left-0 z-3 block whitespace-nowrap min-[540px]:left-2">
+      Tools<span
+        class="inline-block text-[5rem] text-masthead-attention motion-safe:animate-flicker"
+        >.</span
+      >
+    </div>
+    <div
+      class="pointer-events-none absolute top-[45%] right-[200px] -translate-y-1/2 scale-200 min-[540px]:right-[45%] min-[540px]:scale-300"
+    >
+      <div
+        class="absolute size-10 rounded-full border-2 border-masthead-effect opacity-60 motion-safe:animate-pulse-circle"
+      ></div>
+      <div
+        class="absolute -top-2.5 -left-2.5 size-15 rounded-full border-2 border-masthead-effect opacity-60 motion-safe:animate-pulse-circle [animation-delay:1s]"
+      ></div>
+      <div
+        class="absolute -top-5 -left-5 size-20 rounded-full border-2 border-masthead-effect opacity-60 motion-safe:animate-pulse-circle [animation-delay:2s]"
+      ></div>
     </div>
   </div>
   <img
-    class="masthead-image"
+    class="absolute right-[-100px] bottom-0 z-1 block size-[360px] min-w-[360px] transition-transform duration-200 ease-out will-change-transform min-[540px]:right-[-50px] min-[540px]:size-[400px] min-[540px]:min-w-[400px] md:right-0 md:size-[440px] md:min-w-[440px] motion-reduce:transition-none"
     [ngSrc]="'/assets/masthead-girl.webp'"
     #parallaxImg
     width="880"
@@ -20,9 +44,14 @@
     decoding="async"
   />
 </div>
-<svg width="0" height="0" style="position:absolute">
+<svg width="0" height="0" class="absolute">
   <filter id="grain">
-    <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="1" stitchTiles="stitch" />
-    <feColorMatrix type="saturate" values="0"/>
+    <feTurbulence
+      type="fractalNoise"
+      baseFrequency="1.8"
+      numOctaves="1"
+      stitchTiles="stitch"
+    />
+    <feColorMatrix type="saturate" values="0" />
   </filter>
 </svg>

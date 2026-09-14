@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {ExternalLinkDirective} from '@shared/directives/external-link.directive';
+import { ExternalLinkDirective } from '@shared/directives/external-link.directive';
 
 @Component({
   selector: 'app-disclaimer',
-  imports: [
-    ExternalLinkDirective
-  ],
+  imports: [ExternalLinkDirective],
   templateUrl: './disclaimer.component.html',
-  styleUrl: './disclaimer.component.scss',
+  host: { class: 'text-base' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisclaimerComponent {}

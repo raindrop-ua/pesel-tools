@@ -15,7 +15,7 @@ import { GotoParseButtonComponent } from '@components/toolbar/goto-parse-button/
     GotoParseButtonComponent,
   ],
   templateUrl: './pesel-item.component.html',
-  styleUrl: './pesel-item.component.scss',
+  host: { class: 'relative mb-2 block' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselItemComponent {

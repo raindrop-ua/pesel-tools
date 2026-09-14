@@ -8,5 +8,5 @@ export class ExternalLinkDirective {
   @HostBinding('attr.rel') rel = 'noopener noreferrer';
   @HostBinding('attr.aria-label') ariaLabel = 'Opens in a new tab';
   @HostBinding('attr.title') title = 'Opens in a new tab';
-  @HostBinding('class.link-external') externalLink = true;
+  @HostBinding('class') externalLink = "after:content-['_↗']";
 }

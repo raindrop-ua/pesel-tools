@@ -16,6 +16,7 @@ A lightweight app that parses and validates Polish PESEL numbers with full birth
 - Extracts birthdate
 - Detects biological sex from PESEL
 - Friendly UI with real-time feedback
+- Tailwind CSS 4 styling with light, dark, and system themes
 - Clean, documented TypeScript architecture
 
 ### What is PESEL?

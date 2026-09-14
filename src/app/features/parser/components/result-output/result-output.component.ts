@@ -20,7 +20,6 @@ import { SvgIconComponent } from '@core/components/svg-icon/svg-icon.component';
     SvgIconComponent,
   ],
   templateUrl: './result-output.component.html',
-  styleUrl: './result-output.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultOutputComponent {

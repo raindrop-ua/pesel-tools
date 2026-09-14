@@ -1,13 +1,14 @@
 <app-card>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <p class="label">Enter birthdate and sex:</p>
+    <p class="mb-2 text-xl">Enter birthdate and sex:</p>
     <app-birthday-input [formGroup]="birthdayGroup" />
     @if (!birthdayGroup.valid) {
-      <p class="validation-label" role="status" aria-live="polite">
+      <p class="my-2" role="status" aria-live="polite">
         Please provide a valid birthdate.
       </p>
     }
     <button
+      class="my-4"
       app-button="primary"
       type="submit"
       [disabled]="!birthdayGroup.valid"
@@ -15,15 +16,27 @@
       Generate
     </button>
     &nbsp;<span> or </span>&nbsp;
-    <button app-button="primary" type="button" (click)="generateRandomPesel()">
+    <button
+      class="my-4"
+      app-button="primary"
+      type="button"
+      (click)="generateRandomPesel()"
+    >
       Generate Random
     </button>
     <br />
     @let pesels = peselList();
     @if (pesels.length) {
-      <p class="label">Generated PESEL{{ pesels.length > 1 ? "s" : "" }}:</p>
+      <p class="mb-2 text-xl">
+        Generated PESEL{{ pesels.length > 1 ? "s" : "" }}:
+      </p>
       <app-pesel-output [data]="pesels" />
-      <button app-button="primary" type="button" (click)="clearList()">
+      <button
+        class="my-4"
+        app-button="primary"
+        type="button"
+        (click)="clearList()"
+      >
         Clear List
       </button>
     }

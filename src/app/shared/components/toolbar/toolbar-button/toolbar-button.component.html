@@ -1,6 +1,6 @@
 <button
   type="button"
-  class="tool-btn"
+  class="inline-flex size-7 cursor-pointer items-center justify-center rounded-sm border border-tool-border bg-tool-background p-0 text-tool-text transition-colors duration-200 enabled:hover:border-tool-hover-border enabled:hover:bg-tool-hover-background enabled:hover:text-tool-hover-text disabled:cursor-default motion-reduce:transition-none"
   [disabled]="disabled()"
   [title]="titleToShow()"
   (click)="handleClick()"
@@ -8,6 +8,7 @@
 >
   <span class="sr-only">{{ srTextToShow() }}</span>
   <svg
+    class="size-5"
     [icon]="iconToShow()"
     width="24"
     height="24"
