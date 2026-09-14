@@ -1,5 +1,5 @@
 <footer
-  class="flex h-13 items-center justify-between gap-6 bg-footer-background px-6 text-lg font-medium text-footer-text"
+  class="flex h-13 items-center justify-between gap-6 border-t border-card-border bg-footer-background px-6 text-sm font-medium text-footer-text"
 >
   <div class="flex">
     <p>&copy; 2025-{{ currentYear }}</p>
@@ -8,7 +8,7 @@
         @for (item of navigation; track item.path) {
           <li>
             <a
-              class="text-lg text-footer-text no-underline decoration-1 underline-offset-4 hover:text-footer-link-active hover:underline aria-[current=page]:text-footer-link-active aria-[current=page]:underline"
+              class="text-sm text-footer-text no-underline decoration-1 underline-offset-4 hover:text-footer-link-active hover:underline aria-[current=page]:text-footer-link-active aria-[current=page]:underline"
               [routerLink]="item.path"
               [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
             >

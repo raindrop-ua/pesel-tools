@@ -1,6 +1,6 @@
 @if (data(); as data) {
   <div
-    class="relative flex flex-col rounded-md border border-control-border bg-control-background py-4 pr-14 pl-4 text-lg leading-normal text-control-text"
+    class="relative flex flex-col rounded-xl border border-control-border bg-control-background py-4 pr-14 pl-4 text-lg leading-normal text-control-text"
   >
     <p>Birth Date: {{ data.birthDate | date: "dd.MM.y" }}</p>
     <p>Age: {{ data.age }}</p>

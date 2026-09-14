@@ -90,95 +90,68 @@
 
   color-scheme: light;
 
-  --main-background: light-dark(var(--color-blue-100), var(--color-blue-900));
-  --main-text: light-dark(var(--color-blue-900), var(--color-blue-100));
-  --main-outline: var(--color-cobalt-600);
-  --pesel-number: light-dark(
-    var(--color-cobalt-950),
-    var(--color-golden-tainoi-300)
+  /* Shared brand palette, established by the masthead. */
+  --brand-from: light-dark(#f4f7ff, #152747);
+  --brand-via: light-dark(#e5edf9, #13213d);
+  --brand-to: light-dark(#d5e1f3, #101b31);
+  --brand-border: light-dark(#b9c9e3, rgb(255 255 255 / 10%));
+  --brand-text: light-dark(#1c2d4c, #fff);
+  --brand-accent: light-dark(#3158a4, #ffc65c);
+  --brand-muted: light-dark(#52627e, #c2cfe6);
+  --brand-primary: light-dark(#3158a4, #ffc65c);
+  --brand-primary-text: light-dark(#fff, #142039);
+  --brand-primary-hover: light-dark(#244684, #ffd586);
+  --brand-secondary-hover: light-dark(
+    rgb(49 88 164 / 8%),
+    rgb(255 255 255 / 10%)
   );
-  --pesel-number-moment: light-dark(
-    var(--color-cobalt-950),
-    var(--color-golden-tainoi-400)
-  );
-  --button-primary-background: light-dark(
-    var(--color-cobalt-600),
-    var(--color-cobalt-700)
-  );
-  --button-primary-hover-background: light-dark(
-    var(--color-cobalt-500),
-    var(--color-cobalt-600)
-  );
-  --button-primary-text: var(--color-cobalt-100);
-  --button-secondary-background: light-dark(
-    var(--color-nile-blue-600),
-    var(--color-nile-blue-700)
-  );
-  --button-secondary-hover-background: light-dark(
-    var(--color-nile-blue-500),
-    var(--color-nile-blue-600)
-  );
-  --button-secondary-text: var(--color-nile-blue-100);
-  --button-danger-background: light-dark(
-    var(--color-cinnabar-600),
-    var(--color-cinnabar-700)
-  );
-  --button-danger-hover-background: light-dark(
-    var(--color-cinnabar-500),
-    var(--color-cinnabar-600)
-  );
-  --button-danger-text: var(--color-cinnabar-100);
+  --brand-disk: light-dark(#b3c8e9, #284a80);
+  --brand-orbit: light-dark(#ac782a, #ffc65c);
+  --brand-grid: light-dark(#526c99, #b9cef4);
+  --main-background: light-dark(#edf2fa, #0c1525);
+  --main-text: light-dark(#1c2d4c, #e5edf9);
+  --main-outline: var(--brand-accent);
+  --pesel-number: var(--brand-accent);
+  --pesel-number-moment: var(--brand-accent);
+  --button-primary-background: var(--brand-primary);
+  --button-primary-hover-background: var(--brand-primary-hover);
+  --button-primary-text: var(--brand-primary-text);
+  --button-secondary-background: light-dark(#e5edf9, #233650);
+  --button-secondary-hover-background: light-dark(#d5e1f3, #304763);
+  --button-secondary-text: var(--main-text);
+  --button-danger-background: light-dark(#a33442, #f3a6ad);
+  --button-danger-hover-background: light-dark(#872636, #ffc2c8);
+  --button-danger-text: light-dark(#fff, #3d1722);
   --shadow-25: hsl(0deg 0% 0% / 25%);
   --shadow-50: hsl(0deg 0% 0% / 50%);
   --shadow-75: hsl(0deg 0% 0% / 75%);
-  --header-background: light-dark(
-    var(--color-portage-900),
-    var(--color-portage-950)
-  );
-  --header-background-secondary: light-dark(
-    var(--color-blue-700),
-    var(--color-blue-900)
-  );
-  --header-text: var(--color-portage-100);
-  --header-link-active: var(--color-golden-tainoi-400);
-  --card-background: light-dark(var(--color-blue-200), var(--color-blue-800));
-  --card-text: light-dark(var(--color-blue-900), var(--color-blue-100));
-  --card-border: light-dark(var(--color-blue-300), var(--color-blue-700));
-  --tool-background: light-dark(var(--color-blue-400), var(--color-blue-900));
-  --tool-text: light-dark(var(--color-blue-700), var(--color-blue-500));
-  --tool-border: light-dark(var(--color-blue-500), var(--color-blue-700));
-  --tool-hover-background: light-dark(
-    var(--color-blue-500),
-    var(--color-blue-800)
-  );
-  --tool-hover-text: light-dark(var(--color-blue-800), var(--color-blue-300));
-  --tool-hover-border: var(--color-blue-600);
-  --control-background: light-dark(
-    var(--color-blue-300),
-    var(--color-blue-900)
-  );
-  --control-active-background: light-dark(
-    var(--color-blue-500),
-    var(--color-blue-700)
-  );
-  --control-active-text: var(--color-blue-100);
-  --control-text: light-dark(var(--color-blue-800), var(--color-blue-100));
-  --control-border: light-dark(var(--color-blue-400), var(--color-blue-700));
-  --control-focus-border: light-dark(
-    var(--color-cobalt-300),
-    var(--color-cobalt-700)
-  );
+  --header-background: light-dark(#f8faff, #101c30);
+  --header-background-secondary: light-dark(#f8faff, #13213d);
+  --header-text: var(--main-text);
+  --header-link-active: var(--brand-accent);
+  --card-background: light-dark(#fbfcff, #132139);
+  --card-text: var(--main-text);
+  --card-border: light-dark(#cbd8eb, #2a3b57);
+  --tool-background: light-dark(#e8effa, #1c2e49);
+  --tool-text: light-dark(#465f87, #b7c9e4);
+  --tool-border: light-dark(#b9cae3, #3a506e);
+  --tool-hover-background: var(--brand-primary);
+  --tool-hover-text: var(--brand-primary-text);
+  --tool-hover-border: var(--brand-accent);
+  --control-background: light-dark(#f0f5fd, #0e1a2d);
+  --control-active-background: var(--brand-primary);
+  --control-active-text: var(--brand-primary-text);
+  --control-text: var(--main-text);
+  --control-border: light-dark(#aabedb, #405575);
+  --control-focus-border: var(--brand-accent);
   --control-focus-shadow: light-dark(
-    var(--color-cobalt-400),
-    var(--color-cobalt-900)
+    rgb(49 88 164 / 15%),
+    rgb(255 198 92 / 15%)
   );
-  --footer-background: light-dark(
-    var(--color-portage-900),
-    var(--color-portage-950)
-  );
-  --footer-text: var(--color-portage-100);
-  --footer-link-active: var(--color-golden-tainoi-400);
-  --footer-attention: var(--color-cinnabar-600);
+  --footer-background: var(--header-background);
+  --footer-text: light-dark(#52627e, #b7c9e4);
+  --footer-link-active: var(--brand-accent);
+  --footer-attention: light-dark(#ae6740, #ffc65c);
   --masthead-background-gradient-1: light-dark(
     var(--color-blue-300),
     var(--color-navy-900)
@@ -222,24 +195,23 @@
 }
 
 @theme inline {
-  /* Masthead colors keep the same composition in both color schemes. */
-  --color-hero-from: light-dark(#f4f7ff, #152747);
-  --color-hero-via: light-dark(#e5edf9, #13213d);
-  --color-hero-to: light-dark(#d5e1f3, #101b31);
-  --color-hero-border: light-dark(#b9c9e3, rgb(255 255 255 / 10%));
-  --color-hero-text: light-dark(#1c2d4c, #fff);
-  --color-hero-accent: light-dark(#3158a4, #ffc65c);
-  --color-hero-muted: light-dark(#52627e, #c2cfe6);
-  --color-hero-primary: light-dark(#3158a4, #ffc65c);
-  --color-hero-primary-text: light-dark(#fff, #142039);
-  --color-hero-primary-hover: light-dark(#244684, #ffd586);
-  --color-hero-secondary-hover: light-dark(
-    rgb(49 88 164 / 8%),
-    rgb(255 255 255 / 10%)
-  );
-  --color-hero-disk: light-dark(#b3c8e9, #284a80);
-  --color-hero-orbit: light-dark(#ac782a, #ffc65c);
-  --color-hero-grid: light-dark(#526c99, #b9cef4);
+  /* Semantic utilities share the brand palette in both color schemes. */
+  --color-muted: light-dark(#52627e, #b0c1db);
+  --color-validation: light-dark(#a33442, #ffb2b9);
+  --color-hero-from: var(--brand-from);
+  --color-hero-via: var(--brand-via);
+  --color-hero-to: var(--brand-to);
+  --color-hero-border: var(--brand-border);
+  --color-hero-text: var(--brand-text);
+  --color-hero-accent: var(--brand-accent);
+  --color-hero-muted: var(--brand-muted);
+  --color-hero-primary: var(--brand-primary);
+  --color-hero-primary-text: var(--brand-primary-text);
+  --color-hero-primary-hover: var(--brand-primary-hover);
+  --color-hero-secondary-hover: var(--brand-secondary-hover);
+  --color-hero-disk: var(--brand-disk);
+  --color-hero-orbit: var(--brand-orbit);
+  --color-hero-grid: var(--brand-grid);
   --color-main-background: var(--main-background);
   --color-main-text: var(--main-text);
   --color-main-outline: var(--main-outline);

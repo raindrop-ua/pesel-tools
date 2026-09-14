@@ -1,5 +1,5 @@
 <header
-  class="relative z-10 flex h-16 items-center justify-between gap-4 bg-header-background px-6"
+  class="relative z-10 flex h-16 items-center justify-between gap-4 border-b border-card-border bg-header-background px-6"
 >
   <div class="flex items-center gap-4">
     <button
@@ -17,14 +17,14 @@
     @if (menuOpen()) {
       <nav
         id="mobile-navigation"
-        class="absolute inset-x-0 top-16 z-100 bg-header-background-secondary p-4 shadow-lg backdrop-blur-sm md:hidden"
+        class="absolute inset-x-0 top-16 z-100 rounded-b-3xl border-b border-card-border bg-header-background-secondary p-6 shadow-lg shadow-main-text/10 backdrop-blur-sm md:hidden"
         aria-label="Mobile"
       >
-        <ul class="flex flex-col gap-4 md:flex-row">
+        <ul class="flex flex-col gap-1 md:flex-row">
           @for (item of navigation; track item.path) {
             <li>
               <a
-                class="mb-3 text-xl font-normal text-header-text no-underline aria-[current=page]:text-header-link-active aria-[current=page]:underline decoration-2 underline-offset-5"
+                class="block rounded-xl px-4 py-3 text-lg font-semibold text-header-text no-underline hover:bg-control-background aria-[current=page]:bg-control-background aria-[current=page]:text-header-link-active"
                 [routerLink]="item.path"
                 [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
                 (click)="onMenuClose()"
@@ -36,20 +36,20 @@
         </ul>
       </nav>
     }
-    <div class="text-lg font-extrabold text-header-text sm:mr-6 sm:text-3xl">
+    <div class="text-lg font-extrabold text-header-text sm:mr-3 sm:text-2xl">
       <a
         class="block text-header-text no-underline"
         [routerLink]="[AppRouteEnum.Home]"
       >
-        PESEL Tools
+        <span class="text-header-link-active">PESEL</span> Tools
       </a>
     </div>
     <nav class="hidden md:block" aria-label="Main">
-      <ul class="flex flex-col gap-4 md:flex-row">
+      <ul class="flex flex-col gap-1 md:flex-row">
         @for (item of navigation; track item.path) {
           <li>
             <a
-              class="block text-xl font-bold text-header-text no-underline decoration-3 underline-offset-5 transition-[text-underline-offset] duration-300 hover:underline hover:underline-offset-8 aria-[current=page]:text-header-link-active aria-[current=page]:underline motion-reduce:transition-none"
+              class="block rounded-xl px-3 py-2 text-base font-semibold text-header-text no-underline transition-colors duration-200 hover:bg-control-background hover:text-header-link-active aria-[current=page]:bg-control-background aria-[current=page]:text-header-link-active motion-reduce:transition-none"
               [routerLink]="item.path"
               [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
             >

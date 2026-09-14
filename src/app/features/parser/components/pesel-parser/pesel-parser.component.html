@@ -1,4 +1,4 @@
-<p class="mb-2 text-xl">Enter PESEL for parsing</p>
+<p class="mb-4 text-lg font-semibold">Enter PESEL for parsing</p>
 <form class="mb-4" [formGroup]="form">
   <app-pesel-input
     formControlName="pesel"
@@ -9,7 +9,12 @@
   />
 
   @if (peselControl?.errors && peselControl?.touched) {
-    <div id="pesel-error" class="mb-2" role="status" aria-live="polite">
+    <div
+      id="pesel-error"
+      class="mt-3 text-sm text-validation"
+      role="status"
+      aria-live="polite"
+    >
       @if (peselControl?.errors?.["required"]) {
         <p>Please enter PESEL to parse</p>
       }

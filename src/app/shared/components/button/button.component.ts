@@ -30,6 +30,6 @@ export class ButtonComponent {
       danger:
         'bg-button-danger-background text-button-danger-text [&:not([disabled])]:hover:bg-button-danger-hover-background',
     };
-    return `inline-block cursor-pointer rounded-sm border-0 px-4 py-2 text-center text-base no-underline transition-colors duration-200 disabled:cursor-default disabled:opacity-50 motion-reduce:transition-none ${variants[this.appButton]}`;
+    return `inline-flex min-h-12 cursor-pointer items-center justify-center rounded-xl border-0 px-5 py-3 text-center text-sm font-bold no-underline transition-colors duration-200 disabled:cursor-default disabled:opacity-50 motion-reduce:transition-none ${variants[this.appButton]}`;
   }
 }

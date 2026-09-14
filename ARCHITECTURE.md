@@ -69,7 +69,7 @@ Styles use Tailwind CSS 4 via `@tailwindcss/postcss` in `.postcssrc.json`:
 
 - `src/styles.css` imports Tailwind and holds minimal document-wide base styles.
 - Component templates and Angular host classes own layout, typography, responsive states, and interactions.
-- `src/app/styles/theme.css` preserves the original palette and exposes semantic color utilities through `@theme inline`. Colors use `light-dark()` with the existing `data-theme` selection and system preference fallback.
+- `src/app/styles/theme.css` defines a shared `--brand-*` palette for the masthead, navigation, cards, controls, and actions, and exposes semantic color utilities through `@theme inline`. Colors use `light-dark()` with the existing `data-theme` selection and system preference fallback.
 - `src/app/styles/fonts.css` loads the self-hosted Quicksand and JetBrains Mono fonts.
 - `src/app/styles/animations.css` registers the hero and loader keyframes as Tailwind animation utilities, used with `motion-safe:`.
 
