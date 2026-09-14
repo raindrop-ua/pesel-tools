@@ -222,6 +222,24 @@
 }
 
 @theme inline {
+  /* Masthead colors keep the same composition in both color schemes. */
+  --color-hero-from: light-dark(#f4f7ff, #152747);
+  --color-hero-via: light-dark(#e5edf9, #13213d);
+  --color-hero-to: light-dark(#d5e1f3, #101b31);
+  --color-hero-border: light-dark(#b9c9e3, rgb(255 255 255 / 10%));
+  --color-hero-text: light-dark(#1c2d4c, #fff);
+  --color-hero-accent: light-dark(#3158a4, #ffc65c);
+  --color-hero-muted: light-dark(#52627e, #c2cfe6);
+  --color-hero-primary: light-dark(#3158a4, #ffc65c);
+  --color-hero-primary-text: light-dark(#fff, #142039);
+  --color-hero-primary-hover: light-dark(#244684, #ffd586);
+  --color-hero-secondary-hover: light-dark(
+    rgb(49 88 164 / 8%),
+    rgb(255 255 255 / 10%)
+  );
+  --color-hero-disk: light-dark(#b3c8e9, #284a80);
+  --color-hero-orbit: light-dark(#ac782a, #ffc65c);
+  --color-hero-grid: light-dark(#526c99, #b9cef4);
   --color-main-background: var(--main-background);
   --color-main-text: var(--main-text);
   --color-main-outline: var(--main-outline);
