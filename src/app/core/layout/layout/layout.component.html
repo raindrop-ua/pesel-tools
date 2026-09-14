@@ -1,6 +1,11 @@
-<app-header/>
-<main>
-  <app-loader [class.show]="loading()" [class.hide]="!loading()" />
+<app-header />
+<main class="min-h-[calc(100vh-116px)]">
+  <app-loader
+    [class.opacity-100]="loading()"
+    [class.pointer-events-auto]="loading()"
+    [class.opacity-0]="!loading()"
+    [class.pointer-events-none]="!loading()"
+  />
   <router-outlet></router-outlet>
 </main>
-<app-footer/>
+<app-footer />

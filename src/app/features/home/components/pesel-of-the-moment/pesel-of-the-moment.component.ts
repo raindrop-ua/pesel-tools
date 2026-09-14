@@ -19,7 +19,6 @@ import { ToolbarComponent } from '@components/toolbar/toolbar.component';
   selector: 'app-pesel-of-the-moment',
   imports: [CopyButtonComponent, ToolbarComponent],
   templateUrl: './pesel-of-the-moment.component.html',
-  styleUrl: './pesel-of-the-moment.component.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -23,7 +23,6 @@ import { validDateValidator } from '@shared/validators/valid-date.validator';
     ReactiveFormsModule,
   ],
   templateUrl: './simple-generator.component.html',
-  styleUrl: './simple-generator.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleGeneratorComponent {

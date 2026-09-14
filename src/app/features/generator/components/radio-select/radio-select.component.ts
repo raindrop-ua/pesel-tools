@@ -13,7 +13,6 @@ import { RadioOption } from '@features/generator/components/radio-select/model/r
   selector: 'app-radio-select',
   imports: [],
   templateUrl: './radio-select.component.html',
-  styleUrl: './radio-select.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

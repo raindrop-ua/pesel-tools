@@ -1,11 +1,21 @@
 {
-  "extends": "stylelint-config-standard-scss",
-  "customSyntax": "postcss-scss",
+  "extends": "stylelint-config-standard",
   "rules": {
-    "at-rule-no-unknown": null,
-    "scss/at-rule-no-unknown": true,
-    "color-function-notation": "modern",
-    "function-name-case": null,
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "theme",
+          "apply",
+          "source",
+          "custom-variant",
+          "utility",
+          "variant",
+          "reference"
+        ]
+      }
+    ],
+    "import-notation": "string",
     "no-descending-specificity": null
   }
 }

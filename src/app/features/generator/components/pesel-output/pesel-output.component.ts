@@ -22,7 +22,6 @@ import { GotoParseButtonComponent } from '@components/toolbar/goto-parse-button/
     GotoParseButtonComponent,
   ],
   templateUrl: './pesel-output.component.html',
-  styleUrl: './pesel-output.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselOutputComponent {

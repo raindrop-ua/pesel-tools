@@ -33,7 +33,7 @@ describe('PESEL tools flows', () => {
     cy.get('input[aria-label="Year of birth"]').type('1982');
     cy.contains('button', 'Generate').click();
 
-    cy.get('.pesel-item .number')
+    cy.get('[data-testid="pesel-number"]')
       .should('have.length', 1)
       .first()
       .invoke('text')

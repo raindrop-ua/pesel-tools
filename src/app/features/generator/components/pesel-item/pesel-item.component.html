@@ -1,6 +1,12 @@
-<div class="pesel-item">
-  <span class="number">{{ peselNumber() }}</span>
-  <app-toolbar>
+<div class="group flex gap-6">
+  <span
+    data-testid="pesel-number"
+    class="block overflow-x-auto overflow-y-hidden font-mono text-xl leading-6 font-medium tracking-[1px] text-pesel-number tabular-nums"
+    >{{ peselNumber() }}</span
+  >
+  <app-toolbar
+    class="relative! -mt-3 hidden! opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 sm:flex! motion-reduce:transition-none"
+  >
     <app-goto-parse-button [pesel]="peselNumber()" />
     <app-save-button [contentToSave]="peselNumber()" />
     <app-copy-json-button [contentToCopy]="peselNumber()" />

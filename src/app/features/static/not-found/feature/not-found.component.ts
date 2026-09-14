@@ -6,7 +6,6 @@ import { CardComponent } from '@components/card/card.component';
   selector: 'app-not-found',
   imports: [SectionComponent, CardComponent],
   templateUrl: './not-found.component.html',
-  styleUrl: './not-found.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotFoundComponent {}

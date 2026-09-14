@@ -1,28 +1,77 @@
-<div class="masthead" #masthead>
-  <div class="masthead-inner-wrapper">
-    <div class="float float-1">Ultimate</div>
-    <div class="float float-2">PESEL</div>
-    <div class="float float-3">Tools<span class="dot">.</span></div>
-    <div class="pulses">
-      <div class="pulse-circle circle-1"></div>
-      <div class="pulse-circle circle-2"></div>
-      <div class="pulse-circle circle-3"></div>
+<section class="group relative isolate" aria-labelledby="masthead-title">
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-3xl border border-hero-border bg-linear-to-br from-hero-from via-hero-via to-hero-to"
+    aria-hidden="true"
+  >
+    <div
+      class="absolute right-0 bottom-0 h-80 w-full opacity-[0.07] [background-image:linear-gradient(var(--color-hero-grid)_1px,transparent_1px),linear-gradient(90deg,var(--color-hero-grid)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:linear-gradient(to_left,black,transparent)] sm:top-0 sm:h-full sm:w-1/2"
+    ></div>
+    <div
+      class="absolute right-8 bottom-14 size-60 rounded-full bg-hero-disk/50 min-[480px]:max-sm:right-[calc(50%-120px)] sm:right-4 sm:bottom-14 md:right-12 md:bottom-20 md:size-72"
+    ></div>
+    <div
+      class="absolute right-[-35px] bottom-[-70px] size-[380px] rounded-full border border-hero-orbit/80 min-[480px]:max-sm:right-[calc(50%-190px)] sm:right-[-45px] sm:bottom-[-10px] sm:size-[360px] md:right-5 md:size-[400px] lg:size-[450px] motion-safe:transition-transform motion-safe:duration-700 motion-safe:group-hover:rotate-12"
+    >
+      <svg
+        class="absolute top-[12%] right-[12%] size-6 text-hero-orbit"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+      >
+        <path d="M12 3v18M3 12h18" />
+      </svg>
     </div>
   </div>
-  <img
-    class="masthead-image"
-    [ngSrc]="'/assets/masthead-girl.webp'"
-    #parallaxImg
-    width="880"
-    height="880"
-    alt="Girl holding PESEL card"
-    priority
-    decoding="async"
-  />
-</div>
-<svg width="0" height="0" style="position:absolute">
-  <filter id="grain">
-    <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="1" stitchTiles="stitch" />
-    <feColorMatrix type="saturate" values="0"/>
-  </filter>
-</svg>
+
+  <div
+    class="relative z-10 px-7 pt-9 min-[480px]:max-sm:text-center sm:flex sm:min-h-[440px] sm:w-[58%] sm:flex-col sm:justify-center sm:py-8 md:w-[53%] md:px-9 md:py-10 lg:min-h-[480px] lg:px-12"
+  >
+    <h1 id="masthead-title" class="mb-5 text-hero-text">
+      <span class="mb-3 block text-2xl font-medium tracking-tight"
+        >Ultimate</span
+      >
+      <span
+        class="block text-[4rem]/[0.95] font-bold tracking-[-0.055em] min-[480px]:max-sm:text-[3.5rem] lg:text-[5rem]"
+      >
+        <span class="block text-hero-accent min-[480px]:max-sm:inline"
+          >PESEL
+        </span>
+        <span class="block min-[480px]:max-sm:inline"
+          >Tools<span class="text-hero-accent">.</span></span
+        >
+      </span>
+    </h1>
+    <p class="text-base/7 text-hero-muted lg:text-lg/7">
+      Parse, validate and generate.<br />
+      A little clarity in eleven digits.
+    </p>
+    <div class="mt-7 flex flex-wrap gap-3 min-[480px]:max-sm:justify-center">
+      <a
+        [routerLink]="['/', AppRouteEnum.Parser]"
+        class="inline-flex min-h-12 items-center justify-center rounded-xl bg-hero-primary px-5 text-sm font-bold text-hero-primary-text no-underline hover:bg-hero-primary-hover focus-visible:outline-hero-accent motion-safe:transition motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 lg:px-6 lg:text-base"
+        >Parse a PESEL</a
+      >
+      <a
+        [routerLink]="['/', AppRouteEnum.Generator]"
+        class="inline-flex min-h-12 items-center justify-center rounded-xl border border-hero-muted/70 px-5 text-sm font-bold text-hero-text no-underline hover:border-hero-text hover:bg-hero-secondary-hover focus-visible:outline-hero-accent motion-safe:transition motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 lg:px-6 lg:text-base"
+        >Generate</a
+      >
+    </div>
+  </div>
+
+  <div
+    class="pointer-events-none relative mt-3 h-[330px] overflow-hidden rounded-b-3xl sm:absolute sm:right-0 sm:bottom-0 sm:mt-0 sm:h-[440px] sm:w-[52%] md:h-[470px] lg:h-[520px]"
+  >
+    <img
+      class="absolute right-[-10px] bottom-0 size-[330px] max-w-none min-[480px]:max-sm:right-[calc(50%-165px)] sm:right-[-35px] sm:size-[360px] md:size-[430px] lg:right-[-10px] lg:size-[500px] motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out sm:motion-safe:group-hover:-translate-x-1"
+      [ngSrc]="'/assets/masthead-girl.webp'"
+      width="880"
+      height="880"
+      alt="Girl holding PESEL card"
+      priority
+      decoding="async"
+    />
+  </div>
+</section>
