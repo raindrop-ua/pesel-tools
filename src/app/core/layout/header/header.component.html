@@ -1,26 +1,31 @@
-<header>
-  <div class="main-block">
+<header
+  class="relative z-10 flex h-16 items-center justify-between gap-4 border-b border-card-border bg-header-background px-6"
+>
+  <div class="flex items-center gap-4">
     <button
-      class="burger"
+      class="flex cursor-pointer flex-col gap-1 border-0 bg-transparent p-1.5 md:hidden"
       type="button"
       (click)="onMenuToggle()"
       aria-label="Toggle menu"
       aria-controls="mobile-navigation"
       [attr.aria-expanded]="menuOpen()"
     >
-      <span class="line"></span>
-      <span class="line"></span>
-      <span class="line"></span>
+      <span class="h-0.5 w-6 bg-header-text"></span>
+      <span class="h-0.5 w-6 bg-header-text"></span>
+      <span class="h-0.5 w-6 bg-header-text"></span>
     </button>
     @if (menuOpen()) {
-      <nav id="mobile-navigation" class="mobile-navigation" aria-label="Mobile">
-        <ul>
+      <nav
+        id="mobile-navigation"
+        class="absolute inset-x-0 top-16 z-100 rounded-b-3xl border-b border-card-border bg-header-background-secondary p-6 shadow-lg shadow-main-text/10 backdrop-blur-sm md:hidden"
+        aria-label="Mobile"
+      >
+        <ul class="flex flex-col gap-1 md:flex-row">
           @for (item of navigation; track item.path) {
             <li>
               <a
-                class="link"
+                class="block rounded-xl px-4 py-3 text-lg font-semibold text-header-text no-underline hover:bg-control-background aria-[current=page]:bg-control-background aria-[current=page]:text-header-link-active"
                 [routerLink]="item.path"
-                [class.active]="isLinkActive(item.path)"
                 [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
                 (click)="onMenuClose()"
               >
@@ -31,17 +36,21 @@
         </ul>
       </nav>
     }
-    <div class="logo">
-      <a class="logo-link" [routerLink]="[AppRouteEnum.Home]"> PESEL Tools </a>
+    <div class="text-lg font-extrabold text-header-text sm:mr-3 sm:text-2xl">
+      <a
+        class="block text-header-text no-underline"
+        [routerLink]="[AppRouteEnum.Home]"
+      >
+        <span class="text-header-link-active">PESEL</span> Tools
+      </a>
     </div>
-    <nav class="navigation" aria-label="Main">
-      <ul>
+    <nav class="hidden md:block" aria-label="Main">
+      <ul class="flex flex-col gap-1 md:flex-row">
         @for (item of navigation; track item.path) {
           <li>
             <a
-              class="link"
+              class="block rounded-xl px-3 py-2 text-base font-semibold text-header-text no-underline transition-colors duration-200 hover:bg-control-background hover:text-header-link-active aria-[current=page]:bg-control-background aria-[current=page]:text-header-link-active motion-reduce:transition-none"
               [routerLink]="item.path"
-              [class.active]="isLinkActive(item.path)"
               [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
             >
               {{ item.label }}
@@ -56,7 +65,7 @@
 @if (menuOpen()) {
   <button
     type="button"
-    class="overlay"
+    class="fixed inset-0 z-5 border-0 bg-black/50 p-0 backdrop-blur-sm md:hidden"
     aria-label="Close menu"
     (click)="onMenuClose()"
   ></button>

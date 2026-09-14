@@ -12,7 +12,7 @@ import { SimpleGeneratorComponent } from '@features/generator/components/simple-
     SimpleGeneratorComponent,
   ],
   templateUrl: './generator.component.html',
-  styleUrl: './generator.component.scss',
+  host: { class: 'block' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeneratorComponent {}

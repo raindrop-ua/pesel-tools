@@ -1,8 +1,21 @@
-<section class="pesel-wrapper">
-  <h2 class="title">PESEL of&nbsp;the&nbsp;moment</h2>
-  <p class="pesel">
+<section
+  class="relative mb-8 overflow-hidden rounded-3xl border border-hero-border bg-linear-to-br from-hero-from via-hero-via to-hero-to px-5 py-9 text-center text-card-text sm:py-10"
+>
+  <div
+    class="pointer-events-none absolute -right-12 -bottom-24 size-64 rounded-full border border-hero-orbit/30"
+    aria-hidden="true"
+  ></div>
+  <h2 class="relative mb-3 text-xl font-semibold leading-normal text-hero-text">
+    PESEL of&nbsp;the&nbsp;moment
+  </h2>
+  <p
+    class="relative flex justify-center gap-0.5 text-2xl font-medium text-pesel-number-moment min-[412px]:gap-1 min-[412px]:text-3xl sm:text-4xl"
+  >
     @for (digits of digits(); track $index) {
-      <span class="digit">{{ digits }}</span>
+      <span
+        class="inline-block w-[1ch] text-center font-mono font-bold tabular-nums"
+        >{{ digits }}</span
+      >
     }
   </p>
   <app-toolbar>

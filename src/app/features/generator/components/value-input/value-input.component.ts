@@ -12,7 +12,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'app-value-input',
   imports: [],
   templateUrl: './value-input.component.html',
-  styleUrl: './value-input.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import "./app/styles/fonts.css";
+@import "./app/styles/theme.css";
+@import "./app/styles/animations.css";
+
+@layer base {
+  html {
+    @apply bg-main-background font-sans text-main-text antialiased;
+  }
+
+  body {
+    @apply min-h-screen;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-balance;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  a,
+  button {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-main-outline;
+  }
+}

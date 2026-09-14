@@ -13,6 +13,9 @@ interface SeoData {
   ogImage?: string;
 }
 
+const DEFAULT_OG_IMAGE = 'https://pesel.dev/og-image.png';
+const DEFAULT_OG_IMAGE_ALT = 'Ultimate PESEL Tools';
+
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly titleSrv = inject(Title);
@@ -41,6 +44,10 @@ export class SeoService {
   }
 
   public update(seo: SeoData): void {
+    const title = seo.ogTitle ?? seo.title;
+    const description = seo.ogDescription ?? seo.description;
+    const image = seo.ogImage ?? DEFAULT_OG_IMAGE;
+
     if (seo.title) this.titleSrv.setTitle(seo.title);
 
     if (seo.description) {
@@ -51,22 +58,47 @@ export class SeoService {
       this.meta.updateTag({ name: 'keywords', content: seo.keywords });
     }
 
-    if (seo.ogTitle ?? seo.title) {
+    if (title) {
       this.meta.updateTag({
         property: 'og:title',
-        content: seo.ogTitle ?? seo.title!,
+        content: title,
       });
+      this.meta.updateTag({ name: 'twitter:title', content: title });
     }
 
-    if (seo.ogDescription ?? seo.description) {
+    if (description) {
       this.meta.updateTag({
         property: 'og:description',
-        content: seo.ogDescription ?? seo.description!,
+        content: description,
+      });
+      this.meta.updateTag({
+        name: 'twitter:description',
+        content: description,
       });
     }
 
-    if (seo.ogImage) {
-      this.meta.updateTag({ property: 'og:image', content: seo.ogImage });
-    }
+    this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({
+      property: 'og:site_name',
+      content: 'Ultimate PESEL Tools',
+    });
+    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:image:secure_url', content: image });
+    this.meta.updateTag({ property: 'og:image:type', content: 'image/png' });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    this.meta.updateTag({
+      property: 'og:image:alt',
+      content: DEFAULT_OG_IMAGE_ALT,
+    });
+    this.meta.updateTag({
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({
+      name: 'twitter:image:alt',
+      content: DEFAULT_OG_IMAGE_ALT,
+    });
   }
 }

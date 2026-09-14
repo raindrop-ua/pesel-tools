@@ -18,7 +18,6 @@ import { peselValidator } from '@shared/validators/pesel.validator';
   selector: 'app-pesel-parser',
   imports: [PeselInputComponent, ReactiveFormsModule, ResultOutputComponent],
   templateUrl: './pesel-parser.component.html',
-  styleUrl: './pesel-parser.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselParserComponent implements OnInit {

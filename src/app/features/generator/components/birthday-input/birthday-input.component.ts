@@ -14,7 +14,6 @@ import { ValueInputComponent } from '@features/generator/components/value-input/
   selector: 'app-birthday-input',
   imports: [RadioSelectComponent, ReactiveFormsModule, ValueInputComponent],
   templateUrl: './birthday-input.component.html',
-  styleUrl: './birthday-input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BirthdayInputComponent implements AfterViewInit {

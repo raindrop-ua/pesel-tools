@@ -18,7 +18,7 @@ import {
   selector: 'app-toolbar-button',
   imports: [SvgIconComponent],
   templateUrl: './toolbar-button.component.html',
-  styleUrl: './toolbar-button.component.scss',
+  host: { class: 'block' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarButtonComponent {

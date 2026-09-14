@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-section',
   imports: [],
   templateUrl: './section.component.html',
-  styleUrl: './section.component.scss',
+  host: { class: 'mx-auto block max-w-5xl overflow-x-clip p-6' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SectionComponent { }
+export class SectionComponent {}

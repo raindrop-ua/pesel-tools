@@ -65,12 +65,15 @@ Additional platform services include clipboard, download, storage, theme, SEO, a
 
 ## Styling
 
-Styles use SCSS with layered organization:
+Styles use Tailwind CSS 4 via `@tailwindcss/postcss` in `.postcssrc.json`:
 
-- `src/styles.scss` as global entry
-- `src/app/styles/abstracts` for tokens, mixins, functions, variables
-- `src/app/styles/base` for reset/typography/accessibility
-- `src/app/styles/themes` for light/dark themes
+- `src/styles.css` imports Tailwind and holds minimal document-wide base styles.
+- Component templates and Angular host classes own layout, typography, responsive states, and interactions.
+- `src/app/styles/theme.css` defines a shared `--brand-*` palette for the masthead, navigation, cards, controls, and actions, and exposes semantic color utilities through `@theme inline`. Colors use `light-dark()` with the existing `data-theme` selection and system preference fallback.
+- `src/app/styles/fonts.css` loads the self-hosted Quicksand and JetBrains Mono fonts.
+- `src/app/styles/animations.css` registers the hero and loader keyframes as Tailwind animation utilities, used with `motion-safe:`.
+
+Use complete class names for conditional variants (see the button component), so Tailwind can discover them. New components default to CSS; Sass and component SCSS are no longer used.
 
 ## Imports and Aliases
 

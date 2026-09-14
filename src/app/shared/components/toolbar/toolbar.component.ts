@@ -4,7 +4,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-toolbar',
   imports: [],
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.scss',
+  host: {
+    class:
+      'absolute top-2.5 right-2.5 z-1 flex flex-col-reverse gap-2 sm:flex-row',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {}

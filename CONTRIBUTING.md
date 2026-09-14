@@ -39,7 +39,7 @@ npm run test:coverage
 Additional useful checks:
 
 ```bash
-npm run lint:scss
+npm run lint:css
 npm run cypress:run
 ```
 
@@ -58,8 +58,8 @@ Examples:
 Husky + lint-staged run automatically on commit:
 
 - ESLint autofix for `*.ts,*.js`
-- Stylelint autofix for `*.scss,*.css`
-- Prettier for `*.ts,*.js,*.scss,*.json,*.html,*.md`
+- Stylelint autofix for `*.css`
+- Prettier for `*.ts,*.js,*.css,*.json,*.html,*.md`
 
 ## Pull Request Notes
 

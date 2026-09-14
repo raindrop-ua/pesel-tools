@@ -19,7 +19,6 @@ import { ThemeSwitcherComponent } from '@core/components/theme-switcher/theme-sw
   selector: 'app-header',
   imports: [RouterLink, ThemeSwitcherComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
