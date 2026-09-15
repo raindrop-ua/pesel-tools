@@ -8,6 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "vitest",
+    "typecheck:worker": "tsc --project tsconfig.worker.json --noEmit",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "start:ssr": "node dist/pesel-tools/server/server.mjs",

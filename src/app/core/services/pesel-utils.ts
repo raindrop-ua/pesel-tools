@@ -41,6 +41,8 @@ export function isValidChecksum(pesel: string): boolean {
  * @returns True if the date is valid, according to calendar rules, false otherwise.
  */
 export function isValidDate(year: number, month: number, day: number): boolean {
+  if (![year, month, day].every(Number.isInteger)) return false;
+
   if (month < 1 || month > 12 || day < 1 || day > 31) {
     return false;
   }
