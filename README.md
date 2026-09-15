@@ -12,6 +12,7 @@ A lightweight app that parses and validates Polish PESEL numbers with full birth
 
 ## Features
 
+- Unique PESEL generation in a Web Worker, with cancellable batches up to 100,000
 - PESEL validation (format, checksum, and birthdate)
 - Extracts birthdate
 - Detects biological sex from PESEL

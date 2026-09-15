@@ -1,175 +1,73 @@
 import { Injectable } from '@angular/core';
-import { calculateChecksumDigit, isValidDate } from './pesel-utils';
+import type { PeselGenerationOptions } from '../generation/pesel-generation';
+import type {
+  GenerationRequest,
+  GenerationResponse,
+} from '../generation/pesel-worker.protocol';
 
-export interface PeselGenerationOptions {
-  year?: number;
-  month?: number;
-  day?: number;
-  sex?: 'male' | 'female';
-}
-
-export class InvalidBirthDateError extends Error {
-  constructor(message = 'Provided birth date is invalid.') {
-    super(message);
-    this.name = 'InvalidBirthDateError';
-  }
-}
-
-export class InvalidDateRangeError extends Error {
-  constructor(message = 'PESEL supports only years between 1800 and 2299.') {
-    super(message);
-    this.name = 'InvalidDateRangeError';
-  }
-}
-
-export class InvalidGenerationOptionsError extends Error {
-  constructor(
-    message = 'If birth date is provided, year, month, and day must all be specified.',
-  ) {
-    super(message);
-    this.name = 'InvalidGenerationOptionsError';
-  }
-}
-
-@Injectable({
-  providedIn: 'root',
-})
+/** Each job owns a worker, so cancellation cannot interrupt another consumer. */
+@Injectable({ providedIn: 'root' })
 export class PeselGeneratorService {
-  /**
-   * Generates a valid PESEL number.
-   *
-   * You can optionally provide parameters to generate a PESEL for a specific
-   * birthdate and sex. If parameters are not provided, they will be
-   * generated randomly within reasonable ranges.
-   *
-   * @param options Optional parameters for generation.
-   * @param options.year The desired birth year (full year, e.g., 1990).
-   * @param options.month The desired birth month (1-12).
-   * @param options.day The desired birthday (1-31).
-   * @param options.sex The desired sex ('male' or 'female').
-   * @returns A valid PESEL number string.
-   * @throws Error if unable to generate a valid PESEL (e.g., invalid date combination provided).
-   */
-  public generatePesel(options?: PeselGenerationOptions): string {
-    const today = new Date();
-    const currentYear = today.getFullYear();
-
-    let birthYear: number;
-    let birthMonth: number;
-    let birthDay: number;
-    let sex: 'male' | 'female';
-    const dateParts = [options?.year, options?.month, options?.day];
-    const hasAnyDatePart = dateParts.some((part) => part !== undefined);
-    const hasAllDateParts = dateParts.every((part) => part !== undefined);
-
-    if (hasAnyDatePart && !hasAllDateParts) {
-      throw new InvalidGenerationOptionsError();
-    }
-
-    // 1. Determining the year, month and day of birth
-    if (hasAllDateParts) {
-      birthYear = Number(options?.year);
-      birthMonth = Number(options?.month);
-      birthDay = Number(options?.day);
-
-      // Simple check of validity of entered date before proceeding
-      if (!isValidDate(birthYear, birthMonth, birthDay)) {
-        throw new InvalidBirthDateError();
-      }
-    } else {
-      // Generate a random date of birth (e.g. within the last 100 years)
-      const maxBirthYear = currentYear; // Can be limited to earlier years if necessary
-      const minBirthYear = currentYear - 100;
-      birthYear =
-        Math.floor(Math.random() * (maxBirthYear - minBirthYear + 1)) +
-        minBirthYear;
-
-      const daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-      // Generate a random month and day, making sure they are valid for the year
-      do {
-        birthMonth = Math.floor(Math.random() * 12) + 1;
-        const maxDay =
-          birthMonth === 2 &&
-          ((birthYear % 4 === 0 && birthYear % 100 !== 0) ||
-            birthYear % 400 === 0)
-            ? 29
-            : daysInMonth[birthMonth];
-        birthDay = Math.floor(Math.random() * maxDay) + 1;
-      } while (!isValidDate(birthYear, birthMonth, birthDay)); // Retry if an invalid date is generated (though this is unlikely with maxDay calculation)
-    }
-
-    // 2. Sex determination
-    if (options?.sex) {
-      sex = options.sex;
-    } else {
-      sex = Math.random() < 0.5 ? 'male' : 'female';
-    }
-
-    // 3. Formation of the first 6 digits (year, month, day, taking into account the century)
-    let monthCode: number;
-    const peselYear = birthYear % 100;
-
-    // Determining the century and adjusting the month
-    if (birthYear >= 1800 && birthYear <= 1899) {
-      monthCode = birthMonth + 80;
-    } else if (birthYear >= 1900 && birthYear <= 1999) {
-      monthCode = birthMonth; // 1900-1999 do not require adjustment
-    } else if (birthYear >= 2000 && birthYear <= 2099) {
-      monthCode = birthMonth + 20;
-    } else if (birthYear >= 2100 && birthYear <= 2199) {
-      monthCode = birthMonth + 40;
-    } else if (birthYear >= 2200 && birthYear <= 2299) {
-      monthCode = birthMonth + 60;
-    } else {
-      throw new InvalidDateRangeError();
-    }
-
-    const peselDatePart =
-      peselYear.toString().padStart(2, '0') +
-      monthCode.toString().padStart(2, '0') +
-      birthDay.toString().padStart(2, '0');
-
-    // 4. Generate last 4 digits (unique number + sex)
-    // The ninth digit (0-9) indicates sex: even for females, odd for males.
-    // The last (eleventh) digit is the checksum.
-    // Generate 3 random digits for the number, and the 4th (the tenth in the full PESEL) will determine the sex.
-
-    let serialPart = '';
-    for (let i = 0; i < 3; i++) {
-      serialPart += Math.floor(Math.random() * 10).toString();
-    }
-
-    let sexDigit;
-    if (sex === 'female') {
-      // Even number (0, 2, 4, 6, 8)
-      sexDigit = Math.floor(Math.random() * 5) * 2;
-    } else {
-      // Odd number (1, 3, 5, 7, 9)
-      sexDigit = Math.floor(Math.random() * 5) * 2 + 1;
-    }
-
-    const firstTenDigits = peselDatePart + serialPart + sexDigit.toString();
-
-    // 5. Calculate checksum
-    const checksumDigit = calculateChecksumDigit(firstTenDigits);
-
-    // 6. Formation of the final PESEL
-    return firstTenDigits + checksumDigit.toString();
-  }
-
-  public generateUniquePesel(
-    existing: Iterable<string>,
+  public generateBatch(
+    count = 1,
     options?: PeselGenerationOptions,
-    maxAttempts = 500,
-  ): string | null {
-    const existingSet = new Set(existing);
-
-    for (let i = 0; i < maxAttempts; i++) {
-      const pesel = this.generatePesel(options);
-      if (!existingSet.has(pesel)) return pesel;
-    }
-
-    return null;
+    existing: string[] = [],
+    signal?: AbortSignal,
+  ): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      if (signal?.aborted) {
+        reject(new DOMException('Generation cancelled.', 'AbortError'));
+        return;
+      }
+      if (typeof Worker === 'undefined') {
+        reject(
+          new Error('Generation requires a browser with Web Worker support.'),
+        );
+        return;
+      }
+      const worker = new Worker(
+        new URL('../generation/pesel.worker', import.meta.url),
+        { type: 'module' },
+      );
+      const cleanup = () => {
+        clearTimeout(timeout);
+        signal?.removeEventListener('abort', abort);
+        worker.terminate();
+      };
+      const fail = (error: Error) => {
+        cleanup();
+        reject(error);
+      };
+      const abort = () =>
+        fail(new DOMException('Generation cancelled.', 'AbortError'));
+      const timeout = setTimeout(
+        () =>
+          fail(new Error('Generation timed out. Please try a smaller batch.')),
+        60_000,
+      );
+      signal?.addEventListener('abort', abort, { once: true });
+      worker.onmessage = ({ data }: MessageEvent<GenerationResponse>) => {
+        cleanup();
+        if (data.ok) resolve(data.pesels);
+        else reject(new Error(data.message));
+      };
+      worker.onerror = () =>
+        fail(new Error('Could not run the generator. Please try again.'));
+      worker.onmessageerror = () =>
+        fail(new Error('Could not read the generated numbers.'));
+      try {
+        worker.postMessage({
+          count,
+          options,
+          existing,
+        } satisfies GenerationRequest);
+      } catch (error) {
+        fail(
+          error instanceof Error
+            ? error
+            : new Error('Could not start generation.'),
+        );
+      }
+    });
   }
 }

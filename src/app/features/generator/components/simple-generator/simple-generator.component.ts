@@ -1,12 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { PeselGeneratorService } from '@services/pesel-generator.service';
-import { PeselStoreService } from '@services/pesel-store.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { GeneratorStateService } from '../../generator-state.service';
+import { MAX_BATCH_SIZE } from '@core/generation/pesel-generation';
 import { BirthdayInputComponent } from '../birthday-input/birthday-input.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { CardComponent } from '@components/card/card.component';
@@ -22,54 +17,70 @@ import { validDateValidator } from '@shared/validators/valid-date.validator';
     PeselOutputComponent,
     ReactiveFormsModule,
   ],
+  providers: [GeneratorStateService],
   templateUrl: './simple-generator.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleGeneratorComponent {
-  private fb = inject(FormBuilder);
-  private generator = inject(PeselGeneratorService);
-  private peselStoreService = inject(PeselStoreService);
-  public peselList = this.peselStoreService.data;
+  private readonly fb = inject(FormBuilder).nonNullable;
+  public readonly state = inject(GeneratorStateService);
+  public readonly peselList = this.state.pesels;
+  public readonly maxBatchSize = MAX_BATCH_SIZE;
 
-  public form: FormGroup = this.fb.group({
+  public readonly form = this.fb.group({
+    sequential: [false],
+    count: [
+      1,
+      [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(MAX_BATCH_SIZE),
+        Validators.pattern(/^\d+$/),
+      ],
+    ],
     birthday: this.fb.group(
       {
         day: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
         month: ['', [Validators.required, Validators.pattern(/^\d{1,2}$/)]],
         year: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
-        sex: ['female', Validators.required],
+        sex: this.fb.control<'male' | 'female' | 'random'>(
+          'female',
+          Validators.required,
+        ),
       },
       { validators: [validDateValidator()] },
     ),
   });
 
-  get birthdayGroup(): FormGroup {
-    return this.form.get('birthday') as FormGroup;
+  get birthdayGroup() {
+    return this.form.controls.birthday;
   }
 
-  public onSubmit() {
-    if (this.birthdayGroup.invalid) {
-      this.birthdayGroup.markAllAsTouched();
+  public onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
-
-    const { day, month, year, sex } = this.birthdayGroup.value;
-    const pesel = this.generator.generateUniquePesel(this.peselList(), {
-      year,
-      month,
-      day,
-      sex,
+    const { day, month, year, sex } = this.birthdayGroup.getRawValue();
+    void this.state.generate(this.form.controls.count.value, {
+      year: Number(year),
+      month: Number(month),
+      day: Number(day),
+      sex: sex === 'random' ? undefined : sex,
+      serialMode: this.form.controls.sequential.value ? 'sequential' : 'random',
     });
-
-    if (pesel) this.peselStoreService.add(pesel);
   }
 
   public generateRandomPesel(): void {
-    const pesel = this.generator.generateUniquePesel(this.peselList());
-    if (pesel) this.peselStoreService.add(pesel);
+    if (this.form.controls.sequential.value) return;
+    if (this.form.controls.count.invalid) {
+      this.form.controls.count.markAsTouched();
+      return;
+    }
+    void this.state.generate(this.form.controls.count.value);
   }
 
   public clearList(): void {
-    this.peselStoreService.clear();
+    this.state.clear();
   }
 }

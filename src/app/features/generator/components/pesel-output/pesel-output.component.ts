@@ -26,5 +26,6 @@ import { GotoParseButtonComponent } from '@components/toolbar/goto-parse-button/
 })
 export class PeselOutputComponent {
   public data = input.required<string[]>();
+  public readonly preview = computed(() => this.data().slice(0, 100));
   public peselList = computed(() => this.data().join('\n'));
 }
