@@ -8,7 +8,7 @@
 
 A lightweight app that parses and validates Polish PESEL numbers with full birthdate, sex extraction, and checksum verification.
 
-![Preview](docs/splash.png)
+![Preview](docs/og-source.png)
 
 ## Features
 
