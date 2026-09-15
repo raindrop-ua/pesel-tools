@@ -57,11 +57,26 @@ Global providers are defined in `src/app/app.config.ts`:
 Key PESEL logic is placed under `src/app/core/services`:
 
 - `pesel-parser.service.ts`: parses and validates PESEL content
-- `pesel-generator.service.ts`: creates valid PESEL values
+- `pesel-generator.service.ts`: asynchronous Worker client with cancellation, timeout, and cleanup
 - `pesel-utils.ts`: low-level PESEL helpers (e.g. checksum/date logic)
-- `pesel-store.service.ts`: state and data flow support for PESEL-related UI
 
 Additional platform services include clipboard, download, storage, theme, SEO, and service-worker update handling.
+
+## Generation
+
+The flow is `SimpleGeneratorComponent → GeneratorStateService → PeselGeneratorService → pesel.worker.ts → generatePeselBatch`.
+
+- `core/generation/pesel-generation.ts` is a pure TypeScript algorithm, independent of Angular and browser APIs. It validates requests and samples without replacement from the valid date/serial space using a sparse Fisher–Yates shuffle. Existing values are mapped to excluded indices before sampling, so a nearly exhausted space does not cause collision retries or false failures.
+- For a fixed date there are 5,000 combinations per sex, or 10,000 without a sex restriction. Oversized requests fail before returning any results. Uniqueness covers the requested batch and any explicitly supplied exclusions, not an official PESEL registry.
+- Random dates range from January 1 of the current year minus 100 through today (local calendar), within 1800–2299. Explicit dates support the full PESEL range, including future dates.
+- `pesel-worker.protocol.ts` defines the request/response contract. A job owns one Worker, which is terminated on success, error, cancellation, or a 60-second timeout. Consumers are independent. The home page also uses this asynchronous API and skips overlapping refreshes.
+- Workers are created lazily. SSR renders without generating numbers. Browsers without Worker support show an error; there is no synchronous bulk fallback that could freeze the UI.
+- The component-scoped `GeneratorStateService` owns pending/error state, cancellation and the current in-memory result. Each accepted generation clears the previous result immediately, and success replaces it with the new batch. Uniqueness is scoped to one batch. Clearing the list or destroying the view cancels the job and prevents stale results from being saved. Overlapping submissions are ignored.
+- Results are never saved to localStorage and disappear on reload or when leaving the generator. The legacy `pesel-list:v1` key is removed when opening the generator.
+- The sex control offers Male, Female, and Random. Random omits the sex restriction while retaining the selected date.
+- The UI and batch API allow 1–100,000 numbers per request, with no accumulated list. Only the first 100 rows render; text/JSON copy and download include the entire list.
+
+The Worker removes generation from the main thread, but structured cloning, JSON serialization, and exports still use the main thread. For substantially larger datasets, use chunked transfer plus streamed export/IndexedDB instead of raising the current limit.
 
 ## Styling
 
@@ -77,7 +92,7 @@ Use complete class names for conditional variants (see the button component), so
 
 ## Imports and Aliases
 
-Path aliases are configured in `tsconfig.json` (`baseUrl: "src"`), for example:
+Path aliases are configured in `tsconfig.json`, for example:
 
 - `@core/*`
 - `@shared/*`
@@ -92,4 +107,5 @@ These aliases are used throughout the app to keep imports stable and readable.
 - Linting: Angular ESLint + Stylelint
 - Formatting: Prettier
 - E2E: Cypress
-- CI workflow (`.github/workflows/ci.yml`) runs lint, tests, and coverage on Node 24
+- Worker types: `npm run typecheck:worker` (checked separately because the Angular application builder does not type-check Worker code)
+- CI workflow (`.github/workflows/ci.yml`) runs lint, Worker type checking, production build, style lint, and Vitest coverage on Node 24

@@ -27,6 +27,14 @@ export class PeselOfTheMomentComponent implements OnInit {
   private readonly peselGen = inject(PeselGeneratorService);
   private readonly destroyRef = inject(DestroyRef);
 
+  private generating = false;
+  private readonly controller = new AbortController();
+  readonly generationError = signal(false);
+
+  constructor() {
+    this.destroyRef.onDestroy(() => this.controller.abort());
+  }
+
   readonly digits = signal<number[]>(Array(11).fill(0));
   readonly peselToCopy = signal<string>('');
 
@@ -37,22 +45,37 @@ export class PeselOfTheMomentComponent implements OnInit {
   private initGeneration() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    this.generateAndApply();
+    void this.generateAndApply();
 
     interval(5_000)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         tap(() => {
-          this.generateAndApply();
+          void this.generateAndApply();
         }),
       )
       .subscribe();
   }
 
-  private generateAndApply() {
-    const pesel = this.peselGen.generatePesel();
-    this.peselToCopy.set(pesel);
-    this.animateTo(pesel);
+  private async generateAndApply(): Promise<void> {
+    if (this.generating || this.controller.signal.aborted) return;
+    this.generating = true;
+    try {
+      const [pesel] = await this.peselGen.generateBatch(
+        1,
+        undefined,
+        [],
+        this.controller.signal,
+      );
+      if (this.controller.signal.aborted) return;
+      this.generationError.set(false);
+      this.peselToCopy.set(pesel);
+      this.animateTo(pesel);
+    } catch {
+      if (!this.controller.signal.aborted) this.generationError.set(true);
+    } finally {
+      this.generating = false;
+    }
   }
 
   private animateTo(raw: string) {

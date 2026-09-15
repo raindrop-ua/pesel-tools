@@ -7,13 +7,30 @@
         Please provide a valid birthdate.
       </p>
     }
+    <label class="mt-5 block text-sm font-medium" for="generation-count"
+      >Number of PESELs</label
+    >
+    <input
+      id="generation-count"
+      class="mt-2 w-40 rounded-xl border border-control-border bg-control-background px-3 py-2 text-xl leading-normal text-control-text outline-none transition-[border-color,box-shadow] duration-200 focus:border-control-focus-border focus:ring-4 focus:ring-control-focus-shadow motion-reduce:transition-none"
+      type="number"
+      formControlName="count"
+      min="1"
+      [max]="maxBatchSize"
+      step="1"
+    />
+    @if (form.controls.count.invalid) {
+      <p class="mt-2 text-sm text-muted" role="status">
+        Choose a whole number from 1 to {{ maxBatchSize }}.
+      </p>
+    }
     <div
       class="my-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
     >
       <button
         app-button="primary"
         type="submit"
-        [disabled]="!birthdayGroup.valid"
+        [disabled]="form.invalid || state.busy()"
       >
         Generate
       </button>
@@ -22,10 +39,20 @@
         app-button="secondary"
         type="button"
         (click)="generateRandomPesel()"
+        [disabled]="form.controls.count.invalid || state.busy()"
       >
         Generate Random
       </button>
     </div>
+    @if (state.busy()) {
+      <p role="status" class="mb-3 text-sm text-muted">Generating PESELs…</p>
+      <button app-button="secondary" type="button" (click)="state.cancel()">
+        Cancel
+      </button>
+    }
+    @if (state.error(); as error) {
+      <p role="alert" class="mb-3 text-sm text-muted">{{ error }}</p>
+    }
     @let pesels = peselList();
     @if (pesels.length) {
       <p class="mb-4 text-lg font-semibold">

@@ -1,137 +1,91 @@
-import {
-  PeselGeneratorService,
-  InvalidBirthDateError,
-  InvalidDateRangeError,
-  InvalidGenerationOptionsError,
-} from './pesel-generator.service';
-import * as utils from './pesel-utils';
+import { PeselGeneratorService } from './pesel-generator.service';
 
-describe('PeselGeneratorService — 100% coverage', () => {
+class WorkerMock {
+  static instances: WorkerMock[] = [];
+  onmessage?: (event: { data: unknown }) => void;
+  onerror?: () => void;
+  onmessageerror?: () => void;
+  postMessage = vi.fn();
+  terminate = vi.fn();
+  constructor() {
+    WorkerMock.instances.push(this);
+  }
+}
+
+describe('PeselGeneratorService worker lifecycle', () => {
   let service: PeselGeneratorService;
-
   beforeEach(() => {
-    service = new PeselGeneratorService(); // ← без TestBed
+    WorkerMock.instances = [];
+    vi.stubGlobal('Worker', WorkerMock);
+    service = new PeselGeneratorService();
+  });
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.useRealTimers();
   });
 
-  describe('generatePesel with valid parameters', () => {
-    it('generates PESEL for a known birth date and male', () => {
-      const pesel = service.generatePesel({
-        year: 1982,
-        month: 9,
-        day: 5,
-        sex: 'male',
-      });
-
-      expect(pesel.length).toBe(11);
-      expect(pesel.substring(0, 2)).toBe('82'); // 1982
-      expect(pesel.substring(2, 4)).toBe('09'); // September
-      expect(pesel.substring(4, 6)).toBe('05'); // Day
-      const sexDigit = parseInt(pesel.charAt(9), 10);
-      expect(sexDigit % 2).toBe(1); // male = odd
+  it('passes the batch to a worker and releases it after success', async () => {
+    const result = service.generateBatch(2, { sex: 'male' }, ['existing']);
+    const worker = WorkerMock.instances[0];
+    expect(worker.postMessage).toHaveBeenCalledWith({
+      count: 2,
+      options: { sex: 'male' },
+      existing: ['existing'],
     });
-
-    it('generates PESEL for 2003 female with correct month offset', () => {
-      const pesel = service.generatePesel({
-        year: 2003,
-        month: 2,
-        day: 28,
-        sex: 'female',
-      });
-
-      expect(pesel.substring(2, 4)).toBe('22'); // 02 + 20 = 22
-      const sexDigit = parseInt(pesel.charAt(9), 10);
-      expect(sexDigit % 2).toBe(0); // female = even
-    });
-
-    it('generates PESEL for 1820 female with +80 month offset', () => {
-      const pesel = service.generatePesel({
-        year: 1820,
-        month: 4,
-        day: 5,
-        sex: 'female',
-      });
-
-      expect(pesel.substring(2, 4)).toBe('84');
-    });
-
-    it('generates PESEL for 2220 male with +60 month offset', () => {
-      const pesel = service.generatePesel({
-        year: 2220,
-        month: 1,
-        day: 1,
-        sex: 'male',
-      });
-
-      expect(pesel.substring(2, 4)).toBe('61');
-    });
+    worker.onmessage!({ data: { ok: true, pesels: ['a', 'b'] } });
+    await expect(result).resolves.toEqual(['a', 'b']);
+    expect(worker.terminate).toHaveBeenCalledOnce();
   });
 
-  describe('generatePesel with random data', () => {
-    it('generates a PESEL string if no options passed', () => {
-      const pesel = service.generatePesel();
-      expect(pesel).toMatch(/^\d{11}$/);
+  it('isolates concurrent jobs and cancellation', async () => {
+    const controller = new AbortController();
+    const first = service.generateBatch(1, undefined, [], controller.signal);
+    const rejection = expect(first).rejects.toMatchObject({
+      name: 'AbortError',
     });
+    const second = service.generateBatch();
+    controller.abort();
+    WorkerMock.instances[1].onmessage!({ data: { ok: true, pesels: ['b'] } });
+    await rejection;
+    await expect(second).resolves.toEqual(['b']);
+    expect(WorkerMock.instances[0].terminate).toHaveBeenCalledOnce();
   });
 
-  describe('generatePesel — error handling', () => {
-    it('throws InvalidGenerationOptionsError for partial birth date options', () => {
-      expect(() => service.generatePesel({ year: 2000, month: 1 })).toThrow(
-        InvalidGenerationOptionsError,
-      );
-    });
-
-    it('throws InvalidBirthDateError for invalid date', () => {
-      expect(() =>
-        service.generatePesel({ year: 2000, month: 2, day: 30 }),
-      ).toThrow(InvalidBirthDateError);
-    });
-
-    it('throws InvalidDateRangeError for year < 1800', () => {
-      expect(() =>
-        service.generatePesel({ year: 1799, month: 12, day: 31 }),
-      ).toThrow(InvalidDateRangeError);
-    });
-
-    it('throws InvalidDateRangeError for year > 2299', () => {
-      expect(() =>
-        service.generatePesel({ year: 2300, month: 1, day: 1 }),
-      ).toThrow(InvalidDateRangeError);
-    });
+  it('does not start a cancelled job', async () => {
+    const controller = new AbortController();
+    controller.abort();
+    await expect(
+      service.generateBatch(1, undefined, [], controller.signal),
+    ).rejects.toMatchObject({ name: 'AbortError' });
+    expect(WorkerMock.instances).toHaveLength(0);
   });
 
-  describe('generated PESEL has valid checksum', () => {
-    it('checksum digit is valid', () => {
-      const pesel = service.generatePesel({
-        year: 1990,
-        month: 6,
-        day: 15,
-        sex: 'male',
-      });
-
-      const body = pesel.slice(0, 10);
-      const checksum = parseInt(pesel[10], 10);
-
-      expect(utils.calculateChecksumDigit(body)).toBe(checksum);
+  it('reports domain errors and worker failures', async () => {
+    const domain = service.generateBatch();
+    WorkerMock.instances[0].onmessage!({
+      data: { ok: false, message: 'No numbers remain' },
     });
+    await expect(domain).rejects.toThrow('No numbers remain');
+    for (const event of ['onerror', 'onmessageerror'] as const) {
+      const result = service.generateBatch();
+      const worker = WorkerMock.instances.at(-1)!;
+      worker[event]!();
+      await expect(result).rejects.toThrow();
+      expect(worker.terminate).toHaveBeenCalledOnce();
+    }
   });
 
-  describe('generateUniquePesel', () => {
-    it('returns the first unique generated PESEL', () => {
-      vi.spyOn(service, 'generatePesel')
-        .mockReturnValueOnce('11111111111')
-        .mockReturnValueOnce('22222222222');
+  it('times out and releases stalled workers', async () => {
+    vi.useFakeTimers();
+    const result = service.generateBatch();
+    const rejection = expect(result).rejects.toThrow('timed out');
+    vi.advanceTimersByTime(60_000);
+    await rejection;
+    expect(WorkerMock.instances[0].terminate).toHaveBeenCalledOnce();
+  });
 
-      const result = service.generateUniquePesel(['11111111111']);
-
-      expect(result).toBe('22222222222');
-    });
-
-    it('returns null when max attempts are exhausted', () => {
-      vi.spyOn(service, 'generatePesel').mockReturnValue('11111111111');
-
-      const result = service.generateUniquePesel(['11111111111'], undefined, 2);
-
-      expect(result).toBeNull();
-    });
+  it('handles unavailable workers during SSR without starting synchronous generation', async () => {
+    vi.stubGlobal('Worker', undefined);
+    await expect(service.generateBatch()).rejects.toThrow('Web Worker support');
   });
 });
