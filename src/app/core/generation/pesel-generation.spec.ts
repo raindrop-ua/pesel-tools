@@ -6,7 +6,7 @@ import {
   InvalidGenerationOptionsError,
   MAX_BATCH_SIZE,
 } from './pesel-generation';
-import { PeselParserService } from '../services/pesel-parser.service';
+import { PeselParserService } from '@services/pesel-parser.service';
 
 const options = { year: 2000, month: 2, day: 29, sex: 'female' as const };
 const parser = new PeselParserService();

@@ -3,7 +3,7 @@ import {
   isValidChecksum,
   isValidDate,
   isValidFormat,
-} from '../services/pesel-utils';
+} from '@services/pesel-utils';
 
 export interface PeselGenerationOptions {
   year?: number;
