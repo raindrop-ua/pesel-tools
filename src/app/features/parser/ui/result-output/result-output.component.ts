@@ -1,0 +1,34 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { DatePipe, TitleCasePipe } from '@angular/common';
+import { PeselInfo } from '@services/pesel-parser.service';
+import { CopyButtonComponent } from '@shared/ui/toolbar/copy-button/copy-button.component';
+import { ToolbarComponent } from '@shared/ui/toolbar/toolbar.component';
+import { SvgIconComponent } from '@shared/ui/svg-icon/svg-icon.component';
+
+@Component({
+  selector: 'app-result-output',
+  imports: [
+    DatePipe,
+    TitleCasePipe,
+    CopyButtonComponent,
+    ToolbarComponent,
+    SvgIconComponent,
+  ],
+  templateUrl: './result-output.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ResultOutputComponent {
+  public readonly data = input<Omit<PeselInfo, 'message'> | null>(null);
+
+  public readonly dataString = computed(() => {
+    const info = this.data();
+    return info
+      ? `PESEL info:\nSex: ${info.sex}\nDOB: ${info.birthDate}\nAge: ${info.age}\nSerial: ${info.serial}`
+      : '';
+  });
+}

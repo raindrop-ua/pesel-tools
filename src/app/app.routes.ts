@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from '@core/layout/layout/layout.component';
+import { LayoutComponent } from './layout/layout/layout.component';
 import { AppRouteEnum } from '@core/enums/app-route.enum';
 
 export const routes: Routes = [
@@ -18,7 +18,9 @@ export const routes: Routes = [
           },
         },
         loadComponent: () =>
-          import('@features/home/feature/home.component').then((m) => m.HomeComponent),
+          import('@features/home/feature/home.component').then(
+            (m) => m.HomeComponent,
+          ),
       },
       {
         path: AppRouteEnum.Parser,
