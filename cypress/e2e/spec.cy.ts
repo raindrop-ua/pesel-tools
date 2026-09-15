@@ -127,6 +127,46 @@ describe('PESEL tools flows', () => {
     cy.get('[data-testid="pesel-number"]').should('not.exist');
   });
 
+  it('generates ascending serials for every sex and styles the sequential checkbox', () => {
+    cy.viewport(1000, 850);
+    visitClean('/generator');
+    cy.get('input[aria-label="Day of birth"]').type('29');
+    cy.get('input[aria-label="Month of birth"]').type('02');
+    cy.get('input[aria-label="Year of birth"]').type('2000');
+    cy.get('#generation-count').clear().type('3');
+    cy.contains('label', 'Sequential serial numbers').click();
+    cy.get('#sequential-serials').should('be.checked');
+    cy.contains('button', 'Generate Random').should('be.disabled');
+    for (const [sex, serials] of [
+      ['Female', ['0000', '0002', '0004']],
+      ['Male', ['0001', '0003', '0005']],
+      ['Random', ['0000', '0001', '0002']],
+    ] as const) {
+      cy.get('app-radio-select').contains('label', sex).click();
+      cy.get('button[type="submit"]').click();
+      cy.get('[data-testid="pesel-number"]').should(($rows) => {
+        expect(
+          [...$rows].map((row) => row.textContent!.trim().slice(6, 10)),
+        ).to.deep.equal(serials);
+      });
+    }
+    cy.get('button[title="Light"]').click();
+    cy.get('#sequential-serials').focus();
+    cy.screenshot('generator-sequential-light', { capture: 'viewport' });
+    cy.get('button[title="Dark"]').click();
+    cy.get('#sequential-serials').focus();
+    cy.screenshot('generator-sequential-dark', { capture: 'viewport' });
+    cy.viewport(360, 800);
+    cy.window().should((win) =>
+      expect(win.document.documentElement.scrollWidth).to.equal(win.innerWidth),
+    );
+    cy.screenshot('generator-sequential-mobile', { capture: 'viewport' });
+    cy.contains('label', 'Sequential serial numbers').click();
+    cy.get('#sequential-serials').should('not.be.checked');
+    cy.contains('button', 'Generate Random').should('not.be.disabled').click();
+    cy.get('[data-testid="pesel-number"]').should('have.length', 3);
+  });
+
   it('cleans up legacy persisted results without restoring them', () => {
     cy.visit('/generator', {
       onBeforeLoad(win) {

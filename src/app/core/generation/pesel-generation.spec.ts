@@ -30,6 +30,53 @@ describe('PESEL batch generation', () => {
     },
   );
 
+  it.each(['female', 'male', undefined] as const)(
+    'generates the entire sequential serial range for %s',
+    (sex) => {
+      const random = vi.spyOn(Math, 'random');
+      const count = sex === undefined ? 10000 : 5000;
+      const batch = generatePeselBatch(count, {
+        ...options,
+        sex,
+        serialMode: 'sequential',
+      });
+      expect(batch).toHaveLength(count);
+      expect(new Set(batch).size).toBe(count);
+      batch.forEach((pesel, index) => {
+        const expected =
+          sex === undefined ? index : index * 2 + (sex === 'male' ? 1 : 0);
+        expect(pesel.slice(6, 10)).toBe(String(expected).padStart(4, '0'));
+        expect(parser.parsePesel(pesel).birthDate).toBe('2000-02-29');
+      });
+      expect(random).not.toHaveBeenCalled();
+      expect(() =>
+        generatePeselBatch(count + 1, {
+          ...options,
+          sex,
+          serialMode: 'sequential',
+        }),
+      ).toThrow(GenerationCapacityError);
+    },
+  );
+
+  it('skips excluded serials in order and restarts independent sequential batches', () => {
+    const sequentialOptions = { ...options, serialMode: 'sequential' as const };
+    const first = generatePeselBatch(5, sequentialOptions);
+    expect(generatePeselBatch(5, sequentialOptions)).toEqual(first);
+    expect(
+      generatePeselBatch(3, sequentialOptions, [first[0], first[2]]),
+    ).toEqual([first[1], first[3], first[4]]);
+  });
+
+  it('rejects a sequential request without a date and unknown serial modes', () => {
+    expect(() => generatePeselBatch(1, { serialMode: 'sequential' })).toThrow(
+      'require a birthdate',
+    );
+    expect(() =>
+      generatePeselBatch(1, { ...options, serialMode: 'invalid' as 'random' }),
+    ).toThrow(InvalidGenerationOptionsError);
+  });
+
   it('exhausts all 5000 female serials without duplicates even with constant randomness', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0);
     const batch = generatePeselBatch(5000, options);

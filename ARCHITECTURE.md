@@ -73,6 +73,7 @@ The flow is `SimpleGeneratorComponent → GeneratorStateService → PeselGenerat
 - Workers are created lazily. SSR renders without generating numbers. Browsers without Worker support show an error; there is no synchronous bulk fallback that could freeze the UI.
 - The component-scoped `GeneratorStateService` owns pending/error state, cancellation and the current in-memory result. Each accepted generation clears the previous result immediately, and success replaces it with the new batch. Uniqueness is scoped to one batch. Clearing the list or destroying the view cancels the job and prevents stale results from being saved. Overlapping submissions are ignored.
 - Results are never saved to localStorage and disappear on reload or when leaving the generator. The legacy `pesel-list:v1` key is removed when opening the generator.
+- Sequential serial mode requires an explicit birthdate and selects the lowest available serials in ascending order: Female starts at 0000 with step 2, Male at 0001 with step 2, and Random at 0000 with step 1. Each batch restarts from the beginning. Explicit API exclusions are skipped. The UI disables Generate Random in this mode. The checksum is still calculated separately for every number.
 - The sex control offers Male, Female, and Random. Random omits the sex restriction while retaining the selected date.
 - The UI and batch API allow 1–100,000 numbers per request, with no accumulated list. Only the first 100 rows render; text/JSON copy and download include the entire list.
 

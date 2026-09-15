@@ -28,6 +28,7 @@ export class SimpleGeneratorComponent {
   public readonly maxBatchSize = MAX_BATCH_SIZE;
 
   public readonly form = this.fb.group({
+    sequential: [false],
     count: [
       1,
       [
@@ -66,10 +67,12 @@ export class SimpleGeneratorComponent {
       month: Number(month),
       day: Number(day),
       sex: sex === 'random' ? undefined : sex,
+      serialMode: this.form.controls.sequential.value ? 'sequential' : 'random',
     });
   }
 
   public generateRandomPesel(): void {
+    if (this.form.controls.sequential.value) return;
     if (this.form.controls.count.invalid) {
       this.form.controls.count.markAsTouched();
       return;

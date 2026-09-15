@@ -24,6 +24,42 @@
         Choose a whole number from 1 to {{ maxBatchSize }}.
       </p>
     }
+    <label
+      class="mt-5 flex w-fit cursor-pointer items-start gap-3 text-control-text"
+    >
+      <input
+        id="sequential-serials"
+        type="checkbox"
+        formControlName="sequential"
+        [attr.aria-describedby]="
+          form.controls.sequential.value ? 'sequential-hint' : null
+        "
+        class="peer sr-only"
+      />
+      <span
+        aria-hidden="true"
+        class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-md border border-control-border bg-control-background text-transparent transition-[background-color,border-color,box-shadow] duration-200 peer-checked:border-control-focus-border peer-checked:bg-control-active-background peer-checked:text-control-active-text peer-focus-visible:border-control-focus-border peer-focus-visible:ring-4 peer-focus-visible:ring-control-focus-shadow motion-reduce:transition-none"
+      >
+        <svg
+          class="size-3.5"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m3 8 3 3 7-7" />
+        </svg>
+      </span>
+      <span class="text-sm font-medium">Sequential serial numbers</span>
+    </label>
+    @if (form.controls.sequential.value) {
+      <p id="sequential-hint" class="mt-2 text-sm text-muted">
+        Uses the selected birthdate. Female: 0000, 0002… Male: 0001, 0003…
+        Random: 0000, 0001…
+      </p>
+    }
     <div
       class="my-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
     >
@@ -39,7 +75,11 @@
         app-button="secondary"
         type="button"
         (click)="generateRandomPesel()"
-        [disabled]="form.controls.count.invalid || state.busy()"
+        [disabled]="
+          form.controls.count.invalid ||
+          state.busy() ||
+          form.controls.sequential.value
+        "
       >
         Generate Random
       </button>

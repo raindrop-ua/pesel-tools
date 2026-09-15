@@ -10,6 +10,7 @@ export interface PeselGenerationOptions {
   month?: number;
   day?: number;
   sex?: 'male' | 'female';
+  serialMode?: 'random' | 'sequential';
 }
 
 export const MAX_BATCH_SIZE = 100_000;
@@ -58,10 +59,24 @@ export function generatePeselBatch(
   ) {
     throw new InvalidGenerationOptionsError('Sex must be male or female.');
   }
+  if (
+    options.serialMode !== undefined &&
+    options.serialMode !== 'random' &&
+    options.serialMode !== 'sequential'
+  ) {
+    throw new InvalidGenerationOptionsError(
+      'Serial mode must be random or sequential.',
+    );
+  }
   const parts = [options.year, options.month, options.day];
   const specified = parts.filter((part) => part !== undefined).length;
   if (specified !== 0 && specified !== 3)
     throw new InvalidGenerationOptionsError();
+  if (options.serialMode === 'sequential' && specified !== 3) {
+    throw new InvalidGenerationOptionsError(
+      'Sequential serial numbers require a birthdate.',
+    );
+  }
   let firstDay: number;
   let lastDay: number;
   if (specified === 3) {
@@ -110,10 +125,13 @@ export function generatePeselBatch(
   const swaps = new Map<number, number>();
   const result: string[] = [];
   for (let remaining = available; result.length < count; remaining--) {
-    const position = Math.floor(Math.random() * remaining);
-    const rank = swaps.get(position) ?? position;
-    swaps.set(position, swaps.get(remaining - 1) ?? remaining - 1);
-    swaps.delete(remaining - 1);
+    let rank = result.length;
+    if (options.serialMode !== 'sequential') {
+      const position = Math.floor(Math.random() * remaining);
+      rank = swaps.get(position) ?? position;
+      swaps.set(position, swaps.get(remaining - 1) ?? remaining - 1);
+      swaps.delete(remaining - 1);
+    }
     // Convert the available rank into its original index, skipping exclusions.
     let low = 0;
     let high = blocked.length;
