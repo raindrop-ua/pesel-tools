@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GeneratorStateService } from '../../services/generator-state.service';
 import { MAX_BATCH_SIZE } from '@core/generation/pesel-generation';
@@ -19,7 +19,6 @@ import { validDateValidator } from '@shared/validators/valid-date.validator';
   ],
   providers: [GeneratorStateService],
   templateUrl: './simple-generator.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleGeneratorComponent {
   private readonly fb = inject(FormBuilder).nonNullable;

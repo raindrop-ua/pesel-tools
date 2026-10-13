@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { ToolbarButtonComponent } from '@shared/ui/toolbar/toolbar-button/toolbar-button.component';
 import {
   ActionResult,
@@ -9,7 +9,6 @@ import {
   selector: 'app-paste-button',
   imports: [ToolbarButtonComponent],
   templateUrl: './paste-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasteButtonComponent implements ToolbarAction<string> {
   public readonly result = output<ActionResult<string>>();

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { PeselInfo } from '@services/pesel-parser.service';
 import { CopyButtonComponent } from '@shared/ui/toolbar/copy-button/copy-button.component';
@@ -20,7 +15,6 @@ import { SvgIconComponent } from '@shared/ui/svg-icon/svg-icon.component';
     SvgIconComponent,
   ],
   templateUrl: './result-output.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultOutputComponent {
   public readonly data = input<Omit<PeselInfo, 'message'> | null>(null);

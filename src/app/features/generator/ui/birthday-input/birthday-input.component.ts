@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   Input,
   DestroyRef,
@@ -17,7 +16,6 @@ import { ValueInputComponent } from '@features/generator/ui/value-input/value-in
   selector: 'app-birthday-input',
   imports: [RadioSelectComponent, ReactiveFormsModule, ValueInputComponent],
   templateUrl: './birthday-input.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BirthdayInputComponent implements AfterViewInit {
   private readonly destroyRef = inject(DestroyRef);

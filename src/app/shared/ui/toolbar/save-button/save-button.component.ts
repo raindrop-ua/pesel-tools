@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { DownloadService } from '@services/download.service';
 import { ToolbarButtonComponent } from '@shared/ui/toolbar/toolbar-button/toolbar-button.component';
 import {
@@ -15,7 +10,6 @@ import {
   selector: 'app-save-button',
   imports: [ToolbarButtonComponent],
   templateUrl: './save-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaveButtonComponent implements ToolbarAction<void> {
   public readonly contentToSave = input.required<string | undefined>();

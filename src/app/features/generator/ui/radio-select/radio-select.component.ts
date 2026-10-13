@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
@@ -20,7 +19,6 @@ import { RadioOption } from '@features/generator/ui/radio-select/model/radio-opt
       multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioSelectComponent<T = string> implements ControlValueAccessor {
   @Input() options: RadioOption<T>[] = [];

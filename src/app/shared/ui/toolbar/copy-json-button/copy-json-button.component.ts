@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { ClipboardService } from '@services/clipboard.service';
 import { ToolbarButtonComponent } from '@shared/ui/toolbar/toolbar-button/toolbar-button.component';
 import {
@@ -15,7 +10,6 @@ import {
   selector: 'app-copy-json-button',
   imports: [ToolbarButtonComponent],
   templateUrl: './copy-json-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyJsonButtonComponent implements ToolbarAction<void> {
   public readonly contentToCopy = input.required<string | undefined>();

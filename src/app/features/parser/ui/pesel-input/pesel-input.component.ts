@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  input,
-} from '@angular/core';
+import { Component, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PasteButtonComponent } from '@shared/ui/toolbar/paste-button/paste-button.component';
 import { ActionResult } from '@shared/ui/toolbar/toolbar-button/toolbar-action';
@@ -20,7 +15,6 @@ import { ActionResult } from '@shared/ui/toolbar/toolbar-button/toolbar-action';
       multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselInputComponent implements ControlValueAccessor {
   public readonly placeholder = input<string>('');
