@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { interval } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
@@ -20,7 +13,6 @@ import { ToolbarComponent } from '@shared/ui/toolbar/toolbar.component';
   imports: [CopyButtonComponent, ToolbarComponent],
   templateUrl: './pesel-of-the-moment.component.html',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselOfTheMomentComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);

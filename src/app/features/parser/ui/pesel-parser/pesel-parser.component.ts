@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +11,6 @@ import { peselValidator } from '@shared/validators/pesel.validator';
   selector: 'app-pesel-parser',
   imports: [PeselInputComponent, ReactiveFormsModule, ResultOutputComponent],
   templateUrl: './pesel-parser.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselParserComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

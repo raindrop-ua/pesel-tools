@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  HostBinding,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 type ButtonType = 'primary' | 'secondary' | 'danger';
 
@@ -16,7 +11,6 @@ type ButtonType = 'primary' | 'secondary' | 'danger';
   selector: 'button[app-button], a[app-button]',
   imports: [],
   templateUrl: './button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   @Input('app-button') appButton: ButtonType = 'primary';

@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   inject,
@@ -23,7 +22,6 @@ import { FooterComponent } from '../footer/footer.component';
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   imports: [HeaderComponent, LoaderComponent, RouterOutlet, FooterComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent implements AfterViewInit {
   private router = inject(Router);

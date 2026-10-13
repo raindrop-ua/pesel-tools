@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { ToolbarComponent } from '@shared/ui/toolbar/toolbar.component';
 import { CopyButtonComponent } from '@shared/ui/toolbar/copy-button/copy-button.component';
 import { SaveButtonComponent } from '@shared/ui/toolbar/save-button/save-button.component';
@@ -22,7 +17,6 @@ import { GotoParseButtonComponent } from '@shared/ui/toolbar/goto-parse-button/g
     GotoParseButtonComponent,
   ],
   templateUrl: './pesel-output.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeselOutputComponent {
   public data = input.required<string[]>();

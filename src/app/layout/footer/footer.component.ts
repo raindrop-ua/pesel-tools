@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   DestroyRef,
@@ -16,7 +15,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-footer',
   imports: [RouterLink, SvgIconComponent],
   templateUrl: './footer.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent implements OnInit {
   private router = inject(Router);

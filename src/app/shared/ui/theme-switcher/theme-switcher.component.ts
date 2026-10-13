@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Theme, ThemeService } from '@services/theme.service';
 import { SvgIconComponent } from '@shared/ui/svg-icon/svg-icon.component';
 
@@ -18,7 +13,6 @@ const themes = [
   imports: [SvgIconComponent],
   templateUrl: './theme-switcher.component.html',
   host: { class: 'flex' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSwitcherComponent {
   private readonly themeService = inject(ThemeService);

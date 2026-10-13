@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolbarButtonComponent } from '@shared/ui/toolbar/toolbar-button/toolbar-button.component';
 import {
@@ -16,7 +11,6 @@ import { AppRouteEnum } from '@core/enums/app-route.enum';
   selector: 'app-goto-parse-button',
   imports: [ToolbarButtonComponent],
   templateUrl: './goto-parse-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GotoParseButtonComponent implements ToolbarAction<void> {
   private readonly router = inject(Router);

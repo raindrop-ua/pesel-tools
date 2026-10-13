@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   DestroyRef,
@@ -19,7 +18,6 @@ import {
   imports: [SvgIconComponent],
   templateUrl: './toolbar-button.component.html',
   host: { class: 'block' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarButtonComponent {
   public readonly icon = input.required<string>();
