@@ -108,5 +108,5 @@ These aliases are used throughout the app to keep imports stable and readable.
 - Linting: Angular ESLint + Stylelint
 - Formatting: Prettier
 - E2E: Cypress
-- Worker types: `npm run typecheck:worker` (checked separately because the Angular application builder does not type-check Worker code)
+- Worker types: `pnpm typecheck:worker` (checked separately because the Angular application builder does not type-check Worker code)
 - CI workflow (`.github/workflows/ci.yml`) runs lint, Worker type checking, production build, style lint, and Vitest coverage on Node 24

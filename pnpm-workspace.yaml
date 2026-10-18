@@ -1,0 +1,9 @@
+# Allow the required esbuild setup and Cypress binary installation.
+# Optional native accelerators use their packaged binaries or JS fallbacks.
+allowBuilds:
+  "@parcel/watcher": false
+  cypress: true
+  esbuild: true
+  fsevents: false
+  lmdb: false
+  msgpackr-extract: false

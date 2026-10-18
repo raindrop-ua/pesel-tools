@@ -5,18 +5,19 @@ Thank you for contributing to `pesel-tools`.
 ## Prerequisites
 
 - Node.js 24.x (CI uses Node 24)
-- npm
+- pnpm 12.14.0 (pinned in `package.json`)
 
 ## Local Setup
 
 ```bash
-npm install
+corepack enable pnpm
+pnpm install
 ```
 
 Run app locally:
 
 ```bash
-npm start
+pnpm start
 ```
 
 ## Development Workflow
@@ -31,16 +32,16 @@ npm start
 Run the same checks used in CI:
 
 ```bash
-npm run lint
-npm test
-npm run test:coverage
+pnpm lint
+pnpm test
+pnpm test:coverage
 ```
 
 Additional useful checks:
 
 ```bash
-npm run lint:css
-npm run cypress:run
+pnpm lint:css
+pnpm cypress:run
 ```
 
 ## Commit Convention

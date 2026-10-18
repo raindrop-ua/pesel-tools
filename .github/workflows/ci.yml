@@ -14,25 +14,29 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: pnpm
 
       - name: Install deps
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: pnpm lint
 
       - name: Type-check worker
-        run: npm run typecheck:worker
+        run: pnpm typecheck:worker
 
       - name: Build
-        run: npm run build
+        run: pnpm build
 
       - name: Style lint
-        run: npm run lint:css
+        run: pnpm lint:css
 
       - name: Coverage
-        run: npm run test:coverage
+        run: pnpm test:coverage
