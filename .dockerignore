@@ -10,3 +10,5 @@ docs
 Dockerfile
 docker-compose.yml
 README.md
+.pnpm-store
+pnpm-debug.log*

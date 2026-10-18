@@ -157,6 +157,7 @@
     }
   },
   "cli": {
+    "packageManager": "pnpm",
     "analytics": "1c5ed61a-45da-43a2-bc83-baf76d52f98c",
     "schematicCollections": [
       "@schematics/angular",

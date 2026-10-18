@@ -57,7 +57,7 @@
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.0.12",
     "angular-eslint": "^22.6.0",
-    "cypress": "latest",
+    "cypress": "15.17.0",
     "eslint": "^9.28.0",
     "husky": "^8.0.0",
     "jsdom": "^27.1.0",
@@ -84,5 +84,6 @@
       "prettier --write"
     ]
   },
-  "type": "module"
+  "type": "module",
+  "packageManager": "pnpm@12.14.0"
 }

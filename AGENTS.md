@@ -8,7 +8,7 @@ These instructions apply to the entire repository unless a deeper `AGENTS.md` ov
 
 - App: Angular 22 application for validating and parsing Polish PESEL numbers.
 - Tooling: Angular CLI, TypeScript, Vitest, ESLint, Stylelint, Prettier, Cypress.
-- Package manager: `npm`.
+- Package manager: `pnpm`.
 
 ## Working Rules
 
@@ -20,14 +20,14 @@ These instructions apply to the entire repository unless a deeper `AGENTS.md` ov
 
 ## Key Commands
 
-- Install deps: `npm install`
-- Dev server: `npm start`
-- Build: `npm run build`
-- Unit tests: `npm test`
-- Coverage: `npm run test:coverage`
-- Lint TS/JS: `npm run lint`
-- Lint styles: `npm run lint:css`
-- E2E: `npm run e2e` or `npm run cypress:run`
+- Install deps: `pnpm install`
+- Dev server: `pnpm start`
+- Build: `pnpm build`
+- Unit tests: `pnpm test`
+- Coverage: `pnpm test:coverage`
+- Lint TS/JS: `pnpm lint`
+- Lint styles: `pnpm lint:css`
+- E2E: `pnpm e2e` or `pnpm cypress:run`
 
 ## Repository Map
 
@@ -41,4 +41,4 @@ These instructions apply to the entire repository unless a deeper `AGENTS.md` ov
 
 - Check for nested `AGENTS.md` files before editing files in subdirectories.
 - Since `dist/` is generated output, make source changes under `src/` and rebuild only when needed.
-- `npm start` currently opens a browser via `ng serve -o`; prefer a non-opening variant when running automation.
+- `pnpm start` runs without opening a browser; `pnpm start:open` opens one.

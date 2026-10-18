@@ -48,12 +48,24 @@ The self-hosted fonts are licensed under the SIL Open Font License 1.1 (OFL):
 
 ## Run locally
 
+Use Node.js 24.x and pnpm 12.14.0 (pinned in `package.json`).
+
 ```bash
 git clone https://github.com/raindrop-ua/pesel-tools.git
 cd pesel-tools
-npm install
-ng serve
+corepack enable pnpm
+pnpm install
+pnpm start
 ```
+
+## Docker
+
+```bash
+docker build -t pesel-tools .
+docker run --rm -p 4200:4200 pesel-tools
+```
+
+Open `http://localhost:4200`. The image runs as the `node` user and checks the homepage every 30 seconds. Only the bundled application is copied to the runtime image; dependencies are installed in the build stage with the frozen pnpm lockfile and a cached store.
 
 ---
 

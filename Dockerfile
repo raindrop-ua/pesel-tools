@@ -1,30 +1,38 @@
+# syntax=docker/dockerfile:1
+
+# ---------- Build stage ----------
 FROM node:24.16.0-alpine AS build
 WORKDIR /app
 
-ENV CYPRESS_INSTALL_BINARY=0 \
-    NG_CLI_ANALYTICS=false \
-    NPM_CONFIG_AUDIT=false \
-    NPM_CONFIG_FUND=false
+ENV HUSKY=0 \
+    CYPRESS_INSTALL_BINARY=0 \
+    NG_CLI_ANALYTICS=false
 
-COPY package*.json ./
-RUN npm ci --ignore-scripts
+RUN corepack enable pnpm
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN --mount=type=cache,id=pesel-tools-pnpm-store,target=/pnpm/store \
+    pnpm install --frozen-lockfile --store-dir=/pnpm/store
 
 COPY . .
-RUN npm run build
+RUN pnpm build
 
-FROM node:24.16.0-bookworm-slim AS runtime
+# ---------- Runtime stage ----------
+FROM node:24.16.0-alpine AS runtime
 WORKDIR /app
+
 ENV NODE_ENV=production \
-    NPM_CONFIG_AUDIT=false \
-    NPM_CONFIG_FUND=false
+    PORT=4200 \
+    HOST=0.0.0.0
 
-COPY package*.json ./
-RUN npm ci --omit=dev --ignore-scripts
+COPY --from=build --chown=node:node /app/dist/pesel-tools ./dist/pesel-tools
 
-COPY --from=build /app/dist /app/dist
+USER node
 
-ENV PORT=4200
-ENV HOST=0.0.0.0
 EXPOSE 4200
+
+# Consume the SSR body and exit explicitly before Docker's timeout.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD node -e "fetch('http://127.0.0.1:' + (process.env.PORT || 4200) + '/', { signal: AbortSignal.timeout(4000) }).then(async response => { if (!response.ok) throw new Error('HTTP ' + response.status); await response.arrayBuffer(); process.exit(0); }).catch(error => { console.error('Healthcheck failed:', error); process.exit(1); })"
 
 CMD ["node", "dist/pesel-tools/server/server.mjs"]
