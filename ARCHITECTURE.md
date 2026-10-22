@@ -81,6 +81,12 @@ The Worker removes generation from the main thread, but structured cloning, JSON
 
 ## Styling
 
+### Component Files
+
+Every Angular component must have separate `.ts`, `.html`, and `.css` files with the same base name (for example, `example.component.ts`, `example.component.html`, and `example.component.css`). The `.ts` file contains component logic and metadata, references the template through `templateUrl`, and references the stylesheet through `styleUrl` (or `styleUrls`). Inline `template` and `styles` in component `.ts` files are not allowed. Keep the external `.css` file even if it is initially empty. Follow this rule when creating or modifying components.
+
+### Shared Styles and Utilities
+
 Styles use Tailwind CSS 4 via `@tailwindcss/postcss` in `.postcssrc.json`:
 
 - `src/styles.css` imports Tailwind and holds minimal document-wide base styles.
