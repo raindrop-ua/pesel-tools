@@ -14,6 +14,7 @@ These instructions apply to the entire repository unless a deeper `AGENTS.md` ov
 
 - Keep changes focused and minimal; do not refactor unrelated code.
 - Preserve the existing Angular and TypeScript style used in `src/`.
+- Always keep each Angular component in separate `.ts`, `.html`, and `.css` files. Reference the external template and stylesheet with `templateUrl` and `styleUrl` (or `styleUrls`); never put inline `template` or `styles` in the component `.ts` file. Keep the separate `.css` file even when it is initially empty.
 - Prefer fixing issues at the root cause instead of adding superficial workarounds.
 - Update docs when behavior, commands, or architecture meaningfully change.
 - Do not commit, tag, or release unless explicitly asked.
