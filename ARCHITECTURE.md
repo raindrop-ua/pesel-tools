@@ -65,6 +65,12 @@ Key PESEL logic is placed under `src/app/core/services`:
 
 Additional platform services include clipboard, download, storage, theme, SEO, and service-worker update handling.
 
+### PWA Update Notice
+
+`SwUpdateService` exposes a signal when Angular emits `VERSION_READY`. The root-level `UpdateNoticeComponent` shows a non-modal notice on every route, styled for light/dark themes, safe areas and reduced motion. It announces availability without moving keyboard focus. **Update now** reloads the full page to activate the new version and clears in-memory input/results; no `activateUpdate()` is used, avoiding mixed versions of lazy-loaded chunks. **Later** dismisses that version for the current page session; repeated events for the same hash do not reopen it, while a different ready version can show a new notice. There is no automatic reload or dismissal timer.
+
+Update polling starts once the application is stable, checks once a minute, skips overlapping requests and tolerates offline failures. Subscriptions and timers are released when the service is destroyed. Development and SSR do not show the notice when service workers are disabled.
+
 ## Inspection, Batch Checking and Test Data
 
 - `core/validation/pesel-inspection.ts` checks format, date and checksum independently and exposes the checksum contributions used by the parser's interactive digit breakdown. It shares `decodePeselDate`, calendar validation and checksum weights with the existing parser/generator utilities. A wrong checksum does not hide a separate invalid date.
