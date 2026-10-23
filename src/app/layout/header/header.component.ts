@@ -18,6 +18,7 @@ import { ThemeSwitcherComponent } from '@shared/ui/theme-switcher/theme-switcher
   selector: 'app-header',
   imports: [RouterLink, ThemeSwitcherComponent],
   templateUrl: './header.component.html',
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
   private router = inject(Router);

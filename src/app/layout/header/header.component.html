@@ -9,33 +9,39 @@
       aria-label="Toggle menu"
       aria-controls="mobile-navigation"
       [attr.aria-expanded]="menuOpen()"
+      [class.menu-open]="menuOpen()"
     >
-      <span class="h-0.5 w-6 bg-header-text"></span>
-      <span class="h-0.5 w-6 bg-header-text"></span>
-      <span class="h-0.5 w-6 bg-header-text"></span>
+      <span class="menu-bar h-0.5 w-6 bg-header-text"></span>
+      <span class="menu-bar h-0.5 w-6 bg-header-text"></span>
+      <span class="menu-bar h-0.5 w-6 bg-header-text"></span>
     </button>
-    @if (menuOpen()) {
-      <nav
-        id="mobile-navigation"
-        class="absolute inset-x-0 top-16 z-100 rounded-b-3xl border-b border-card-border bg-header-background-secondary p-6 shadow-lg shadow-main-text/10 backdrop-blur-sm md:hidden"
-        aria-label="Mobile"
-      >
-        <ul class="flex flex-col gap-1 md:flex-row">
-          @for (item of navigation; track item.path) {
-            <li>
-              <a
-                class="block rounded-xl px-4 py-3 text-lg font-semibold text-header-text no-underline hover:bg-control-background aria-[current=page]:bg-control-background aria-[current=page]:text-header-link-active"
-                [routerLink]="item.path"
-                [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
-                (click)="onMenuClose()"
-              >
-                {{ item.label }}
-              </a>
-            </li>
-          }
-        </ul>
-      </nav>
-    }
+    <!-- The live parent makes leaving links inert as soon as the menu closes. -->
+    <div class="contents" [attr.inert]="menuOpen() ? null : ''">
+      @if (menuOpen()) {
+        <nav
+          id="mobile-navigation"
+          class="absolute inset-x-0 top-16 z-100 rounded-b-3xl border-b border-card-border bg-header-background-secondary p-6 shadow-lg shadow-main-text/10 backdrop-blur-sm md:hidden"
+          aria-label="Mobile"
+          animate.enter="menu-enter"
+          animate.leave="menu-leave"
+        >
+          <ul class="flex flex-col gap-1 md:flex-row">
+            @for (item of navigation; track item.path) {
+              <li>
+                <a
+                  class="block rounded-xl px-4 py-3 text-lg font-semibold text-header-text no-underline hover:bg-control-background aria-[current=page]:bg-control-background aria-[current=page]:text-header-link-active"
+                  [routerLink]="item.path"
+                  [attr.aria-current]="isLinkActive(item.path) ? 'page' : null"
+                  (click)="onMenuClose()"
+                >
+                  {{ item.label }}
+                </a>
+              </li>
+            }
+          </ul>
+        </nav>
+      }
+    </div>
     <div class="text-lg font-extrabold text-header-text sm:mr-3 sm:text-2xl">
       <a
         class="block text-header-text no-underline"
@@ -62,11 +68,15 @@
   </div>
   <app-theme-switcher />
 </header>
-@if (menuOpen()) {
-  <button
-    type="button"
-    class="fixed inset-0 z-5 border-0 bg-black/50 p-0 backdrop-blur-sm md:hidden"
-    aria-label="Close menu"
-    (click)="onMenuClose()"
-  ></button>
-}
+<div class="contents" [attr.inert]="menuOpen() ? null : ''">
+  @if (menuOpen()) {
+    <button
+      type="button"
+      class="fixed inset-0 z-5 border-0 bg-black/50 p-0 backdrop-blur-sm md:hidden"
+      aria-label="Close menu"
+      (click)="onMenuClose()"
+      animate.enter="backdrop-enter"
+      animate.leave="backdrop-leave"
+    ></button>
+  }
+</div>

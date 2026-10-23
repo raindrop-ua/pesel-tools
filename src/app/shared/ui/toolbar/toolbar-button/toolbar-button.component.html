@@ -5,6 +5,7 @@
   [title]="titleToShow()"
   (click)="handleClick()"
   aria-live="polite"
+  [class.action-complete]="active()"
 >
   <span class="sr-only">{{ srTextToShow() }}</span>
   <svg

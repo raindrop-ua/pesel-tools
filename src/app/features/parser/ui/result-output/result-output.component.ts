@@ -15,6 +15,7 @@ import { SvgIconComponent } from '@shared/ui/svg-icon/svg-icon.component';
     SvgIconComponent,
   ],
   templateUrl: './result-output.component.html',
+  styleUrl: './result-output.component.css',
 })
 export class ResultOutputComponent {
   public readonly data = input<Omit<PeselInfo, 'message'> | null>(null);

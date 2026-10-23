@@ -19,6 +19,7 @@ import { validDateValidator } from '@shared/validators/valid-date.validator';
   ],
   providers: [GeneratorStateService],
   templateUrl: './simple-generator.component.html',
+  styleUrl: './simple-generator.component.css',
 })
 export class SimpleGeneratorComponent {
   private readonly fb = inject(FormBuilder).nonNullable;
