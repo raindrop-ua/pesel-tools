@@ -1,0 +1,309 @@
+<app-section>
+  <p
+    class="mt-3 text-sm font-semibold tracking-widest text-hero-accent sm:mt-6"
+  >
+    MANY NUMBERS. ONE CHECK.
+  </p>
+  <h1
+    class="mt-2 mb-3 text-[2rem] font-bold leading-tight tracking-tight text-hero-text sm:text-4xl"
+  >
+    Batch PESEL checker
+  </h1>
+  <p class="mb-6 max-w-2xl text-muted">
+    Check a list, spot duplicates and export the results. Everything runs in
+    your browser; input and results are never saved.
+  </p>
+  <app-card>
+    <form (submit)="$event.preventDefault(); validate()">
+      <div class="mb-4 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <label for="batch-format" class="mb-2 block text-sm font-semibold"
+            >Input format</label
+          >
+          <select
+            #formatInput
+            id="batch-format"
+            class="batch-control"
+            [value]="format()"
+            (change)="setFormat(formatInput.value)"
+            [disabled]="working()"
+          >
+            <option value="list">Plain list</option>
+            <option value="csv">CSV</option>
+          </select>
+        </div>
+        <button
+          app-button="secondary"
+          type="button"
+          (click)="sample()"
+          [disabled]="working()"
+        >
+          Try a sample
+        </button>
+      </div>
+      <label for="batch-input" class="mb-2 block text-lg font-semibold"
+        >PESEL list</label
+      >
+      <textarea
+        #batchInput
+        id="batch-input"
+        class="batch-control block min-h-48 w-full resize-y font-mono text-sm leading-6"
+        rows="8"
+        spellcheck="false"
+        autocomplete="off"
+        [value]="inputPreview()"
+        [readOnly]="largeInput()"
+        (paste)="onPaste($event)"
+        (input)="setText(batchInput.value)"
+        [disabled]="working()"
+        aria-describedby="batch-hint batch-privacy batch-preview"
+      ></textarea>
+      <p id="batch-preview" class="mt-3 text-sm text-muted" aria-live="polite">
+        @if (largeInput()) {
+          Large input: read-only preview of the first 5,000 characters. All
+          {{ text().length | number }} characters are used for checking. Clear
+          to replace this input.
+        }
+      </p>
+      <p id="batch-hint" class="mt-3 text-sm text-muted">
+        @if (format() === "csv") {
+          Use a PESEL column header for multi-column CSV. Comma, semicolon and
+          tab delimiters are supported, including quoted fields.
+        } @else {
+          Separate values with newlines, spaces, commas or semicolons. Leading
+          zeros are preserved.
+        }
+        Up to 100,000 rows.
+      </p>
+      <div class="my-5">
+        <label for="batch-file" class="mb-2 block text-sm font-semibold"
+          >Or choose a CSV / TXT file (up to 5 MB)</label
+        >
+        <input
+          id="batch-file"
+          type="file"
+          accept=".csv,.txt,text/csv,text/plain"
+          class="block w-full text-sm text-muted file:mr-3 file:cursor-pointer file:rounded-lg file:border-0 file:bg-control-background file:px-4 file:py-2 file:font-semibold file:text-control-text"
+          (change)="readFile($event)"
+          [disabled]="working()"
+        />
+        @if (fileName()) {
+          <p class="mt-2 break-all text-sm text-muted">
+            Loaded: {{ fileName() }}
+          </p>
+        }
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button
+          app-button="primary"
+          type="submit"
+          [disabled]="working() || !text().trim()"
+        >
+          Check PESELs
+        </button>
+        @if (busy()) {
+          <button app-button="secondary" type="button" (click)="cancel()">
+            Cancel
+          </button>
+        }
+        <button
+          app-button="secondary"
+          type="button"
+          (click)="clear()"
+          [disabled]="!text() && !reading()"
+        >
+          Clear
+        </button>
+      </div>
+    </form>
+    @if (busy()) {
+      <div class="mt-5">
+        <label for="batch-progress" class="text-sm text-muted"
+          >Checking {{ processed() | number }} of
+          {{ total() | number }} rows</label
+        >
+        <progress
+          id="batch-progress"
+          class="mt-2 block h-2 w-full accent-hero-accent"
+          [value]="processed()"
+          [max]="total()"
+        ></progress>
+      </div>
+    }
+    <p class="mt-4 text-sm text-muted" role="status" aria-live="polite">
+      {{ reading() ? "Reading file…" : status() }}
+    </p>
+    @if (error()) {
+      <p class="mt-4 text-sm text-validation" role="alert">{{ error() }}</p>
+    }
+    <p
+      id="batch-privacy"
+      class="mt-4 border-t border-card-border pt-4 text-sm text-muted"
+    >
+      Valid means the format, birthdate and checksum pass. This does not check
+      whether a number was assigned in the PESEL registry.
+    </p>
+  </app-card>
+
+  @if (results().length) {
+    <app-card>
+      <h2 class="mb-5 text-xl font-bold">Validation results</h2>
+      <dl class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div class="summary-tile">
+          <dt>Total rows</dt>
+          <dd>{{ results().length | number }}</dd>
+        </div>
+        <div class="summary-tile">
+          <dt>Valid</dt>
+          <dd>{{ summary().valid | number }}</dd>
+        </div>
+        <div class="summary-tile">
+          <dt>Invalid</dt>
+          <dd>{{ summary().invalid | number }}</dd>
+        </div>
+        <div class="summary-tile">
+          <dt>Duplicate rows</dt>
+          <dd>{{ summary().duplicates | number }}</dd>
+        </div>
+      </dl>
+      <div
+        class="mb-5 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Filter results"
+      >
+        @for (item of filters; track item.id) {
+          <button
+            type="button"
+            class="filter-button"
+            [attr.aria-pressed]="filter() === item.id"
+            (click)="filter.set(item.id)"
+          >
+            {{ item.label }}
+          </button>
+        }
+      </div>
+      <div class="mb-4 flex flex-wrap items-center gap-3">
+        <button
+          app-button="secondary"
+          type="button"
+          (click)="exportCsv()"
+          [disabled]="!filtered().length"
+        >
+          Export CSV
+        </button>
+        <button
+          app-button="secondary"
+          type="button"
+          (click)="exportJson()"
+          [disabled]="!filtered().length"
+        >
+          Export JSON
+        </button>
+        <app-copy-button [contentToCopy]="textToCopy()" />
+        <span class="text-sm text-muted"
+          >Exports include all {{ filtered().length | number }} matching
+          rows.</span
+        >
+      </div>
+      <p class="mb-4 text-sm text-muted">
+        For spreadsheets, import the PESEL column as text to keep leading zeros.
+        Duplicate rows are counted separately and keep their original position.
+      </p>
+      <div
+        class="overflow-x-auto rounded-xl border border-card-border"
+        tabindex="0"
+        role="region"
+        aria-label="Validation results table"
+      >
+        <table class="w-full min-w-[640px] text-left text-sm">
+          <caption class="sr-only">
+            PESEL validation results, page
+            {{
+              page() + 1
+            }}
+            of
+            {{
+              pageCount()
+            }}
+          </caption>
+          <thead class="bg-control-background">
+            <tr>
+              <th scope="col">Row</th>
+              <th scope="col">PESEL</th>
+              <th scope="col">Result</th>
+              <th scope="col">Decoded data / issues</th>
+              <th scope="col">Duplicate</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of visible(); track row.row) {
+              <tr>
+                <td>{{ row.row }}</td>
+                <td class="max-w-56 break-all font-mono">
+                  {{
+                    row.pesel
+                      ? row.pesel.length > 80
+                        ? row.pesel.slice(0, 80) + "…"
+                        : row.pesel
+                      : "(empty)"
+                  }}
+                </td>
+                <td>
+                  <span class="result-badge" [class.invalid]="!row.valid">{{
+                    row.valid ? "Valid" : "Invalid"
+                  }}</span>
+                </td>
+                <td>
+                  @for (issue of row.issues; track issue) {
+                    <p class="text-validation">{{ labels[issue] }}</p>
+                  }
+                  @if (row.birthDate) {
+                    <p>{{ row.birthDate }} · {{ row.sex }}</p>
+                  }
+                </td>
+                <td>
+                  {{
+                    row.duplicateOf !== null ? "Row " + row.duplicateOf : "—"
+                  }}
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="py-8 text-center text-muted">
+                  No rows match this filter.
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="mt-5 flex flex-wrap items-center justify-between gap-3"
+        aria-label="Results pagination"
+      >
+        <span class="text-sm text-muted" aria-live="polite"
+          >{{ filtered().length | number }} matching rows · Page
+          {{ page() + 1 }} of {{ pageCount() }}</span
+        >
+        <div class="flex gap-2">
+          <button
+            app-button="secondary"
+            type="button"
+            (click)="page.set(page() - 1)"
+            [disabled]="page() === 0"
+          >
+            Previous
+          </button>
+          <button
+            app-button="secondary"
+            type="button"
+            (click)="page.set(page() + 1)"
+            [disabled]="page() + 1 >= pageCount()"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </app-card>
+  }
+</app-section>

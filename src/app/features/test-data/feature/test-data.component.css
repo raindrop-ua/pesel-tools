@@ -1,0 +1,40 @@
+.preset-button {
+  min-width: 0;
+  cursor: pointer;
+  padding: 1.25rem;
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  background: var(--card-background);
+  text-align: left;
+}
+
+.preset-button[aria-pressed="true"] {
+  border-color: var(--brand-accent);
+  outline: 1px solid var(--brand-accent);
+  background: var(--control-background);
+}
+
+th,
+td {
+  padding: 0.875rem;
+  vertical-align: top;
+}
+
+tbody tr {
+  border-top: 1px solid var(--card-border);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .preset-button {
+    transition:
+      border-color 180ms,
+      background-color 180ms,
+      transform 180ms var(--motion-ease-out);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .preset-button:hover {
+    transform: translateY(-2px);
+  }
+}
