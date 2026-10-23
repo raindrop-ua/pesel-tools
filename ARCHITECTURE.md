@@ -93,7 +93,7 @@ Styles use Tailwind CSS 4 via `@tailwindcss/postcss` in `.postcssrc.json`:
 - Component templates and Angular host classes own layout, typography, responsive states, and interactions.
 - `src/app/styles/theme.css` defines a shared `--brand-*` palette for the masthead, navigation, cards, controls, and actions, and exposes semantic color utilities through `@theme inline`. Colors use `light-dark()` with the existing `data-theme` selection and system preference fallback.
 - `src/app/styles/fonts.css` loads the self-hosted Quicksand and JetBrains Mono fonts.
-- `src/app/styles/animations.css` registers the hero and loader keyframes as Tailwind animation utilities, used with `motion-safe:`.
+- `src/app/styles/animations.css` provides shared entrance, exit, and success-feedback keyframes plus the loader's Tailwind animation utilities. Component styles add route entrances, staged masthead content, result reveals, button feedback, and mobile menu enter/leave animations. The generator staggers only the first eight preview rows. Motion is enabled only with `prefers-reduced-motion: no-preference`; the home-page digit counter also skips rolling when reduced motion is requested. Mobile menu exits use Angular's `animate.leave`, with leaving controls made inert until removal.
 
 Use complete class names for conditional variants (see the button component), so Tailwind can discover them. New components default to CSS; Sass and component SCSS are no longer used.
 
@@ -111,6 +111,7 @@ These aliases are used throughout the app to keep imports stable and readable.
 ## Testing and Quality
 
 - Unit/integration tests: Vitest
+- Vite and Vitest are explicit dev dependencies; keep `vitest`, `@vitest/ui`, and `@vitest/coverage-v8` on matching versions. The targeted `@angular/build>vite` override in `pnpm-workspace.yaml` also patches Angular's exactly pinned dev-server dependency. Review the override when updating Angular's builder.
 - Linting: Angular ESLint + Stylelint
 - Formatting: Prettier
 - E2E: Cypress
