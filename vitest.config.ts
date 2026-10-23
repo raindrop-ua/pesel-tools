@@ -6,6 +6,7 @@ export default defineConfig({
     alias: {
       '@config': fileURLToPath(new URL('./src/app/config', import.meta.url)),
       '@core': fileURLToPath(new URL('./src/app/core', import.meta.url)),
+      '@layout': fileURLToPath(new URL('./src/app/layout', import.meta.url)),
       '@shared': fileURLToPath(new URL('./src/app/shared', import.meta.url)),
       '@features': fileURLToPath(
         new URL('./src/app/features', import.meta.url),
@@ -13,7 +14,9 @@ export default defineConfig({
       '@components': fileURLToPath(
         new URL('./src/app/shared/components', import.meta.url),
       ),
-      '@services': fileURLToPath(new URL('./src/app/core/services', import.meta.url)),
+      '@services': fileURLToPath(
+        new URL('./src/app/core/services', import.meta.url),
+      ),
     },
   },
   test: {

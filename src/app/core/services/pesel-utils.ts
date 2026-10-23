@@ -5,6 +5,30 @@ export class InvalidInputStringLengthError extends Error {
   }
 }
 
+export const PESEL_CHECKSUM_WEIGHTS = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3] as const;
+
+/** Decode the century without normalizing impossible calendar dates. */
+export function decodePeselDate(firstSixDigits: string): {
+  year: number;
+  month: number;
+  day: number;
+  century: number;
+  offset: number;
+} | null {
+  if (!/^\d{6}$/.test(firstSixDigits)) return null;
+  const encodedMonth = Number(firstSixDigits.slice(2, 4));
+  const century = [1900, 2000, 2100, 2200, 1800][Math.floor(encodedMonth / 20)];
+  const month = encodedMonth % 20;
+  if (century === undefined || month < 1 || month > 12) return null;
+  return {
+    year: century + Number(firstSixDigits.slice(0, 2)),
+    month,
+    day: Number(firstSixDigits.slice(4, 6)),
+    century,
+    offset: encodedMonth - month,
+  };
+}
+
 /**
  * Checks if the PESEL string has the correct format (11 digits).
  * @param pesel The PESEL number string.
@@ -20,11 +44,14 @@ export function isValidFormat(pesel: string): boolean {
  * @returns True if the checksum is valid, false otherwise.
  */
 export function isValidChecksum(pesel: string): boolean {
-  const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
   const sum = pesel
     .substring(0, 10)
     .split('')
-    .reduce((acc, digit, idx) => acc + parseInt(digit, 10) * weights[idx], 0);
+    .reduce(
+      (acc, digit, idx) =>
+        acc + parseInt(digit, 10) * PESEL_CHECKSUM_WEIGHTS[idx],
+      0,
+    );
 
   const controlDigit = (10 - (sum % 10)) % 10;
 
@@ -108,10 +135,13 @@ export function calculateChecksumDigit(firstTenDigits: string): number {
     throw new InvalidInputStringLengthError();
   }
 
-  const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
   const sum = firstTenDigits
     .split('')
-    .reduce((acc, digit, idx) => acc + parseInt(digit, 10) * weights[idx], 0);
+    .reduce(
+      (acc, digit, idx) =>
+        acc + parseInt(digit, 10) * PESEL_CHECKSUM_WEIGHTS[idx],
+      0,
+    );
 
   return (10 - (sum % 10)) % 10;
 }

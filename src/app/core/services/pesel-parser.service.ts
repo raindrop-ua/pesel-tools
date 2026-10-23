@@ -4,6 +4,7 @@ import {
   isValidChecksum,
   isValidDate,
   calculateAge,
+  decodePeselDate,
 } from './pesel-utils';
 
 export interface PeselInfo {
@@ -45,28 +46,11 @@ export class PeselParserService {
     month: number;
     day: number;
   } {
-    const year = parseInt(pesel.substring(0, 2), 10);
-    let month = parseInt(pesel.substring(2, 4), 10);
-    const day = parseInt(pesel.substring(4, 6), 10);
-
-    let century = 1900;
-    if (month >= 81 && month <= 92) {
-      century = 1800;
-      month -= 80;
-    } else if (month >= 61 && month <= 72) {
-      century = 2200;
-      month -= 60;
-    } else if (month >= 41 && month <= 52) {
-      century = 2100;
-      month -= 40;
-    } else if (month >= 21 && month <= 32) {
-      century = 2000;
-      month -= 20;
-    } else if (month < 1 || month > 12) {
+    const parts = decodePeselDate(pesel.slice(0, 6));
+    if (!parts) {
       throw new InvalidPeselDateError('Invalid month value in PESEL.');
     }
-
-    return { birthYear: century + year, month, day };
+    return { birthYear: parts.year, month: parts.month, day: parts.day };
   }
 
   /**
