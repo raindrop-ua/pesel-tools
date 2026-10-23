@@ -54,8 +54,8 @@
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
-    "@vitest/coverage-v8": "^4.1.4",
-    "@vitest/ui": "^4.0.12",
+    "@vitest/coverage-v8": "^4.1.12",
+    "@vitest/ui": "^4.1.12",
     "angular-eslint": "^22.6.0",
     "cypress": "15.17.0",
     "eslint": "^9.28.0",
@@ -70,8 +70,8 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.33.1",
-    "vite": "^7.2.6",
-    "vitest": "^4.0.8"
+    "vite": "^8.3.5",
+    "vitest": "^4.1.12"
   },
   "lint-staged": {
     "*.{ts,js}": [

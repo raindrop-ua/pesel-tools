@@ -1,0 +1,11 @@
+@media (prefers-reduced-motion: no-preference) {
+  :host > div {
+    animation: content-in 280ms var(--motion-ease-out);
+  }
+
+  /* Keep large previews quiet and limit the stagger to the first eight rows. */
+  app-pesel-item:nth-of-type(-n + 8) {
+    animation: content-in 260ms var(--motion-ease-out) var(--row-delay, 0ms)
+      backwards;
+  }
+}

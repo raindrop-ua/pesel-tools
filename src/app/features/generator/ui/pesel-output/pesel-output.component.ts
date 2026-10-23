@@ -17,6 +17,7 @@ import { GotoParseButtonComponent } from '@shared/ui/toolbar/goto-parse-button/g
     GotoParseButtonComponent,
   ],
   templateUrl: './pesel-output.component.html',
+  styleUrl: './pesel-output.component.css',
 })
 export class PeselOutputComponent {
   public data = input.required<string[]>();

@@ -1,0 +1,7 @@
+@media (prefers-reduced-motion: no-preference) {
+  [role="status"],
+  [role="alert"],
+  #sequential-hint {
+    animation: content-in 220ms var(--motion-ease-out);
+  }
+}

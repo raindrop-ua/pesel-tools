@@ -12,6 +12,7 @@ import { ToolbarComponent } from '@shared/ui/toolbar/toolbar.component';
   selector: 'app-pesel-of-the-moment',
   imports: [CopyButtonComponent, ToolbarComponent],
   templateUrl: './pesel-of-the-moment.component.html',
+  styleUrl: './pesel-of-the-moment.component.css',
   standalone: true,
 })
 export class PeselOfTheMomentComponent implements OnInit {
@@ -74,6 +75,11 @@ export class PeselOfTheMomentComponent implements OnInit {
     const target = /^\d{11}$/.test(raw)
       ? raw.split('').map((ch) => +ch)
       : Array(11).fill(0);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.digits.set(target);
+      return;
+    }
 
     target.forEach((targetDigit, index) => {
       const arr = this.digits();

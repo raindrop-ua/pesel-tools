@@ -11,6 +11,7 @@ type ButtonType = 'primary' | 'secondary' | 'danger';
   selector: 'button[app-button], a[app-button]',
   imports: [],
   templateUrl: './button.component.html',
+  styleUrl: './button.component.css',
 })
 export class ButtonComponent {
   @Input('app-button') appButton: ButtonType = 'primary';

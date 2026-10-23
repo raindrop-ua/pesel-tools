@@ -17,6 +17,7 @@ import {
   selector: 'app-toolbar-button',
   imports: [SvgIconComponent],
   templateUrl: './toolbar-button.component.html',
+  styleUrl: './toolbar-button.component.css',
   host: { class: 'block' },
 })
 export class ToolbarButtonComponent {

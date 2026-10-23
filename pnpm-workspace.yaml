@@ -1,3 +1,7 @@
+overrides:
+  # Angular pins Vite exactly; keep its dev server on the patched release too.
+  "@angular/build>vite": ^8.3.5
+
 # Allow the required esbuild setup and Cypress binary installation.
 # Optional native accelerators use their packaged binaries or JS fallbacks.
 allowBuilds:

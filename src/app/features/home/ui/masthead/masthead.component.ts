@@ -7,6 +7,7 @@ import { AppRouteEnum } from '@core/enums/app-route.enum';
   selector: 'app-masthead',
   imports: [NgOptimizedImage, RouterLink],
   templateUrl: './masthead.component.html',
+  styleUrl: './masthead.component.css',
   host: { class: 'mt-4 mb-8 block md:mt-10' },
 })
 export class MastheadComponent {

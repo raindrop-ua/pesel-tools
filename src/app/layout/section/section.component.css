@@ -1,0 +1,5 @@
+@media (prefers-reduced-motion: no-preference) {
+  :host {
+    animation: content-in 360ms var(--motion-ease-out) backwards;
+  }
+}
