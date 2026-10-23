@@ -1,0 +1,19 @@
+@media (prefers-reduced-motion: no-preference) {
+  .masthead-title,
+  .masthead-description,
+  .masthead-actions {
+    animation: content-in 500ms var(--motion-ease-out) backwards;
+  }
+
+  .masthead-description {
+    animation-delay: 60ms;
+  }
+
+  .masthead-actions {
+    animation-delay: 120ms;
+  }
+
+  .masthead-art {
+    animation: fade-in 600ms ease-out 100ms backwards;
+  }
+}

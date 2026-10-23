@@ -1,0 +1,5 @@
+@media (prefers-reduced-motion: no-preference) {
+  button[aria-pressed="true"] svg {
+    animation: success-pop 300ms var(--motion-ease-out);
+  }
+}

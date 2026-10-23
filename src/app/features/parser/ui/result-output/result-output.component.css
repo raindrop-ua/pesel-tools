@@ -1,0 +1,5 @@
+@media (prefers-reduced-motion: no-preference) {
+  :host > div {
+    animation: content-in 280ms var(--motion-ease-out);
+  }
+}
