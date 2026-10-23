@@ -1,0 +1,74 @@
+.batch-control {
+  border: 1px solid var(--control-border);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  background: var(--control-background);
+  color: var(--control-text);
+}
+
+.batch-control:focus-visible {
+  outline: 2px solid var(--control-focus-border);
+  outline-offset: 2px;
+}
+
+.summary-tile {
+  container-type: inline-size;
+  padding: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  background: var(--control-background);
+}
+
+.summary-tile dt {
+  font-size: 0.875rem;
+}
+
+.summary-tile dd {
+  margin-top: 0.25rem;
+  font-size: clamp(1rem, 16cqi, 1.75rem);
+  font-weight: 700;
+}
+
+.filter-button {
+  cursor: pointer;
+  border: 1px solid var(--control-border);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+}
+
+.filter-button[aria-pressed="true"] {
+  border-color: var(--brand-primary);
+  background: var(--brand-primary);
+  color: var(--brand-primary-text);
+}
+
+th,
+td {
+  padding: 0.875rem;
+  vertical-align: top;
+}
+
+tbody tr {
+  border-top: 1px solid var(--card-border);
+}
+
+.result-badge {
+  font-weight: 700;
+}
+
+.result-badge.invalid {
+  color: var(--color-validation);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .filter-button {
+    transition:
+      background-color 180ms,
+      color 180ms;
+  }
+
+  :host app-card {
+    display: block;
+    animation: content-in 280ms var(--motion-ease-out);
+  }
+}

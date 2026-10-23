@@ -3,7 +3,7 @@
 >
   <div class="flex items-center gap-4">
     <button
-      class="flex cursor-pointer flex-col gap-1 border-0 bg-transparent p-1.5 md:hidden"
+      class="flex cursor-pointer flex-col gap-1 border-0 bg-transparent p-1.5 lg:hidden"
       type="button"
       (click)="onMenuToggle()"
       aria-label="Toggle menu"
@@ -20,12 +20,12 @@
       @if (menuOpen()) {
         <nav
           id="mobile-navigation"
-          class="absolute inset-x-0 top-16 z-100 rounded-b-3xl border-b border-card-border bg-header-background-secondary p-6 shadow-lg shadow-main-text/10 backdrop-blur-sm md:hidden"
+          class="absolute inset-x-0 top-16 z-100 rounded-b-3xl border-b border-card-border bg-header-background-secondary p-6 shadow-lg shadow-main-text/10 backdrop-blur-sm lg:hidden"
           aria-label="Mobile"
           animate.enter="menu-enter"
           animate.leave="menu-leave"
         >
-          <ul class="flex flex-col gap-1 md:flex-row">
+          <ul class="flex flex-col gap-1 lg:flex-row">
             @for (item of navigation; track item.path) {
               <li>
                 <a
@@ -50,8 +50,8 @@
         <span class="text-header-link-active">PESEL</span> Tools
       </a>
     </div>
-    <nav class="hidden md:block" aria-label="Main">
-      <ul class="flex flex-col gap-1 md:flex-row">
+    <nav class="hidden lg:block" aria-label="Main">
+      <ul class="flex flex-col gap-1 lg:flex-row">
         @for (item of navigation; track item.path) {
           <li>
             <a
@@ -72,7 +72,7 @@
   @if (menuOpen()) {
     <button
       type="button"
-      class="fixed inset-0 z-5 border-0 bg-black/50 p-0 backdrop-blur-sm md:hidden"
+      class="fixed inset-0 z-5 border-0 bg-black/50 p-0 backdrop-blur-sm lg:hidden"
       aria-label="Close menu"
       (click)="onMenuClose()"
       animate.enter="backdrop-enter"
