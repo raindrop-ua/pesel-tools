@@ -16,9 +16,10 @@ Core characteristics:
 
 Main source tree lives in `src/app`:
 
-- `core/`: application-level layout, shared services, route config, preloading strategies
+- `core/`: shared services, PESEL validation and test data, route config, preloading strategies
+- `layout/`: application shell, header, footer and section layout
 - `shared/`: reusable UI components, directives, pipes, validators
-- `features/`: domain features (`home`, `parser`, `generator`, `static/not-found`)
+- `features/`: domain features (`home`, `parser`, `generator`, `batch`, `test-data`, `static/not-found`)
 
 Entry points:
 
@@ -40,6 +41,8 @@ Configured routes:
 - `/` -> Home feature
 - `/parser` -> Parser feature
 - `/generator` -> Generator feature
+- `/batch` -> Batch validator (lazy loaded without preloading)
+- `/test-data` -> Deterministic tester fixtures (lazy loaded without preloading)
 - `**` -> Not Found feature
 
 ## Application Configuration
@@ -61,6 +64,22 @@ Key PESEL logic is placed under `src/app/core/services`:
 - `pesel-utils.ts`: low-level PESEL helpers (e.g. checksum/date logic)
 
 Additional platform services include clipboard, download, storage, theme, SEO, and service-worker update handling.
+
+### PWA Update Notice
+
+`SwUpdateService` exposes a signal when Angular emits `VERSION_READY`. The root-level `UpdateNoticeComponent` shows a non-modal notice on every route, styled for light/dark themes, safe areas and reduced motion. It announces availability without moving keyboard focus. **Update now** reloads the full page to activate the new version and clears in-memory input/results; no `activateUpdate()` is used, avoiding mixed versions of lazy-loaded chunks. **Later** dismisses that version for the current page session; repeated events for the same hash do not reopen it, while a different ready version can show a new notice. There is no automatic reload or dismissal timer.
+
+Update polling starts once the application is stable, checks once a minute, skips overlapping requests and tolerates offline failures. Subscriptions and timers are released when the service is destroyed. Development and SSR do not show the notice when service workers are disabled.
+
+## Inspection, Batch Checking and Test Data
+
+- `core/validation/pesel-inspection.ts` checks format, date and checksum independently and exposes the checksum contributions used by the parser's interactive digit breakdown. It shares `decodePeselDate`, calendar validation and checksum weights with the existing parser/generator utilities. A wrong checksum does not hide a separate invalid date.
+- `core/validation/pesel-batch.ts` reads plain lists or quoted CSV (comma/semicolon/tab, BOM, CRLF, escaped quotes and embedded newlines). Multi-column files must have exactly one `PESEL` header. CSV empty values are invalid records; physically blank lines are ignored. Input is capped at 5 million characters / 100,000 values; files are capped at 5 MB.
+- Batch validation yields every 250 rows and accepts an AbortSignal. The component aborts on cancellation, clear and destruction, and guards against stale validation/file-read results. No partial results are committed. It keeps only compact validation records, filters in memory and renders 50 records per page. CSV/JSON exports cover the whole filtered result. Spreadsheet formula prefixes are neutralized in CSV; raw PESEL strings are preserved in JSON.
+- To bound native textarea editing/layout work, inputs over 20,000 characters show a read-only 5,000-character preview while retaining the full input for validation. Large paste events are intercepted before native insertion and preserve the selected-range replacement. Clear returns the field to editable mode.
+- `core/testing/pesel-test-sets.ts` contains deterministic date/century, checksum, malformed-input and mixed/duplicate fixtures with expected validity and issue codes. Invalid-date fixtures have correct control digits, isolating the date failure. Tests verify all expectations against both inspection and the existing parser.
+- `BatchInputService` is a one-time in-memory transfer from the test-data page to the batch page. User input and imported files are not put in URLs or browser storage, and no validation API is called. Reloading/leaving the batch page discards its state.
+- Validity is structural; registry assignment is never checked. Synthetic fixtures are not claimed to be unassigned. Future dates in 1800–2299 remain structurally valid, matching the existing parser.
 
 ## Generation
 
@@ -102,6 +121,7 @@ Use complete class names for conditional variants (see the button component), so
 Path aliases are configured in `tsconfig.json`, for example:
 
 - `@core/*`
+- `@layout/*` (also configured in Vitest)
 - `@shared/*`
 - `@features/*`
 - `@services/*`

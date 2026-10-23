@@ -1,0 +1,63 @@
+<p class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+  {{
+    updates.updateAvailable()
+      ? "A new version of PESEL Tools is ready. Update now or keep working and reload later."
+      : ""
+  }}
+</p>
+@if (updates.updateAvailable()) {
+  <aside
+    class="update-notice"
+    aria-labelledby="update-notice-title"
+    aria-describedby="update-notice-description"
+    [attr.aria-busy]="updates.reloading()"
+    animate.enter="notice-enter"
+  >
+    <div class="notice-heading">
+      <span class="notice-icon" aria-hidden="true">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 7v5h-5M4 17v-5h5" />
+          <path d="M6.1 7a7 7 0 0 1 11.5-1L20 9M4 15l2.4 3A7 7 0 0 0 17.9 17" />
+        </svg>
+      </span>
+      <div>
+        <p class="notice-eyebrow">FRESH FROM PESEL TOOLS</p>
+        <h2 id="update-notice-title">A little update. Ready when you are.</h2>
+      </div>
+    </div>
+    <p id="update-notice-description" class="notice-description">
+      A new version is ready. Reload to get the latest improvements. Your
+      current input and results will be cleared.
+    </p>
+    @if (updates.error()) {
+      <p class="notice-error" role="alert">{{ updates.error() }}</p>
+    }
+    <div class="notice-actions">
+      <button
+        app-button="primary"
+        type="button"
+        (click)="updates.reload()"
+        [disabled]="updates.reloading()"
+      >
+        {{ updates.reloading() ? "Reloading…" : "Update now" }}
+      </button>
+      <button
+        app-button="secondary"
+        type="button"
+        (click)="updates.postpone()"
+        [disabled]="updates.reloading()"
+      >
+        Later
+      </button>
+    </div>
+  </aside>
+}

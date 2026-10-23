@@ -6,11 +6,18 @@ import { PeselInfo, PeselParserService } from '@services/pesel-parser.service';
 import { PeselInputComponent } from '@features/parser/ui/pesel-input/pesel-input.component';
 import { ResultOutputComponent } from '@features/parser/ui/result-output/result-output.component';
 import { peselValidator } from '@shared/validators/pesel.validator';
+import { PeselBreakdownComponent } from '../pesel-breakdown/pesel-breakdown.component';
 
 @Component({
   selector: 'app-pesel-parser',
-  imports: [PeselInputComponent, ReactiveFormsModule, ResultOutputComponent],
+  imports: [
+    PeselInputComponent,
+    ReactiveFormsModule,
+    ResultOutputComponent,
+    PeselBreakdownComponent,
+  ],
   templateUrl: './pesel-parser.component.html',
+  styleUrl: './pesel-parser.component.css',
 })
 export class PeselParserComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
@@ -18,6 +25,7 @@ export class PeselParserComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly peselParser = inject(PeselParserService);
   public readonly parsedData = signal<Omit<PeselInfo, 'message'> | null>(null);
+  public readonly rawPesel = signal('');
   public readonly form = this.fb.group({
     pesel: ['', [Validators.required, peselValidator(this.peselParser)]],
   });
@@ -54,6 +62,7 @@ export class PeselParserComponent implements OnInit {
   }
 
   private updateParsedData(value: string | null | undefined): void {
+    this.rawPesel.set(value ?? '');
     if (this.peselControl?.valid && value) {
       this.parsedData.set(this.peselParser.parsePesel(value));
       return;

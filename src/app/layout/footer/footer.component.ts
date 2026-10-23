@@ -15,6 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-footer',
   imports: [RouterLink, SvgIconComponent],
   templateUrl: './footer.component.html',
+  styleUrl: './footer.component.css',
 })
 export class FooterComponent implements OnInit {
   private router = inject(Router);

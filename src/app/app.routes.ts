@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout/layout.component';
+import { LayoutComponent } from '@layout/layout/layout.component';
 import { AppRouteEnum } from '@core/enums/app-route.enum';
 
 export const routes: Routes = [
@@ -50,6 +50,39 @@ export const routes: Routes = [
         loadComponent: () =>
           import('@features/generator/feature/generator.component').then(
             (m) => m.GeneratorComponent,
+          ),
+      },
+      {
+        path: AppRouteEnum.Batch,
+        data: {
+          preload: false,
+          seo: {
+            title: 'Batch Checker | Ultimate PESEL Tools',
+            description:
+              'Validate PESEL lists and CSV files locally, find duplicates and export results.',
+            keywords:
+              'batch pesel validator, csv pesel checker, duplicate pesel',
+          },
+        },
+        loadComponent: () =>
+          import('@features/batch/feature/batch.component').then(
+            (m) => m.BatchComponent,
+          ),
+      },
+      {
+        path: AppRouteEnum.TestData,
+        data: {
+          preload: false,
+          seo: {
+            title: 'Test Datasets | Ultimate PESEL Tools',
+            description:
+              'Download synthetic PESEL fixtures with expected results for century boundaries, leap dates, checksum and format errors.',
+            keywords: 'pesel test data, pesel fixtures, invalid pesel examples',
+          },
+        },
+        loadComponent: () =>
+          import('@features/test-data/feature/test-data.component').then(
+            (m) => m.TestDataComponent,
           ),
       },
       {

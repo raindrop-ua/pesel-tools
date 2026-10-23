@@ -1,0 +1,113 @@
+<app-section>
+  <p
+    class="mt-3 text-sm font-semibold tracking-widest text-hero-accent sm:mt-6"
+  >
+    SMALL DATASETS. USEFUL EDGE CASES.
+  </p>
+  <h1
+    class="mt-2 mb-3 text-[2rem] font-bold leading-tight tracking-tight text-hero-text sm:text-4xl"
+  >
+    PESEL test datasets
+  </h1>
+  <p class="mb-6 max-w-2xl text-muted">
+    Repeatable fixtures with expected outcomes for your tests. Explore century
+    boundaries, leap days, malformed input and duplicate handling.
+  </p>
+  <div
+    class="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2"
+    role="group"
+    aria-label="Choose a test dataset"
+  >
+    @for (set of sets; track set.id) {
+      <button
+        type="button"
+        class="preset-button"
+        [attr.aria-pressed]="selected() === set.id"
+        (click)="selected.set(set.id)"
+      >
+        <span class="mb-1 flex items-center justify-between gap-3 font-bold"
+          ><span>{{ set.label }}</span
+          ><span class="text-sm">{{ set.cases.length }} cases</span></span
+        >
+        <span class="block text-sm leading-relaxed text-muted">{{
+          set.description
+        }}</span>
+      </button>
+    }
+  </div>
+  <app-card>
+    <div class="mb-5 flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <h2 class="text-xl font-bold">{{ activeSet().label }}</h2>
+        <p class="mt-2 text-sm text-muted" aria-live="polite">
+          {{ activeSet().cases.length }} cases · {{ validCount() }} valid ·
+          {{ activeSet().cases.length - validCount() }} invalid
+        </p>
+      </div>
+      <button app-button="primary" type="button" (click)="checkSet()">
+        Check this set
+      </button>
+    </div>
+    <div class="mb-5 flex flex-wrap items-center gap-3">
+      <button app-button="secondary" type="button" (click)="exportCsv()">
+        Download CSV
+      </button>
+      <button app-button="secondary" type="button" (click)="exportJson()">
+        Download JSON
+      </button>
+      <div class="flex items-center gap-2">
+        <app-copy-button [contentToCopy]="json()" /><span
+          class="text-sm text-muted"
+          >Copy JSON</span
+        >
+      </div>
+    </div>
+    <div
+      class="overflow-x-auto rounded-xl border border-card-border"
+      tabindex="0"
+      role="region"
+      aria-label="Test dataset table"
+    >
+      <table class="w-full min-w-[620px] text-left text-sm">
+        <caption class="sr-only">
+          {{
+            activeSet().label
+          }}: synthetic PESEL values and expected validation outcomes
+        </caption>
+        <thead class="bg-control-background">
+          <tr>
+            <th scope="col">Scenario</th>
+            <th scope="col">PESEL</th>
+            <th scope="col">Expected result</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of activeSet().cases; track $index) {
+            <tr>
+              <td class="max-w-64">{{ item.scenario }}</td>
+              <td class="font-mono">{{ item.pesel || "(empty)" }}</td>
+              <td>
+                <strong [class.text-validation]="!item.expectedValid">{{
+                  item.expectedValid ? "Valid" : "Invalid"
+                }}</strong>
+                @for (issue of item.expectedIssues; track issue) {
+                  <p class="mt-1 text-muted">{{ labels[issue] }}</p>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-5 text-sm leading-relaxed text-muted">
+      These numbers are synthetic examples, not verified unassigned identifiers.
+      Valid means format, calendar date and checksum only. Future dates are
+      valid under these structural checks. Invalid-date cases have a correct
+      checksum to isolate the date error.
+    </p>
+    <p class="mt-3 text-sm text-muted">
+      CSV and JSON include each scenario and its expected result. Import the
+      PESEL column as text in spreadsheets to keep leading zeros.
+    </p>
+  </app-card>
+</app-section>

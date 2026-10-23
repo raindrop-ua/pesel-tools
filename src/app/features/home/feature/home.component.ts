@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AppRouteEnum } from '@core/enums/app-route.enum';
 import { SectionComponent } from '../../../layout/section/section.component';
 import { CardComponent } from '@shared/ui/card/card.component';
 import { DisclaimerComponent } from '@shared/ui/disclaimer/disclaimer.component';
@@ -14,8 +16,12 @@ import { PeselOfTheMomentComponent } from '@features/home/ui/pesel-of-the-moment
     DisclaimerComponent,
     MastheadComponent,
     PeselOfTheMomentComponent,
+    RouterLink,
     WhatIsPeselComponent,
   ],
   templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  protected readonly AppRouteEnum = AppRouteEnum;
+}
