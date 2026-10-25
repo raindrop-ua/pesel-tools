@@ -4,11 +4,12 @@
   padding: 0.75rem;
   background: var(--control-background);
   color: var(--control-text);
+  outline: none;
 }
 
-.batch-control:focus-visible {
-  outline: 2px solid var(--control-focus-border);
-  outline-offset: 2px;
+.batch-control:focus {
+  border-color: var(--control-focus-border);
+  box-shadow: 0 0 0 4px var(--control-focus-shadow);
 }
 
 .summary-tile {
@@ -61,6 +62,12 @@ tbody tr {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .batch-control {
+    transition:
+      border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   .filter-button {
     transition:
       background-color 180ms,
